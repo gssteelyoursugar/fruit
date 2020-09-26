@@ -49,6 +49,7 @@
 				"navigationStyle":"custom"
 			}
         }
+		
         
        
         
@@ -252,13 +253,16 @@
                 ,{
                     "path" : "SetUp/SetUp",
                     "style" : {
-						
+						"navigationBarTitleText": "设置",
+						"navigationStyle":"custom"
 					}
                 }
                 ,{
                     "path" : "cooperation/cooperation",
                     "style" : {
 						// "enablePullDownRefresh": true
+						"navigationBarTitleText": "商务合作",
+						"navigationStyle":"custom"
 					}
                 }
                 ,{

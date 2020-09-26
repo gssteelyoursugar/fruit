@@ -1,0 +1,78 @@
+
+.price1{
+	color: #FF5600;
+	font-size: 24rpx;
+	font-weight: 600;
+}
+.price2{
+	color: #B6B6B6;
+	font-size: 24rpx;
+}
+.tui-tab-rank{
+	background-color: #fff;
+	margin: 20rpx 0;
+}
+.tui-time-title{
+	height: 60rpx;
+	line-height: 60rpx;
+	border-bottom: 1rpx solid #F5F5F5;
+}
+.title-time-left{
+	margin-left: 20rpx;
+	color: #707070;
+}
+.tui-tab-rank-cent{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	padding: 20rpx ;
+}
+.img-rink{
+	width: 180rpx;
+	height: 180rpx;
+	display: block;
+	margin-right: 20rpx;
+}
+.tui-pro-tit {
+	-webkit-box-flex: 5;
+	-webkit-flex: 5;
+	        flex: 5;
+}
+.tag-tit{
+	/* 渐变色 */
+	background-image: -webkit-linear-gradient(left, #00C94A , #00AC3F);
+	background-image: linear-gradient(to right, #00C94A , #00AC3F);
+	margin-right: 10rpx;
+	padding: 0 10rpx;
+	border-radius: 15rpx 0 15rpx 0;
+	color: #fff;
+	font-size: 20rpx;
+}
+.tag-tit2{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
+}
+.tag-tit2-price{
+	color: #555555;
+	font-size: 24rpx;
+}
+.tag-tit2-text{
+	color: ##FF5600;
+	font-size: 24rpx;
+}
+.tui-shop-car{
+	width: 45rpx;
+	height: 48rpx;
+	display: block;
+}
+.tag-tit-text{
+	font-size: 28rpx;
+	color: #333;
+}
+
+
+

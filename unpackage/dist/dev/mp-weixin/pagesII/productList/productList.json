@@ -1,0 +1,13 @@
+{
+  "enablePullDownRefresh": true,
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "tui-icon": "/components/tui-icon/tui-icon",
+    "tui-top-dropdown": "/components/tui-top-dropdown/tui-top-dropdown",
+    "tui-drawer": "/components/tui-drawer/tui-drawer",
+    "easy-select": "/components/easy-select/easy-select",
+    "tui-dropdown-list": "/components/tui-dropdown-list/tui-dropdown-list",
+    "tui-list-cell": "/components/tui-list-cell/tui-list-cell",
+    "tui-nomore": "/components/tui-nomore/tui-nomore"
+  }
+}

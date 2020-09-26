@@ -13,13 +13,14 @@
 		<!--header-->
 		<!--banner-->
 		<view class="tui-banner-swiper">
-		<image :src="imageUrl" class="tui-my-bg" mode="widthFix"></image>
+			<!-- <image src="../../static/images/hot_fruit.png" class="tui-my-bg" mode="widthFix"></image> -->
+			<image :src="imageUrl" class="tui-my-bg" mode="widthFix"></image>
 		</view>
 		<!-- <view class="tui-cent-box">
 			
 		</view> -->
 		<view class="tui-rink-sceate">
-			<view class="tui-rank-list" >
+			<view class="tui-rank-list">
 				<view class="tui-tab-rank" v-for="(item,index) in importData" :key="index">
 					<view class="tui-tab-rank-cent" @tap="gotoList(item.id)">
 						<image :src="item.url" mode="aspectFill" class="img-rink"></image>
@@ -30,7 +31,7 @@
 									<view class="tag-tit2-price">
 										<text class="text-color1">限量价</text>
 										<text class="text-color2">￥</text>
-										{{item.platformPrice}}元<text class="text-color">/件</text>
+										{{item.platformPrice}}<text style="color: #FF5600;font-size: 24rpx;font-weight: 400;">元</text><text class="text-color">/件</text>
 									</view>
 									<!-- <view class="tag-tit2-text">
 										{{item.number}}点赞
@@ -39,14 +40,14 @@
 								<image src="../../static/images/shopcar@2x.png" mode="aspectFill" class="tui-shop-car"></image>
 								<!-- <view>购物车</view> -->
 							</view>
-							
+
 						</view>
 					</view>
 				</view>
 			</view>
-			
-			
-			
+
+
+
 		</view>
 		<!-- <Progress></Progress> -->
 
@@ -56,21 +57,29 @@
 
 <script>
 	//请求
-	import {listing2,publicing} from '../../api/api.js'
+	import {
+		listing2,
+		publicing
+	} from '../../api/api.js'
 	//请求地址
-	import {getselectHot,imgurl} from '../../api/request.js'
-	var {log} = console
+	import {
+		getselectHot,
+		imgurl
+	} from '../../api/request.js'
+	var {
+		log
+	} = console
 	export default {
-	
+
 		data() {
 			return {
-				url:'',
-				title:'热门品种',
+				url: '',
+				title: '热门品种',
 				hideing: 0,
-				num:0,
-				
-				imageUrl:"http://qg-qr.oss-cn-shenzhen.aliyuncs.com/test/1599787275218.png?Expires=1915147267&OSSAccessKeyId=LTAI4G74cnhsbDWNkfvuNew3&Signature=qy5G7B2cGleaAAiI9I9YTcnNXhY%3D",
-				rankBgUrl:"/static/images/paihangbang@2x.png",
+				num: 0,
+
+				imageUrl: "http://qg-qr.oss-cn-shenzhen.aliyuncs.com/test/1599787275218.png?Expires=1915147267&OSSAccessKeyId=LTAI4G74cnhsbDWNkfvuNew3&Signature=qy5G7B2cGleaAAiI9I9YTcnNXhY%3D",
+				rankBgUrl: "/static/images/paihangbang@2x.png",
 				height: 64, //header高度
 				top: 26, //标题图标距离顶部距离
 				scrollH: 0, //滚动总高度
@@ -81,7 +90,7 @@
 				popupShow: false,
 				value: 1,
 				collected: false,
-				importData:[],//请求的数据
+				importData: [], //请求的数据
 			};
 		},
 		onLoad: function(options) {
@@ -110,45 +119,45 @@
 				});
 			}, 0);
 		},
-		
+
 		methods: {
 			//下拉刷新
-			 onPullDownRefresh() {
-				 this.getImportData()
-			        console.log('refresh');
-			        setTimeout(function () {
-			            uni.stopPullDownRefresh();
-						
-						
-						
-			        }, 1000);
-			    },
+			onPullDownRefresh() {
+				this.getImportData()
+				console.log('refresh');
+				setTimeout(function() {
+					uni.stopPullDownRefresh();
+
+
+
+				}, 1000);
+			},
 			//获取进口水果
-			getImportData(){
+			getImportData() {
 				listing2(getselectHot)
-				.then((res)=>{
-					console.log(res)
-					this.importData =  res.data.data
-				})
-				.catch((err)=>{
-					console.log(err)
-				})
+					.then((res) => {
+						console.log(res)
+						this.importData = res.data.data
+					})
+					.catch((err) => {
+						console.log(err)
+					})
 			},
 			//商品详情页
-			gotoList(id){
+			gotoList(id) {
 				log(id)
 				uni.navigateTo({
-					url:'../../pagesIII/productDetail/productDetail?id=' + id
+					url: '../../pagesIII/productDetail/productDetail?id=' + id
 				})
 			},
-			gotoGun(){
+			gotoGun() {
 				uni.navigateTo({
-					url:'../../pagesIII/demo/demo'
+					url: '../../pagesIII/demo/demo'
 				})
 			},
-			menubtn(index){
+			menubtn(index) {
 				this.num = index
-				console.log(this.num )
+				console.log(this.num)
 				// 子组件调试父组件方法 ：parent
 				// this.$parent.fatherMethod(index)
 			},
@@ -193,10 +202,10 @@
 						phoneNumber: "10086"
 					})
 				} else if (index == 6) {
-                    // #ifdef MP
-                    this.common()
-                    // #endif
-					
+					// #ifdef MP
+					this.common()
+					// #endif
+
 					// #ifndef MP
 					this.onShare()
 					// #endif
@@ -261,14 +270,17 @@
 	.container {
 		/* padding-bottom: 110rpx; */
 	}
-	.tui-rank-list{
+
+	.tui-rank-list {
 		padding: 0 30rpx;
 	}
+
 	.tui-my-bg {
 		width: 100%;
-		height: 380rpx;
+		height: 680rpx !important;
 		display: block;
 	}
+
 	.tui-rank-bg {
 		position: absolute;
 		width: 381rpx;
@@ -280,94 +292,123 @@
 		display: flex;
 		align-items: center;
 	}
+
 	/* 排行榜 */
-	
-	.tui-rink-sceate{
+
+	.tui-rink-sceate {
 		border-radius: 60rpx 60rpx 0 0;
-		padding-top: 26rpx;
+		padding: 18rpx 0;
 		position: relative;
-		top: -26px;
+		top: -100rpx;
 		background-color: #fff;
 	}
-	.tui-cent-box{
+
+	.tui-cent-box {
 		padding-top: 26rpx;
-		border-radius: 60rpx 60rpx 0 0 ;
+		border-radius: 60rpx 60rpx 0 0;
 		height: 30px;
 		background-color: #fff;
 		position: relative;
 		top: -20rpx;
-		
-		
+
+
 	}
-	.tui-tab-rank-cent{
+
+	.tui-tab-rank-cent {
 		display: flex;
-		padding: 20rpx 0;
-		
+		padding: 32rpx 0;
 	}
-	.img-rink{
+
+	.img-rink {
 		width: 150rpx;
 		height: 150rpx;
 		display: block;
-		margin-right: 20rpx;
+		margin-right: 10rpx;
+		background: #eee;
+		border-radius: 6rpx;
 	}
+
 	.tui-pro-tit {
 		flex: 5;
 	}
-	.tag-tit{
+
+	.tag-tit {
 		/* 渐变色 */
-		background-image: linear-gradient(to right, #00C94A , #00AC3F);
+		background-image: linear-gradient(to right, #00C94A, #00AC3F);
 		margin-right: 10rpx;
 		padding: 0 10rpx;
 		border-radius: 15rpx 0 15rpx 0;
 		color: #fff;
-		font-size: 20rpx;
+		font-size: 24rpx;
 	}
-	.tag-tit2{
+
+	.tag-tit2 {
 		display: flex;
 		justify-content: space-between;
+		align-items: center;
 	}
-	.tag-tit2-price{
+
+	.tag-tit2-price {
+
 		color: #FF5600;
 		font-size: 28rpx;
+		font-weight: bold;
 	}
-	.text-color1{
-		color: rgba(85, 85, 85, 1);
+
+	.text-color1 {
+		color: #555;
+		font-size: 24rpx;
+		font-weight: normal;
+		margin-right: 6rpx;
+	}
+
+	.text-color2 {
+		color: rgba(255, 86, 0, 1);
+		font-size: 16rpx;
+	}
+
+	.text-color {
+		color: #B6B6B6;
 		font-size: 20rpx;
 	}
-	.text-color2{
-		color:rgba(255, 86, 0, 1);
-		font-size: 18rpx;
-	}
-	.text-color{
-		color: rgba(182, 182, 182, 1);
-		font-size: 20rpx;
-		
-	}
-	.tag-tit2-text{
+
+	.tag-tit2-text {
 		color: #555;
 		font-size: 16rpx;
 	}
-	.tui-shop-car{
+
+	.tui-shop-car {
 		width: 80rpx;
 		height: 80rpx;
 		display: block;
 	}
-	.tag-tit-text{
+
+	.tag-tit-text {
 		font-size: 28rpx;
 		color: #333;
+		font-weight: 400;
 	}
-	.tui-tab-rank{
+
+	.tui-tab-rank {
 		margin: 10rpx 0;
 		border-bottom: 1rpx solid #ccc;
 	}
-	.actineclass{display: block; }
-	.errorclass{display: none;}
-	.activetext{
+
+	.actineclass {
+		display: block;
+	}
+
+	.errorclass {
+		display: none;
+	}
+
+	.activetext {
 		color: #fff !important;
-		background-image: linear-gradient(to right, #FF943D , #FF5600);
+		background-image: linear-gradient(to right, #FF943D, #FF5600);
 		border-radius: 60rpx;
-		}
-	.tui-cent-tab{
+	}
+
+	.tui-cent-tab {
 		position: relative;
 		top: 50rpx;
 		height: 60rpx;
@@ -376,17 +417,19 @@
 		border-radius: 60rpx;
 		background-color: #f7f7f7;
 		margin-bottom: 80rpx;
-		
+
 	}
-	.tui-tab-btn{
+
+	.tui-tab-btn {
 		flex: 1;
 		width: 25%;
 		text-align: center;
 		font-size: 20rpx;
 		color: #333333;
 		line-height: 60rpx;
-		
+
 	}
+
 	.tui-header-box {
 		width: 100%;
 		position: fixed;
@@ -442,7 +485,11 @@
 
 	.tui-banner-swiper {
 		position: relative;
+		height: 400rpx;
+		overflow: hidden;
+
 	}
+
 	/* 地区 */
 	.tui-info-center {
 		position: absolute;
@@ -457,10 +504,12 @@
 		align-items: center;
 		color: #fff;
 	}
-	.tui-info-day{
+
+	.tui-info-day {
 		font-size: 20rpx;
 	}
-	.tui-info-quanguo{
+
+	.tui-info-quanguo {
 		font-size: 28rpx;
 	}
 
@@ -477,6 +526,4 @@
 	}
 
 	/*顶部菜单*/
-
-	
 </style>

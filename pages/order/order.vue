@@ -47,15 +47,19 @@
 									<view class="tui-model-text">{{itemTwo.kg1}}斤装</view>
 								</view>
 								<view class="tui-price-box">
-									<view class="tui-goods-price">￥{{itemTwo.platformPrice | getPrice}}/件</view>
+									<view class="tui-goods-price">
+										<text class="goods-price-tag">￥</text>
+										<text class="goods-price-num">{{itemTwo.platformPrice | getPrice}}</text>
+										<text>/件</text>
+									</view>
 									<!-- :custom="index" :index="indexs" 
 									这个存储用的，第一个是存储最大外面的那个下标
 									第二个是存储第二个循环的下标，这样才能找到对应的商品的 number
 									
 									这个是组件封装好了的，方法不能传参数，只能接受组件传出来的
 									-->
-									<tui-numberbox :value="itemTwo.number" :height="36" :width="64" :min="0" :custom="index" :index="indexs"
-									 @change="changeNum()"></tui-numberbox>
+									<tui-numberbox :value="itemTwo.number" iconColor="#444444" :height="48" :width="76" :min="0" :custom="index"
+									 :index="indexs" @change="changeNum()"></tui-numberbox>
 								</view>
 							</view>
 						</view>
@@ -221,7 +225,7 @@
 			},
 			//获取头像昵称
 			getUserInfo(event) {
-				log(event)
+				// log(event)
 				this.usering = event.detail.userInfo
 				uni.setStorageSync('userIN', event.detail.userInfo) //把头像存在本地，小程序提供如同浏览器cookie
 				let userING = uni.setStorageSync('userIN', event.detail.userInfo)
@@ -230,16 +234,12 @@
 					this.wxCode(wxing.avatarUrl, wxing.nickName)
 				}
 				// wx.startPullDownRefresh()
-
-				log('dddddddddd')
-
-
 			},
 			//获取code
 			wxCode(avatarUrl, nickName) {
 				wx.login({
 					success: (res) => {
-						log(res)
+						// log(res)
 						let code = res.code
 						this.wxLoging(code)
 					},
@@ -271,10 +271,10 @@
 								content: '服务器错误，请重新登录获取信息',
 								success: function(res) {
 									if (res.confirm) {
-										console.log('用户点击确定');
+										// console.log('用户点击确定');
 										uni.hideLoading();
 									} else if (res.cancel) {
-										console.log('用户点击取消');
+										// console.log('用户点击取消');
 										uni.hideLoading();
 									}
 								}
@@ -282,11 +282,9 @@
 							return
 
 						} else if (res.statusCode == 200) {
-
 							log(res)
 						}
-
-						log(res) //获得token
+						// log(res) //获得token
 						uni.setStorageSync('usermen', res.data.token) //把token存在本地，小程序提供如同浏览器cookie
 
 						this.modaishow = false
@@ -312,7 +310,7 @@
 				log(data)
 				listing(getClient, data)
 					.then((res) => {
-						log(res)
+						// log(res)
 						///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
 						this.ApproveStatus = res.data.data.approveStatus //获取状态码，0未认证，1已认证，2拒绝
 						log(this.ApproveStatus)
@@ -346,14 +344,14 @@
 			//请求订单列表
 			orderIng() {
 				let setdata = uni.getStorageSync('usermen')
-				console.log("setdata==========", setdata)
+				// console.log("setdata==========", setdata)
 				let data = {
 					token: setdata
 				}
 				log(setdata)
 				listing(getCart, data)
 					.then((res) => {
-						log(res.data.data)
+						// log(res.data.data)
 						this.orderObj = res.data.data
 
 						// for(var i=0;i<this.orderObj.length;i++){
@@ -865,17 +863,18 @@
 		height: 45rpx !important;
 		border: none;
 	}
-	
 
-	
+
+
 
 	/* #endif */
 	.tui-goods-img {
-		width: 220rpx;
-		height: 220rpx !important;
+		width: 150rpx;
+		height: 150rpx !important;
 		border-radius: 12rpx;
 		flex-shrink: 0;
 		display: block;
+		background: #ddd;
 	}
 
 	.tui-goods-info {
@@ -897,39 +896,34 @@
 		display: -webkit-box;
 		-webkit-box-orient: vertical;
 		-webkit-line-clamp: 2;
-		font-size: 24rpx;
+		font-size: 28rpx;
 		color: #333;
+		font-weight: 500;
 	}
 
 	.tag-tit {
 		/* 渐变色 */
-		background-image: linear-gradient(to right, #00C94A, #00AC3F);
+		background: linear-gradient(to right, #00C94A, #00AC3F);
 		margin-right: 10rpx;
 		padding: 0 10rpx;
 		border-radius: 15rpx 0 15rpx 0;
 		color: #fff;
-		font-size: 20rpx;
+		font-size: 24rpx;
 	}
 
 	.tui-goods-model {
 		max-width: 100%;
 		color: #333;
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		padding: 0 16rpx;
-		box-sizing: border-box;
+
 	}
 
 	.tui-model-text {
-		max-width: 100%;
-		transform: scale(0.9);
-		transform-origin: 0 center;
 		font-size: 24rpx;
-		line-height: 32rpx;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
+		width: 400rpx;
+		color: #666666;
 	}
 
 	.tui-price-box {
@@ -940,9 +934,23 @@
 	}
 
 	.tui-goods-price {
-		font-size: 34rpx;
-		font-weight: 500;
+		font-size: 20rpx;
+		font-weight: 400;
+		color: #B6B6B6;
+
+	}
+
+	.goods-price-tag {
+		font-size: 16rpx;
 		color: #FF5600;
+
+	}
+
+	.goods-price-num {
+		color: #FF5600;
+		font-size: 32rpx;
+		font-weight: bold;
+
 	}
 
 	.tui-scale {
@@ -957,6 +965,9 @@
 		justify-content: space-between;
 		padding: 0 30rpx 20rpx 28rpx;
 		box-sizing: border-box;
+		border-bottom: 1px solid #f5f5f5;
+		margin-bottom: 26rpx;
+
 	}
 
 	.tui-buy {
@@ -1058,35 +1069,39 @@
 		align-items: baseline;
 
 	}
+
 	.total-all {
 		font-size: 24rpx;
 		font-weight: 400;
 		color: #333;
 	}
-	
+
 	.total-label {
-		color:#FF5600;
+		color: #FF5600;
 		font-weight: 400;
 		font-size: 24rpx;
 
 	}
+
 	.total-price-num {
 		color: #FF5600;
 		font-size: 36rpx;
 		font-weight: bold;
 		margin: 0 4rpx;
 	}
+
 	.total-fee {
 		font-size: 22rpx;
 		font-weight: 400;
 		color: #888888;
 	}
+
 	.pay-btns {
 		width: 30%;
 	}
-	
+
 	.go-pay {
-		background: linear-gradient(to right,#00C52A,#00BC45);
+		background: linear-gradient(to right, #00C52A, #00BC45);
 		color: #fff;
 		width: 90%;
 		padding: 12rpx 0;
@@ -1096,7 +1111,7 @@
 		margin: 0 auto;
 		fong-weight: 400;
 	}
-	
+
 	.no-pay {
 		background: #ddd;
 		color: #fff;
@@ -1109,6 +1124,7 @@
 		fong-weight: 400;
 
 	}
+
 	/*猜你喜欢*/
 	.tui-youlike {
 		padding-left: 12rpx
@@ -1260,5 +1276,4 @@
 		padding: 16rpx 0;
 		font-size: 32rpx;
 	}
-	
 </style>

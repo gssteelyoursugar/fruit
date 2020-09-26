@@ -13,7 +13,8 @@
 		<!--header-->
 		<!--banner-->
 		<view class="tui-banner-swiper">
-		<image :src="imageUrl" class="tui-my-bg" mode="widthFix "></image>
+			<!-- <image src="../../static/images/import_fruit.png" class="tui-my-bg" mode="widthFix "></image> -->
+			<image :src="imageUrl" class="tui-my-bg" mode="widthFix "></image>
 		</view>
 		<!-- <view class="tui-cent-box">
 			
@@ -30,7 +31,7 @@
 									<view class="tag-tit2-price">
 										<text class="text-color1">限量价</text>
 										<text class="text-color2">￥</text>
-										{{item.platformPrice}}元<text class="text-color">/件</text>
+										{{item.platformPrice}} <text style="color: #FF5600;font-size: 24rpx;font-weight: 400;">元</text><text class="text-color">/件</text>
 									</view>
 									<!-- <view class="tag-tit2-text">
 										{{item.number}}点赞
@@ -268,7 +269,7 @@
 	}
 	.tui-my-bg {
 		width: 100%;
-		height: 414rpx;
+		height: 352rpx;
 		display: block;
 	}
 	.tui-rank-bg {
@@ -286,7 +287,7 @@
 	
 	.tui-rink-sceate{
 		border-radius: 60rpx 60rpx 0 0;
-		padding-top: 26rpx;
+		padding: 18rpx 0;
 		position: relative;
 		top: -26px;
 		background-color: #fff;
@@ -303,14 +304,16 @@
 	}
 	.tui-tab-rank-cent{
 		display: flex;
-		padding: 20rpx 0;
+		padding: 32rpx 0;
 		
 	}
 	.img-rink{
 		width: 150rpx;
 		height: 150rpx;
 		display: block;
-		margin-right: 20rpx;
+		margin-right: 10rpx;
+		background: #eee;
+
 	}
 	.tui-pro-tit {
 		flex: 5;
@@ -322,26 +325,33 @@
 		padding: 0 10rpx;
 		border-radius: 15rpx 0 15rpx 0;
 		color: #fff;
-		font-size: 20rpx;
+		font-size: 24rpx;
 	}
 	.tag-tit2{
 		display: flex;
 		justify-content: space-between;
+		align-items: center;
+
 	}
 	.tag-tit2-price{
 		color: #FF5600;
 		font-size: 28rpx;
+		font-weight: bold;
+
 	}
 	.text-color1{
-		color: rgba(85, 85, 85, 1);
-		font-size: 20rpx;
+		color: #555;
+		font-size: 24rpx;
+		font-weight: normal;
+		margin-right: 6rpx;
 	}
 	.text-color2{
 		color:rgba(255, 86, 0, 1);
-		font-size: 18rpx;
+		font-size: 16rpx;
+
 	}
 	.text-color{
-		color: rgba(182, 182, 182, 1);
+		color: #B6B6B6;
 		font-size: 20rpx;
 		
 	}
@@ -357,6 +367,8 @@
 	.tag-tit-text{
 		font-size: 28rpx;
 		color: #333;
+		font-weight: 400;
+
 	}
 	.tui-tab-rank{
 		margin: 10rpx 0;

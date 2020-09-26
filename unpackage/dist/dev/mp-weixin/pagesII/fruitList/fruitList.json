@@ -1,0 +1,7 @@
+{
+  "enablePullDownRefresh": true,
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "tui-icon": "/components/tui-icon/tui-icon"
+  }
+}

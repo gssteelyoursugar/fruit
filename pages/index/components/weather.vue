@@ -3,11 +3,12 @@
 		<view class="tui-flex ">
 			<view class="tui-left  ">
 				<image src="../../../static/images/dingwei@2x.png" mode="aspectFit" class="dingwei"></image> 
-				<text class="city">配送至{{address}}</text>
-				<view class="tui-class" v-show="ApproveStatus === 0"  :class="{ active: isActive, 'text-danger': hasError }">
-				
+				<text class="city" style="font-size: 24rpx;" v-if="address&& ApproveStatus === 1">配送至{{address}}</text>
+				<text class="city"  v-if="ApproveStatus !== 1">配送至</text>
+				<view class="tui-class" v-if="ApproveStatus !== 1"  :class="{ active: isActive, 'text-danger': hasError }">
+		
 				</view>
-				<view class="tui-class2" v-show="ApproveStatus === 0" :class="{ active: isActive, 'text-danger': hasError }">
+				<view class="tui-class2" v-if="ApproveStatus !== 1" :class="{ active: isActive, 'text-danger': hasError }">
 					请认证店铺信息
 				</view>
 			</view>
@@ -99,7 +100,8 @@ export default {
 	.tui-left {
 		flex: 1;
 		display: flex;
-		
+		align-items: center;
+
 	}
 	
 	.tui-right{
