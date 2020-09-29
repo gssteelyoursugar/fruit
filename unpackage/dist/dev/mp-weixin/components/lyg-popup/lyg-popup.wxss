@@ -47,7 +47,7 @@
           box-sizing: border-box;
   padding: 40rpx 20rpx 0 20rpx;
   position: fixed;
-  bottom: 30%;
+  bottom: 20%;
   -webkit-border-radius: 8px;
           border-radius: 8px;
   left: 50%;
@@ -56,7 +56,7 @@
   min-height: 400rpx;
   background: #ffffff;
   width: 80%;
-  z-index: 99;
+  z-index: 999;
 }
 .popup_content .title {
   text-align: center;

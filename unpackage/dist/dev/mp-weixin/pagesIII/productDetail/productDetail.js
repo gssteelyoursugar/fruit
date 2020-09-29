@@ -97,13 +97,13 @@ var components = {
     return __webpack_require__.e(/*! import() | components/tui-icon/tui-icon */ "components/tui-icon/tui-icon").then(__webpack_require__.bind(null, /*! @/components/tui-icon/tui-icon.vue */ 357))
   },
   tuiTabs: function() {
-    return __webpack_require__.e(/*! import() | components/tui-tabs/tui-tabs */ "components/tui-tabs/tui-tabs").then(__webpack_require__.bind(null, /*! @/components/tui-tabs/tui-tabs.vue */ 455))
+    return __webpack_require__.e(/*! import() | components/tui-tabs/tui-tabs */ "components/tui-tabs/tui-tabs").then(__webpack_require__.bind(null, /*! @/components/tui-tabs/tui-tabs.vue */ 448))
   },
   tuiTag: function() {
-    return __webpack_require__.e(/*! import() | components/tui-tag/tui-tag */ "components/tui-tag/tui-tag").then(__webpack_require__.bind(null, /*! @/components/tui-tag/tui-tag.vue */ 467))
+    return __webpack_require__.e(/*! import() | components/tui-tag/tui-tag */ "components/tui-tag/tui-tag").then(__webpack_require__.bind(null, /*! @/components/tui-tag/tui-tag.vue */ 460))
   },
   tuiRate: function() {
-    return __webpack_require__.e(/*! import() | components/tui-rate/tui-rate */ "components/tui-rate/tui-rate").then(__webpack_require__.bind(null, /*! @/components/tui-rate/tui-rate.vue */ 505))
+    return __webpack_require__.e(/*! import() | components/tui-rate/tui-rate */ "components/tui-rate/tui-rate").then(__webpack_require__.bind(null, /*! @/components/tui-rate/tui-rate.vue */ 498))
   },
   tuiNomore: function() {
     return __webpack_require__.e(/*! import() | components/tui-nomore/tui-nomore */ "components/tui-nomore/tui-nomore").then(__webpack_require__.bind(null, /*! @/components/tui-nomore/tui-nomore.vue */ 371))
@@ -112,7 +112,7 @@ var components = {
     return __webpack_require__.e(/*! import() | components/tui-button/tui-button */ "components/tui-button/tui-button").then(__webpack_require__.bind(null, /*! @/components/tui-button/tui-button.vue */ 413))
   },
   wybPopup: function() {
-    return __webpack_require__.e(/*! import() | components/wyb-popup/wyb-popup */ "components/wyb-popup/wyb-popup").then(__webpack_require__.bind(null, /*! @/components/wyb-popup/wyb-popup.vue */ 512))
+    return __webpack_require__.e(/*! import() | components/wyb-popup/wyb-popup */ "components/wyb-popup/wyb-popup").then(__webpack_require__.bind(null, /*! @/components/wyb-popup/wyb-popup.vue */ 505))
   },
   tuiNumberbox: function() {
     return __webpack_require__.e(/*! import() | components/tui-numberbox/tui-numberbox */ "components/tui-numberbox/tui-numberbox").then(__webpack_require__.bind(null, /*! @/components/tui-numberbox/tui-numberbox.vue */ 406))
@@ -565,29 +565,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 var _api = __webpack_require__(/*! ../../api/api.js */ 19);
 
+
+
+
+
 var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -1038,7 +1022,28 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
       //这个方法是异步执行的，值还没有赋值，后就先执行了postAct这个，异步，同步，
       (0, _api.publicing)(_request.postdelist, data).then(function (res) {console.log(res.data);_this8.shopListdata = res.data;_this8.labelList = res.data.data.labelList;_this8.urlList = res.data.data.urlList;console.log(_this8.labelList);}).catch(function (err) {console.log(err);});uni.hideLoading();}, //立即购买/加进货单
     postShopping: function postShopping(id) {var _this9 = this;var setdata = uni.getStorageSync('usermen');if (!setdata) {this.modaishow = true;} else {// this.modaishow = false
-        this.modaishow = false;var data = { goodsId: id, token: setdata, number: 1 };log(data);if (this.shopListdata.data.isCart == true) {uni.showToast({ title: '重复加入进货单', icon: 'none', duration: 2000 });uni.hideLoading();return;} else if (this.shopListdata.data.isCart == false) {(0, _api.publicing)(_request.postmyOrder, data).then(function (res) {var code = res.data.code;if (code == -1) {uni.showToast({ title: "".concat(res.data.msg), icon: 'none', duration: 2000 });} else if (code == 200) {_this9.postDetails();uni.showToast({ title: '加入进货单成功', icon: 'none', duration: 2000 });uni.hideLoading();}log(res);
+        this.modaishow = false;var data = { goodsId: id, token: setdata, number: 1 };log(data);if (this.shopListdata.data.isCart == true) {uni.showToast({ title: '重复加入进货单', icon: 'none', duration: 2000 });uni.hideLoading();return;} else if (this.shopListdata.data.isCart == false) {(0, _api.publicing)(_request.postmyOrder, data).
+          then(function (res) {
+            var code = res.data.code;
+            if (code == -1) {
+              uni.showToast({
+                title: "".concat(res.data.msg),
+                icon: 'none',
+                duration: 2000 });
+
+            } else if (code == 200) {
+
+              _this9.postDetails();
+              uni.showToast({
+                title: '加入进货单成功',
+                icon: 'none',
+                duration: 2000 });
+
+              uni.hideLoading();
+            }
+            log(res);
+
+
 
           }).
           catch(function (err) {

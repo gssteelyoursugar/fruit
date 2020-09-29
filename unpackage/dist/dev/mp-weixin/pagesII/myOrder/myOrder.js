@@ -94,10 +94,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   tuiTabs: function() {
-    return __webpack_require__.e(/*! import() | components/tui-tabs/tui-tabs */ "components/tui-tabs/tui-tabs").then(__webpack_require__.bind(null, /*! @/components/tui-tabs/tui-tabs.vue */ 455))
+    return __webpack_require__.e(/*! import() | components/tui-tabs/tui-tabs */ "components/tui-tabs/tui-tabs").then(__webpack_require__.bind(null, /*! @/components/tui-tabs/tui-tabs.vue */ 448))
   },
   wybSlideListener: function() {
-    return __webpack_require__.e(/*! import() | components/wyb-slide-listener/wyb-slide-listener */ "components/wyb-slide-listener/wyb-slide-listener").then(__webpack_require__.bind(null, /*! @/components/wyb-slide-listener/wyb-slide-listener.vue */ 462))
+    return __webpack_require__.e(/*! import() | components/wyb-slide-listener/wyb-slide-listener */ "components/wyb-slide-listener/wyb-slide-listener").then(__webpack_require__.bind(null, /*! @/components/wyb-slide-listener/wyb-slide-listener.vue */ 455))
   },
   tuiListCell: function() {
     return __webpack_require__.e(/*! import() | components/tui-list-cell/tui-list-cell */ "components/tui-list-cell/tui-list-cell").then(__webpack_require__.bind(null, /*! @/components/tui-list-cell/tui-list-cell.vue */ 420))

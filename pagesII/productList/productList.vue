@@ -10,26 +10,32 @@
 				<view class="tui-back" :style="{ marginTop: arrowTop + 'px' }" @tap="back">
 					<tui-icon name="arrowleft" color="#000"></tui-icon>
 				</view>
-				<view class="tui-searchbox tui-search-mr" :style="{ marginTop: inputTop + 'px' }" @tap="search">
+				<view class="tui--top-title">找水果</view>
+				<!-- <view class="tui-searchbox tui-search-mr" :style="{ marginTop: inputTop + 'px' }" @tap="search">
 					<icon type="search" :size="13" color="#999"></icon>
 					<text class="tui-search-text" v-if="!searchKey">搜索圈果商品</text>
 					<view class="tui-search-key" v-if="searchKey">
 						<view class="tui-key-text">{{ searchKey }}</view>
 						<tui-icon name="shut" :size="12" color="#fff"></tui-icon>
 					</view>
-				</view>
+				</view> -->
 			</view>
 		</view>
 		<!--header-->
+		
+		<!-- 搜索框 -->
+		<view class="search-bar">
+			<image src="../../static/images/search-icon.png" mode=""></image>
+			<view class="search-text">芒果</view>
+		</view>
+		<!-- 搜索框 -->
 		<!--顶部筛选-->
 		<view class="tui-header-screen" :style="{ top: height + 'px' }">
 			<view class="tui-screen-top">
 				<!-- 综合筛选 -->
 				<block v-for="(item,index) in seleTopList" :key="index">
 					<view class="tui-top-item tui-icon-ml" :class="[index == num ? 'tui-active tui-bold' : '']" @tap="Total(index)"
-					 data-index=" "
-						  
-						  >
+					 data-index=" ">
 						<view>{{item.name}}</view>
 						<text class="iconfont icon-shangxiajiantou" :color="index == num ? '#00BC45' : '#444' " v-if="index == 1 || index == 2"></text>
 					</view>
@@ -158,12 +164,15 @@
 				<view class="tui-hot-title" style="color: #000000;">
 					热门水果
 				</view>
-				<view class="tui-drop-item " v-for="(item, index) in species" :key="index">
-					<text class="tui-ml tui-middle " :class="{activetext:index == numNull}" @click="checkDing(index,item.id,item.title)">{{ item.title }}</text>
+				<view class="hot-wrap"  style="display: flex; flex-wrap: wrap;">
+					<view class="tui-drop-item" :class="{'tui-drop-active':index == numNull}" v-for="(item, index) in species" :key="index" :style="">
+						<text class="" :class="{activetext:index == numNull}" @click="checkDing(index,item.id,item.title)">{{ item.title }}</text>
+					</view>
+					<view class="tui-drop-item ">
+						<text class="" @click="checkgeng()">更多></text>
+					</view>
 				</view>
-				<view class="tui-drop-item ">
-					<text class="tui-ml tui-middle " @click="checkgeng()">更多></text>
-				</view>
+				
 				<!-- <view class="tui-drop-item "v-for="(item, index) in variety":key="index" >
 					<text class="tui-ml tui-middle " :class="{checked: item.isActives}" @click="checkDing2(index,item.title,item.isActives)">{{ item.title }}</text>
 				</view> -->
@@ -174,16 +183,14 @@
 				<view class="tui-drop-btn tui-btn-red" hover-class="tui-red-hover" :hover-stay-time="150" @tap="btnSure">确定</view>
 			</view> -->
 		</tui-top-dropdown>
+		<!-- 品种 -->
 		<tui-top-dropdown backgroundColor="#f7f7f7" :show="dropScreenShow2" :paddingbtm="110" :translatey="dropScreenH"
 		 @close="btnCloseDrop">
 			<scroll-view class="tui-scroll-box" scroll-y :scroll-top="scrollTop">
-
-				<view class="tui-drop-item ">
-
-					
-					<text class="tui-ml tui-middle ">zz</text>
+				<view class="hot-wrap"></view>
+				<view class="tui-drop-item" v-for="(item,index) of variety" :key="index">
+					<text class="tui-ml tui-middle ">{{item.title}}</text>
 				</view>
-
 			</scroll-view>
 			<view class="tui-drop-btnbox">
 				<view class="tui-drop-btn tui-btn-white" hover-class="tui-white-hover" :hover-stay-time="150" @tap="reset">重置</view>
@@ -198,14 +205,12 @@
 				<scroll-view class="tui-drawer-scroll" scroll-y :style="{ height: drawerH + 'px'}">
 					<view class="tui-drawer-title">
 						<text class="tui-title-bold">果品等级</text>
-
 					</view>
-
 					<view class="tui-drawer-content tui-flex-attr">
 
-						<block v-for="(item,index) in dengji" :key="index">
+						<block v-for="(item,index) in fruit_level" :key="index">
 							<view class="tui-attr-item" :class="{activeItem:index == num}" @click="activeGo(index)">
-								<view class="tui-attr-ellipsis">{{item.name}}</view>
+								<view class="tui-attr-ellipsis">{{item.title}}</view>
 							</view>
 						</block>
 					</view>
@@ -229,13 +234,9 @@
 					<view class="tui-drawer-title">
 						<text class="tui-title-bold">口感等级</text>
 					</view>
-					
-					<!-- 
-					
-					 -->
 					<view class="tui-drawer-content">
 						<view class="content" @click="useOutClickSide">
-							<easy-select :options="taste_level" :colorLevelList="colorLevelList" ref="easySelect" size="mini" :value="selecValue" @selectOne="selectOne"></easy-select>
+							<easy-select :options="taste_level" :colorLevelList="taste_level" ref="easySelect" size="mini" :value="selecValue" @selectOne="selectOne"></easy-select>
 						</view>
 						<tui-icon name="reduce" color="#333" :size="14"></tui-icon>
 						<view class="content" @click="useOutClickSide">
@@ -243,7 +244,6 @@
 						</view>
 						<text>星</text>
 					</view>
-
 					<view class="tui-drawer-title">
 						<text class="tui-title-bold">颜色等级</text>
 					</view>
@@ -255,58 +255,6 @@
 						<view class="content" @click="useOutClickSide">
 							<easy-select ref="easySelect" size="mini" :value="selecValue" @selectOne="selectOne"></easy-select>
 						</view><text>星</text>
-					</view>
-					<view class="tui-drawer-title">
-						<text class="tui-title-bold">颜色等级</text>
-					</view>
-					<view class="tui-drawer-content">
-						<view class="tui-drop-input-box">
-							<tui-dropdown-list :show="dropdownShow" :top="94" :height="400">
-								<template v-slot:selectionbox>
-									<view class="" style="width: 300rpx;height: 50rpx; border: 1rpx solid #ccc;" @click="dropDownList(-1)">
-										{{title}}
-										<view class="tui-animation" :class="[dropdownShow?'tui-animation-show':'']">
-											<tui-icon name="turningdown" :size="20"></tui-icon>
-										</view>
-									</view>
-								</template>
-								<template v-slot:dropdownbox>
-									<view class="tui-selected-list">
-										<scroll-view scroll-y class="tui-dropdown-scroll">
-											<block v-for="(item,index) in dropdownlistData" :key="index">
-												<tui-list-cell padding="0" @click="dropDownList(index,item.name)" :unlined="dropdownlistData.length-1==index">
-													<text class="tui-ml-20">{{item.name}}</text>
-												</tui-list-cell>
-											</block>
-										</scroll-view>
-									</view>
-								</template>
-							</tui-dropdown-list>
-						</view>
-						<tui-icon name="reduce" color="#333" :size="14"></tui-icon>
-						<tui-dropdown-list :show="dropdownShow2" :top="94" :height="400">
-							<template v-slot:selectionbox>
-								<view class="" style="width: 300rpx;height: 50rpx; border: 1rpx solid #ccc;" @click="dropDownList2(-1)">
-									{{title}}
-									<view class="tui-animation" :class="[dropdownShow2?'tui-animation-show':'']">
-										<tui-icon name="turningdown" :size="20"></tui-icon>
-									</view>
-								</view>
-							</template>
-							<template v-slot:dropdownbox>
-								<view class="tui-selected-list">
-									<scroll-view scroll-y class="tui-dropdown-scroll">
-										<block v-for="(item,index) in dropdownlistData" :key="index">
-											<tui-list-cell padding="0" @click="dropDownList2(index,item.name)" :unlined="dropdownlistData.length-1==index">
-												<text class="tui-ml-20">{{item.name}}</text>
-											</tui-list-cell>
-										</block>
-									</scroll-view>
-								</view>
-							</template>
-						</tui-dropdown-list>
-
-						<text>星</text>
 					</view>
 					<view class="tui-drawer-title">
 						<text class="tui-title-bold">果形等级</text>
@@ -547,170 +495,6 @@
 						selected: false
 					}
 				],
-				attrArr: [
-
-					{
-						name: '芒果',
-						selectedName: '芒果',
-						code: 'mangguo',
-						isActive: false,
-						list: [{
-								name: '西瓜',
-								selected: false
-							},
-							{
-								name: '葡萄',
-								selected: false
-							},
-							{
-								name: 'AORO',
-								selected: false
-							},
-							{
-								name: '苏发',
-								selected: false
-							},
-							{
-								name: '飞花令（FHL）',
-								selected: false
-							},
-							{
-								name: '叶梦丝',
-								selected: false
-							},
-							{
-								name: 'ITZOOM',
-								selected: false
-							},
-							{
-								name: '亿魅',
-								selected: false
-							},
-							{
-								name: 'LEIKS',
-								selected: false
-							},
-							{
-								name: '雷克士',
-								selected: false
-							},
-							{
-								name: '蕊芬妮',
-								selected: false
-							},
-							{
-								name: '辉宏达',
-								selected: false
-							},
-							{
-								name: '英西达',
-								selected: false
-							},
-							{
-								name: '戴为',
-								selected: false
-							},
-							{
-								name: '魔风者',
-								selected: false
-							},
-							{
-								name: '即满',
-								selected: false
-							},
-							{
-								name: '北比',
-								selected: false
-							},
-							{
-								name: '娱浪',
-								selected: false
-							},
-							{
-								name: '搞怪猪',
-								selected: false
-							}
-						]
-					},
-					{
-						name: '类型',
-						selectedName: '类型',
-						code: 'leixing',
-						isActive: false,
-						list: [{
-								name: '线充套装',
-								selected: false
-							},
-							{
-								name: '单条装',
-								selected: false
-							},
-							{
-								name: '车载充电器',
-								selected: false
-							},
-							{
-								name: 'PD快充',
-								selected: false
-							},
-							{
-								name: '数据线转换器',
-								selected: false
-							},
-							{
-								name: '多条装',
-								selected: false
-							},
-							{
-								name: '充电插头',
-								selected: false
-							},
-							{
-								name: '无线充电器',
-								selected: false
-							},
-							{
-								name: '座式充电器',
-								selected: false
-							},
-							{
-								name: '万能充',
-								selected: false
-							},
-							{
-								name: '转换器/转接线',
-								selected: false
-							},
-							{
-								name: 'MFI苹果认证',
-								selected: false
-							},
-							{
-								name: '转换器',
-								selected: false
-							},
-							{
-								name: '苹果认证',
-								selected: false
-							}
-						]
-					},
-					{
-						name: '水果标准',
-						selectedName: '水果标准',
-						code: 'shuiguobiaozhun',
-						isActive: false,
-
-						list: []
-					},
-					{
-						name: '验货保障',
-						selectedName: '验货保障',
-						code: 'yanhuobaozhang',
-						isActive: false,
-						list: []
-					},
-				],
 				
 				pageIndex: 1,
 				loadding: false,
@@ -726,23 +510,15 @@
 			log(beforePage.$page.fullPath)
 			if(beforePage.$page.fullPath === '/pagesII/searchGoods/searchGoods'){
 				log('我执行了搜索')
-				
-				//搜索
-			
-				
+				//搜索	
 			}
 			this.getSearch(options.name)
-			
-			
-			
 			console.log(options)
 			this.serrchGoods = options.name
 			this.slMangguo = options.name
 			this.mangguoID = options.id
-
 			log(this.mangguoID)
-			// this.ShopIng()
-
+			this.ShopIng()
 			//this.searchKey = options.name
 			let obj = {};
 			// #ifdef MP-WEIXIN
@@ -818,10 +594,7 @@
 				if (this.num == 0) {
 					this.ShopIng()
 					log('综合')
-
-
 				} else if (this.num == 1) {
-					
 					if(this.sleter ){
 						log('销量升序')
 						this.getshopDESC()
@@ -830,16 +603,11 @@
 						log('销量降序')
 					}
 					this.sleter = !this.sleter
-					
-					
-					
-
 				} else if (this.num == 2) {
 						if(this.sleter2 ){
 							log('价格升序')
 							this.getpriceDESC()
 						}else{
-							
 							log('价格降序')
 							this.getpriceASC()
 						}
@@ -877,14 +645,11 @@
 				log('颜色事件isActives1=' + this.isActives1, '弹层事件=' + this.dropScreenShow)
 				// 	this.dropScreenShow = !this.dropScreenShow
 				// this.dropScreenShow2 = false
-
 				// log(this.dropNum)
 				// if (this.dropNum == 0) {
 				// 	this.dropScreenShow = !this.dropScreenShow
 				// 	this.dropScreenShow2 = false
 				// 	log('芒果')
-
-
 				// } else if (this.dropNum == 1) {
 				// 	this.dropScreenShow2 = !this.dropScreenShow2
 				// 	this.dropScreenShow = false
@@ -1064,7 +829,6 @@
 			
 			//请求数据
 			ShopIng() {
-
 				let data = {
 					pageNo: 1,
 					pageSize: 10
@@ -1077,7 +841,6 @@
 					// listing(getGoodsall,data)
 					.then((res) => {
 						log(res)
-
 						this.seleVarieties = res[1].data.data
 						// log(this.seleVarieties)
 						if (this.seleVarieties === undefined) {
@@ -1102,7 +865,6 @@
 						this.storage_mode = res[0].data.data[0].storage_mode
 						this.taste_level = res[0].data.data[0].taste_level
 						this.variety = res[0].data.data[0].variety
-						
 						//编译格式
 						for(let i =0;i<this.taste_level.length;i++){
 							this.taste_level[i].num = i
@@ -1231,7 +993,7 @@
 	.activetext {
 		color: #fff;
 		border: 1rpx solid rgba(0, 0, 0, 0);
-		background-image: linear-gradient(to left, rgba(0, 188, 69, 1), rgba(0, 197, 42, 1));
+		
 	}
 
 	.tui-drop-input-box {
@@ -1272,11 +1034,11 @@
 	}
 	
 
-	.tui-ml {
+	/* .tui-ml {
 		border: 1rpx solid #ccc;
 		padding: 10rpx 20rpx;
 		border-radius: 24px;
-	}
+	} */
 
 	/* 隐藏scroll-view滚动条*/
 
@@ -1297,7 +1059,8 @@
 
 	.tui-header {
 		display: flex;
-		align-items: flex-start;
+		align-items: center;
+		
 	}
 
 	.tui-back {
@@ -1305,7 +1068,17 @@
 		height: 32px !important;
 		width: 32px !important;
 	}
+	
+	.tui--top-title {
+		margin-top: 52rpx;
+		height: 66rpx;
+		line-height: 66rpx;
+		color: #000;
+		font-size: 32rpx;
 
+	}
+	
+	
 	.tui-searchbox {
 		width: 100%;
 		height: 30px;
@@ -1353,7 +1126,35 @@
 		overflow: hidden;
 		text-overflow: ellipsis;
 	}
-
+	
+	.search-bar {
+		width: 590rpx;
+		margin: 0 50rpx;
+		border: 1px solid #F5F5F5;
+		-webkit-box-shadow: 0 0 20rpx 0 #f5f5f5;
+		box-shadow: 0 0 20rpx 0 #f5f5f5;
+		height: 80rpx;
+		background: #fff;
+		border-radius: 40rpx;
+		position: fixed;
+		top: 140rpx;
+		z-index: 99999;
+		left: 0;
+		display: flex;
+		align-items: center;
+		padding: 0 40rpx;
+	}
+	
+	.search-bar image {
+		width: 36rpx;
+		height: 36rpx;
+		margin-right:20rpx;
+	}
+	.search-text {
+		color: #666666;
+		font-size: 28rpx;
+	}
+	
 	/*screen*/
 
 	.tui-header-screen {
@@ -1362,6 +1163,7 @@
 		background: #fff;
 		position: fixed;
 		z-index: 1000;
+		padding-top: 100rpx;
 	}
 
 	.tui-screen-top,
@@ -1508,20 +1310,39 @@
 		color: #fff;
 		font-size: 30rpx;
 		word-break: break-all;
+		margin-top: 100rpx;
 	}
 	.tui-hot-title{
-		margin: 10rpx;
-	}
-
-	.tui-drop-item {
+		margin: 24rpx 40rpx;
 		color: #333;
-		height: 80rpx;
+	}
+	
+	.hot-wrap {
+		display: flex;
+		flex-wrap: wrap;
+	}
+	.tui-drop-item {
+		padding: 10rpx 0;
+		width: 19%;
+		margin: 20rpx;
+		text-align: center;
+		border: 1px solid #eee;
+		border-radius: 40rpx;
+		font-size: 24rpx;
+		color: #333;
+	}
+	.tui-drop-active {
+		background: linear-gradient(to left, rgba(0, 188, 69, 1), rgba(0, 197, 42, 1));
+		
+	}
+	/* .tui-drop-item {
+		color: #333;
 		font-size: 28rpx;
 		padding: 20rpx 40rpx 20rpx 40rpx;
 		box-sizing: border-box;
 		display: inline-block;
-		/* width: 50%; */
-	}
+		
+	} */
 
 	.tui-drop-btnbox {
 		width: 100%;
@@ -1778,7 +1599,7 @@
 	/* 商品列表*/
 
 	.tui-product-list {
-		padding: 0 10rpx;
+		padding: 100rpx 10rpx 30rpx;
 		display: flex;
 		justify-content: space-between;
 		flex-direction: row;

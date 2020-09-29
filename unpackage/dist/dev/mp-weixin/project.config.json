@@ -39,16 +39,23 @@
 			"list": [
 				{
 					"id": -1,
-					"name": "新果",
-					"pathName": "pagesII/fruitList/fruitList",
+					"name": "pagesIII/productDetail/productDetail",
+					"pathName": "pagesIII/productDetail/productDetail",
+					"query": "id=1299160628273971200&__id__=2",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "评价管理",
+					"pathName": "pagesII/Evaluate/Evaluate",
 					"query": "__id__=1",
 					"scene": null
 				},
 				{
 					"id": -1,
-					"name": "排行榜",
-					"pathName": "pagesII/rankingList/rankingList",
-					"query": "index=0&value=order_total&__id__=1",
+					"name": "订单统计",
+					"pathName": "pagesII/OrderStatistics/OrderStatistics",
+					"query": "__id__=1",
 					"scene": null
 				}
 			]

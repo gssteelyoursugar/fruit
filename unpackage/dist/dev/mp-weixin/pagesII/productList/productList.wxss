@@ -5,9 +5,6 @@ page {
 .activetext {
 	color: #fff;
 	border: 1rpx solid rgba(0, 0, 0, 0);
-	background-image: -webkit-gradient(linear, right top, left top, from(rgba(0, 188, 69, 1)), to(rgba(0, 197, 42, 1)));
-	background-image: -webkit-linear-gradient(right, rgba(0, 188, 69, 1), rgba(0, 197, 42, 1));
-	background-image: linear-gradient(to left, rgba(0, 188, 69, 1), rgba(0, 197, 42, 1));
 }
 .tui-drop-input-box {
 	padding: 50rpx;
@@ -54,12 +51,12 @@ page {
 .color-text{
 	color: rgba(112, 112, 112, 1);
 }
-.tui-ml {
+
+/* .tui-ml {
 	border: 1rpx solid #ccc;
 	padding: 10rpx 20rpx;
-	-webkit-border-radius: 24px;
-	        border-radius: 24px;
-}
+	border-radius: 24px;
+} */
 
 /* 隐藏scroll-view滚动条*/
 ::-webkit-scrollbar {
@@ -79,14 +76,21 @@ page {
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;
-	-webkit-box-align: start;
-	-webkit-align-items: flex-start;
-	        align-items: flex-start;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
 }
 .tui-back {
 	margin-left: 8rpx;
 	height: 32px !important;
 	width: 32px !important;
+}
+.tui--top-title {
+	margin-top: 52rpx;
+	height: 66rpx;
+	line-height: 66rpx;
+	color: #000;
+	font-size: 32rpx;
 }
 .tui-searchbox {
 	width: 100%;
@@ -140,6 +144,37 @@ page {
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
+.search-bar {
+	width: 590rpx;
+	margin: 0 50rpx;
+	border: 1px solid #F5F5F5;
+	-webkit-box-shadow: 0 0 20rpx 0 #f5f5f5;
+	box-shadow: 0 0 20rpx 0 #f5f5f5;
+	height: 80rpx;
+	background: #fff;
+	-webkit-border-radius: 40rpx;
+	        border-radius: 40rpx;
+	position: fixed;
+	top: 140rpx;
+	z-index: 99999;
+	left: 0;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	padding: 0 40rpx;
+}
+.search-bar image {
+	width: 36rpx;
+	height: 36rpx;
+	margin-right:20rpx;
+}
+.search-text {
+	color: #666666;
+	font-size: 28rpx;
+}
 
 /*screen*/
 .tui-header-screen {
@@ -149,6 +184,7 @@ page {
 	background: #fff;
 	position: fixed;
 	z-index: 1000;
+	padding-top: 100rpx;
 }
 .tui-screen-top,
 .tui-screen-bottom {
@@ -309,20 +345,44 @@ page {
 	color: #fff;
 	font-size: 30rpx;
 	word-break: break-all;
+	margin-top: 100rpx;
 }
 .tui-hot-title{
-	margin: 10rpx;
+	margin: 24rpx 40rpx;
+	color: #333;
+}
+.hot-wrap {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-flex-wrap: wrap;
+	        flex-wrap: wrap;
 }
 .tui-drop-item {
+	padding: 10rpx 0;
+	width: 19%;
+	margin: 20rpx;
+	text-align: center;
+	border: 1px solid #eee;
+	-webkit-border-radius: 40rpx;
+	        border-radius: 40rpx;
+	font-size: 24rpx;
 	color: #333;
-	height: 80rpx;
+}
+.tui-drop-active {
+	background: -webkit-gradient(linear, right top, left top, from(rgba(0, 188, 69, 1)), to(rgba(0, 197, 42, 1)));
+	background: -webkit-linear-gradient(right, rgba(0, 188, 69, 1), rgba(0, 197, 42, 1));
+	background: linear-gradient(to left, rgba(0, 188, 69, 1), rgba(0, 197, 42, 1));
+}
+
+/* .tui-drop-item {
+	color: #333;
 	font-size: 28rpx;
 	padding: 20rpx 40rpx 20rpx 40rpx;
-	-webkit-box-sizing: border-box;
-	        box-sizing: border-box;
+	box-sizing: border-box;
 	display: inline-block;
-	/* width: 50%; */
-}
+	
+} */
 .tui-drop-btnbox {
 	width: 100%;
 	height: 100rpx;
@@ -616,7 +676,7 @@ page {
 
 /* 商品列表*/
 .tui-product-list {
-	padding: 0 10rpx;
+	padding: 100rpx 10rpx 30rpx;
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;

@@ -105,12 +105,6 @@ var components = {
   easySelect: function() {
     return __webpack_require__.e(/*! import() | components/easy-select/easy-select */ "components/easy-select/easy-select").then(__webpack_require__.bind(null, /*! @/components/easy-select/easy-select.vue */ 441))
   },
-  tuiDropdownList: function() {
-    return __webpack_require__.e(/*! import() | components/tui-dropdown-list/tui-dropdown-list */ "components/tui-dropdown-list/tui-dropdown-list").then(__webpack_require__.bind(null, /*! @/components/tui-dropdown-list/tui-dropdown-list.vue */ 448))
-  },
-  tuiListCell: function() {
-    return __webpack_require__.e(/*! import() | components/tui-list-cell/tui-list-cell */ "components/tui-list-cell/tui-list-cell").then(__webpack_require__.bind(null, /*! @/components/tui-list-cell/tui-list-cell.vue */ 420))
-  },
   tuiNomore: function() {
     return __webpack_require__.e(/*! import() | components/tui-nomore/tui-nomore */ "components/tui-nomore/tui-nomore").then(__webpack_require__.bind(null, /*! @/components/tui-nomore/tui-nomore.vue */ 371))
   }
@@ -162,58 +156,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -829,58 +771,6 @@ var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 var _console = console,log = _console.log;var _default = { data: function data() {return { title: '选中', sleter: false, sleter2: false, dropdownlistData: [{ name: "微信支付" }, { name: "支付宝支付" }, { name: "银行卡支付" }, { name: "微信支付" }, { name: "支付宝支付" }, { name: "银行卡支付" }], dropdownShow: false, dropdownShow2: false, seleVarieties: [], //全部品种
       color_level: [], //颜色等级
       facade_level: [], //外观等级
@@ -908,170 +798,39 @@ var _console = console,log = _console.log;var _default = { data: function data()
       isList: false, //切换列表展示效果
       drawer: false, //显示选果标准抽屉
       drawerH: 0, //抽屉内部scrollview高度
-      selectedName: '综合', selectH: 0, num: 0, seleTopList: [{ name: '综合', selected: false }, { name: '销量', selected: false }, { name: '价格', selected: false }, { name: '视频选果', selected: false }], seleBottom: [{ name: '芒果', selected: false }, { name: '品种', selected: true }, { name: '水果标准', selected: false }, { name: '验证保障', selected: false }], dropdownList: [{ name: '综合', selected: true }, { name: '价格升序', selected: false }, { name: '价格降序', selected: false }], attrArr: [{ name: '芒果', selectedName: '芒果', code: 'mangguo', isActive: false, list: [{ name: '西瓜', selected: false }, { name: '葡萄', selected: false }, { name: 'AORO', selected: false }, { name: '苏发', selected: false }, { name: '飞花令（FHL）', selected: false }, { name: '叶梦丝', selected: false }, { name: 'ITZOOM', selected: false }, { name: '亿魅', selected: false }, { name: 'LEIKS', selected: false }, { name: '雷克士', selected: false }, { name: '蕊芬妮', selected: false }, { name: '辉宏达', selected: false }, { name: '英西达', selected: false }, { name: '戴为', selected: false }, { name: '魔风者', selected: false }, { name: '即满', selected: false }, { name: '北比', selected: false }, { name: '娱浪', selected: false }, { name: '搞怪猪', selected: false }] }, { name: '类型', selectedName: '类型', code: 'leixing', isActive: false, list: [{ name: '线充套装', selected: false }, { name: '单条装', selected: false }, { name: '车载充电器', selected: false }, { name: 'PD快充', selected: false }, { name: '数据线转换器', selected: false }, { name: '多条装', selected: false }, { name: '充电插头', selected: false }, { name: '无线充电器', selected: false }, { name: '座式充电器', selected: false }, { name: '万能充', selected: false }, { name: '转换器/转接线', selected: false }, { name: 'MFI苹果认证', selected: false }, { name: '转换器', selected: false }, { name: '苹果认证', selected: false }] }, { name: '水果标准', selectedName: '水果标准', code: 'shuiguobiaozhun', isActive: false, list: [] }, { name: '验货保障', selectedName: '验货保障', code: 'yanhuobaozhang', isActive: false, list: [] }], pageIndex: 1, loadding: false, pullUpOn: true };}, onLoad: function onLoad(options) {var _this = this;var pages = getCurrentPages();var curPage = pages[pages.length - 1]; // 当前页面路径
+      selectedName: '综合', selectH: 0, num: 0, seleTopList: [{ name: '综合', selected: false }, { name: '销量', selected: false }, { name: '价格', selected: false }, { name: '视频选果', selected: false }], seleBottom: [{ name: '芒果', selected: false }, { name: '品种', selected: true }, { name: '水果标准', selected: false }, { name: '验证保障', selected: false }], dropdownList: [{ name: '综合', selected: true }, { name: '价格升序', selected: false }, { name: '价格降序', selected: false }], pageIndex: 1, loadding: false, pullUpOn: true };}, onLoad: function onLoad(options) {var _this = this;var pages = getCurrentPages();var curPage = pages[pages.length - 1]; // 当前页面路径
     var beforePage = pages[pages.length - 2]; // 前一个页面路径
-    log(beforePage.$page.fullPath);if (beforePage.$page.fullPath === '/pagesII/searchGoods/searchGoods') {log('我执行了搜索'); //搜索
-    }this.getSearch(options.name);console.log(options);this.serrchGoods = options.name;this.slMangguo = options.name;this.mangguoID = options.id;log(this.mangguoID); // this.ShopIng()
-    //this.searchKey = options.name
-    var obj = {};obj = wx.getMenuButtonBoundingClientRect();
-
-
-
-    uni.getSystemInfo({
-      success: function success(res) {
-        _this.width = obj.left || res.windowWidth;
-        _this.height = obj.top ? obj.top + obj.height + 8 : res.statusBarHeight + 44;
-        _this.inputTop = obj.top ? obj.top + (obj.height - 30) / 2 : res.statusBarHeight + 7;
-        _this.arrowTop = obj.top ? obj.top + (obj.height - 32) / 2 : res.statusBarHeight + 6;
-        _this.searchKey = options.name || ''; //传递的搜索关键字
+    log(beforePage.$page.fullPath);if (beforePage.$page.fullPath === '/pagesII/searchGoods/searchGoods') {log('我执行了搜索'); //搜索	
+    }this.getSearch(options.name);console.log(options);this.serrchGoods = options.name;this.slMangguo = options.name;this.mangguoID = options.id;log(this.mangguoID);this.ShopIng(); //this.searchKey = options.name
+    var obj = {};obj = wx.getMenuButtonBoundingClientRect();uni.getSystemInfo({ success: function success(res) {_this.width = obj.left || res.windowWidth;_this.height = obj.top ? obj.top + obj.height + 8 : res.statusBarHeight + 44;_this.inputTop = obj.top ? obj.top + (obj.height - 30) / 2 : res.statusBarHeight + 7;_this.arrowTop = obj.top ? obj.top + (obj.height - 32) / 2 : res.statusBarHeight + 6;_this.searchKey = options.name || ''; //传递的搜索关键字
         //略小，避免误差带来的影响
-        _this.dropScreenH = _this.height * 750 / res.windowWidth + 186;
-        _this.drawerH = res.windowHeight - uni.upx2px(100) - _this.height;
-      } });
-
-  },
-  methods: {
-    //商品详情页
-    gotoList: function gotoList(id) {
-      log(id);
-      uni.navigateTo({
-        url: '../../pagesIII/productDetail/productDetail?id=' + id });
-
-    },
-    //下拉选
-    dropDownList: function dropDownList(index, name) {
-      if (index !== -1) {
-        console.log("index：" + index, name);
-      }
-      this.title = name;
-      this.dropdownShow = !this.dropdownShow;
-    },
-    dropDownList2: function dropDownList2(index, name) {
-      if (index !== -1) {
-        console.log("index：" + index, name);
-      }
-      this.title = name;
-      this.dropdownShow2 = !this.dropdownShow2;
-    },
-    getSearch: function getSearch(serrchName) {var _this2 = this;
-
-      var data = {
-        pageNo: 1,
-        pageSize: 10,
-        name: serrchName };
-
-      (0, _api.listing)(_request.getGoodsall, data).
-      then(function (res) {
-        log(res);
-        _this2.goods = res.data.data[0].goods;
-        log(_this2.goods);
-      }).
-      catch(function (err) {
-        log(err);
-      });
-
-    },
-
-
-
-    /* 第一个筛选 */
-    Total: function Total(index) {
-      this.num = index;
-      log(this.num);
-      if (this.num == 0) {
-        this.ShopIng();
-        log('综合');
-
-
-      } else if (this.num == 1) {
-
-        if (this.sleter) {
-          log('销量升序');
-          this.getshopDESC();
-        } else {
-          this.getshopASC();
-          log('销量降序');
-        }
-        this.sleter = !this.sleter;
-
-
-
-
-      } else if (this.num == 2) {
-        if (this.sleter2) {
-          log('价格升序');
-          this.getpriceDESC();
-        } else {
-
-          log('价格降序');
-          this.getpriceASC();
-        }
-        this.sleter2 = !this.sleter2;
-
-      } else if (this.num == 3) {
-        uni.navigateTo({
-          url: '../../pagesIII/videos/videos' });
-
-        log('视频选果');
-
-      } else if (this.num == 4) {
-
-        uni.navigateTo({
-          url: '../../pagesII/rankingList/rankingList' });
-
-      }
-    },
-
-
-
-    /* 筛选果 */
-    btnDropChange: function btnDropChange(name) {
-      this.isActives1 = !this.isActives1;
-      this.dropScreenShow = !this.dropScreenShow;
-      this.dropScreenShow2 = false;
-      this.isActives2 = false;
-      // if(this.isActives1 === true){
+        _this.dropScreenH = _this.height * 750 / res.windowWidth + 186;_this.drawerH = res.windowHeight - uni.upx2px(100) - _this.height;} });}, methods: { //商品详情页
+    gotoList: function gotoList(id) {log(id);uni.navigateTo({ url: '../../pagesIII/productDetail/productDetail?id=' + id });}, //下拉选
+    dropDownList: function dropDownList(index, name) {if (index !== -1) {console.log("index：" + index, name);}this.title = name;this.dropdownShow = !this.dropdownShow;}, dropDownList2: function dropDownList2(index, name) {if (index !== -1) {console.log("index：" + index, name);}this.title = name;this.dropdownShow2 = !this.dropdownShow2;}, getSearch: function getSearch(serrchName) {var _this2 = this;var data = { pageNo: 1, pageSize: 10, name: serrchName };(0, _api.listing)(_request.getGoodsall, data).then(function (res) {log(res);_this2.goods = res.data.data[0].goods;log(_this2.goods);}).catch(function (err) {log(err);});}, /* 第一个筛选 */Total: function Total(index) {this.num = index;log(this.num);if (this.num == 0) {this.ShopIng();log('综合');} else if (this.num == 1) {if (this.sleter) {log('销量升序');this.getshopDESC();} else {this.getshopASC();log('销量降序');}this.sleter = !this.sleter;} else if (this.num == 2) {if (this.sleter2) {log('价格升序');this.getpriceDESC();} else {log('价格降序');this.getpriceASC();}this.sleter2 = !this.sleter2;} else if (this.num == 3) {uni.navigateTo({ url: '../../pagesIII/videos/videos' });log('视频选果');} else if (this.num == 4) {uni.navigateTo({ url: '../../pagesII/rankingList/rankingList' });}}, /* 筛选果 */btnDropChange: function btnDropChange(name) {this.isActives1 = !this.isActives1;this.dropScreenShow = !this.dropScreenShow;this.dropScreenShow2 = false;this.isActives2 = false; // if(this.isActives1 === true){
       // 	this.dropScreenShow === true
       // }else if(this.isActives1 === false){
       // 	this.dropScreenShow === false
       // }
       // this.isActives1 = !this.isActives1
-      this.isActives1 = this.dropScreenShow;
-      log('颜色事件isActives1=' + this.isActives1, '弹层事件=' + this.dropScreenShow);
-      // 	this.dropScreenShow = !this.dropScreenShow
+      this.isActives1 = this.dropScreenShow;log('颜色事件isActives1=' + this.isActives1, '弹层事件=' + this.dropScreenShow); // 	this.dropScreenShow = !this.dropScreenShow
       // this.dropScreenShow2 = false
-
       // log(this.dropNum)
       // if (this.dropNum == 0) {
       // 	this.dropScreenShow = !this.dropScreenShow
       // 	this.dropScreenShow2 = false
       // 	log('芒果')
-
-
       // } else if (this.dropNum == 1) {
       // 	this.dropScreenShow2 = !this.dropScreenShow2
       // 	this.dropScreenShow = false
       // 	log('品种')
-
       // } else if (this.dropNum == 2) {
       // 	this.btnCloseDrop();
       // 	this.drawer = !this.drawer
       // 	log('果标')
       // } else if (this.dropNum == 3) {
       // 	log('保障')
-
       // } 
-
-    },
-    btnDropChange2: function btnDropChange2() {
-      log('触发');
-      this.$forceUpdate();
-      this.isActives2 = !this.isActives2;
-      this.dropScreenShow2 = !this.dropScreenShow2;
-      this.dropScreenShow = false;
-      this.isActives1 = false;
-    },
-    btnDropChange3: function btnDropChange3() {
+    }, btnDropChange2: function btnDropChange2() {log('触发');this.$forceUpdate();this.isActives2 = !this.isActives2;this.dropScreenShow2 = !this.dropScreenShow2;this.dropScreenShow = false;this.isActives1 = false;}, btnDropChange3: function btnDropChange3() {
       this.drawer = !this.drawer;
       this.dropScreenShow2 = false;
       this.dropScreenShow = false;
@@ -1227,7 +986,6 @@ var _console = console,log = _console.log;var _default = { data: function data()
 
     //请求数据
     ShopIng: function ShopIng() {var _this7 = this;
-
       var data = {
         pageNo: 1,
         pageSize: 10 };
@@ -1240,7 +998,6 @@ var _console = console,log = _console.log;var _default = { data: function data()
       // listing(getGoodsall,data)
       .then(function (res) {
         log(res);
-
         _this7.seleVarieties = res[1].data.data;
         // log(this.seleVarieties)
         if (_this7.seleVarieties === undefined) {
@@ -1265,7 +1022,6 @@ var _console = console,log = _console.log;var _default = { data: function data()
         _this7.storage_mode = res[0].data.data[0].storage_mode;
         _this7.taste_level = res[0].data.data[0].taste_level;
         _this7.variety = res[0].data.data[0].variety;
-
         //编译格式
         for (var _i = 0; _i < _this7.taste_level.length; _i++) {
           _this7.taste_level[_i].num = _i;

@@ -124,7 +124,7 @@
 		box-sizing: border-box;
 		padding: 40upx 20upx 0 20upx;
 		position: fixed;
-		bottom: 30%;
+		bottom: 20%;
 		border-radius: 8px;
 		left: 50%;
 		margin-left: -40%;
@@ -132,7 +132,7 @@
 		min-height: 400upx;
 		background: #ffffff;
 		width: 80%;
-		z-index: 99;
+		z-index: 999;
 
 		.title {
 			text-align: center;

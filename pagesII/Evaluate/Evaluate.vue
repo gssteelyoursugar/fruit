@@ -12,7 +12,8 @@
 							5斤装 × 1
 						</view>
 						<view class="tag-tit2-text">
-							 <text class="price1">￥108元</text><text class="price2">/件</text>
+							<text style="font-size: 20rpx;margin-right:4rpx;">¥</text>108<text style="font-size: 20rpx;margin-left:4rpx;">元</text>
+							<text class="price2">/件</text>
 						</view>
 					</view>
 					<image src="../../static/images/zan.png" mode="aspectFill" class="tui-shop-car"></image>
@@ -31,7 +32,10 @@
 							5斤装 × 1
 						</view>
 						<view class="tag-tit2-text">
-							 <text class="price1">￥108元</text><text class="price2">/件</text>
+							<text class="price1">
+								 <text style="font-size: 20rpx;margin-right:4rpx;">¥</text>108<text style="font-size: 20rpx;margin-left:4rpx;">元</text>
+								 <text class="price2">/件</text>
+							</text>
 						</view>
 					</view>
 					<image src="../../static/images/zan.png" mode="aspectFill" class="tui-shop-car"></image>
@@ -54,7 +58,8 @@
 							5斤装 × 1
 						</view>
 						<view class="tag-tit2-text">
-							 <text class="price1">￥108元</text><text class="price2">/件</text>
+							<text style="font-size: 20rpx;margin-right:4rpx;">¥</text>108<text style="font-size: 20rpx;margin-left:4rpx;">元</text>
+							<text class="price2">/件</text>
 						</view>
 					</view>
 					<image src="../../static/images/zan.png" mode="aspectFill" class="tui-shop-car"></image>
@@ -98,7 +103,7 @@
 <style>
 	.price1{
 		color: #FF5600;
-		font-size: 24rpx;
+		font-size: 36rpx;
 		font-weight: 600;
 	}
 	.price2{
@@ -117,8 +122,12 @@
 		
 	}
 	.title-time-left{
-		margin-left: 20rpx;
+		margin-left: 30rpx;
 		color: #707070;
+		padding: 14rpx 0;
+		font-size: 28rpx;
+		font-weight: 500;
+
 	}
 	.tui-tab-rank-cent{
 		display: flex;
@@ -126,10 +135,13 @@
 		
 	}
 	.img-rink{
-		width: 180rpx;
-		height: 180rpx;
+		width: 140rpx;
+		height: 140rpx;
 		display: block;
-		margin-right: 20rpx;
+		margin-right: 10rpx;
+		background: #eee;
+		border-radius: 6rpx;
+		
 	}
 	.tui-pro-tit {
 		flex: 5;
@@ -141,11 +153,13 @@
 		padding: 0 10rpx;
 		border-radius: 15rpx 0 15rpx 0;
 		color: #fff;
-		font-size: 20rpx;
+		font-size: 24rpx;
 	}
 	.tag-tit2{
 		display: flex;
 		justify-content: space-between;
+		margin: 8rpx 0;
+
 	}
 	.tag-tit2-price{
 		color: #555555;
@@ -156,8 +170,8 @@
 		font-size: 24rpx;
 	}
 	.tui-shop-car{
-		width: 45rpx;
-		height: 48rpx;
+		width: 44rpx;
+		height: 46rpx;
 		display: block;
 	}
 	.tag-tit-text{

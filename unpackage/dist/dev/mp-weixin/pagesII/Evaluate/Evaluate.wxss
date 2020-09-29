@@ -1,7 +1,7 @@
 
 .price1{
 	color: #FF5600;
-	font-size: 24rpx;
+	font-size: 36rpx;
 	font-weight: 600;
 }
 .price2{
@@ -18,8 +18,11 @@
 	border-bottom: 1rpx solid #F5F5F5;
 }
 .title-time-left{
-	margin-left: 20rpx;
+	margin-left: 30rpx;
 	color: #707070;
+	padding: 14rpx 0;
+	font-size: 28rpx;
+	font-weight: 500;
 }
 .tui-tab-rank-cent{
 	display: -webkit-box;
@@ -28,10 +31,13 @@
 	padding: 20rpx ;
 }
 .img-rink{
-	width: 180rpx;
-	height: 180rpx;
+	width: 140rpx;
+	height: 140rpx;
 	display: block;
-	margin-right: 20rpx;
+	margin-right: 10rpx;
+	background: #eee;
+	-webkit-border-radius: 6rpx;
+	        border-radius: 6rpx;
 }
 .tui-pro-tit {
 	-webkit-box-flex: 5;
@@ -48,7 +54,7 @@
 	-webkit-border-radius: 15rpx 0 15rpx 0;
 	        border-radius: 15rpx 0 15rpx 0;
 	color: #fff;
-	font-size: 20rpx;
+	font-size: 24rpx;
 }
 .tag-tit2{
 	display: -webkit-box;
@@ -57,6 +63,7 @@
 	-webkit-box-pack: justify;
 	-webkit-justify-content: space-between;
 	        justify-content: space-between;
+	margin: 8rpx 0;
 }
 .tag-tit2-price{
 	color: #555555;
@@ -67,8 +74,8 @@
 	font-size: 24rpx;
 }
 .tui-shop-car{
-	width: 45rpx;
-	height: 48rpx;
+	width: 44rpx;
+	height: 46rpx;
 	display: block;
 }
 .tag-tit-text{
