@@ -1,40 +1,51 @@
 <template>
 	<view class="container">
+		<!--header-->
+		<view class="tui-header-box">
+			<view class="tui-icon-box" @tap="back">
+				<tui-icon name="arrowleft" :size="30" color="#333"></tui-icon>
+			</view>
+			<view class="tui-header">最近看过</view>
+		</view>
+		<!--header-->
 		<view class="container-img " v-if="lookDatas.length == 0" :class="{ active: isActive, 'text-danger': hasError }">
 			<image src="../../static/images/orderBMG.png" mode="widthFix"></image>
 			<text class="color-text">最近没有浏览过商品先去逛逛</text>
 		</view>
 		<view class="container-img" v-if="modaishow">
-				<image src="../../static/images/quanguo.png" mode="widthFix" class="img-quanguo"></image>
-				<!-- <text class="color-text">{{tips}}</text> -->
-				<view class="btnbox">
-					<button class="btn" type="default"  open-type="getUserInfo" @getuserinfo="getUserInfo">去登陆</button>
-				</view>
-				
+			<image src="../../static/images/quanguo.png" mode="widthFix" class="img-quanguo"></image>
+			<!-- <text class="color-text">{{tips}}</text> -->
+			<view class="btnbox">
+				<button class="btn" type="default" open-type="getUserInfo" @getuserinfo="getUserInfo">去登陆</button>
+			</view>
+
 		</view>
-		
-		<checkbox-group @change="buyChange" >
-			<view class="tui-cart-cell  tui-mtop" >
-				
-				<tui-swipe-action :actions="actions" @click="handlerButton(item.id)" :params="item" v-for="(item,index) in lookDatas" :key="index">
+
+		<checkbox-group @change="buyChange">
+			<view class="tui-cart-cell  tui-mtop">
+
+				<tui-swipe-action :actions="actions" @click="handlerButton(item.id)" :params="item" v-for="(item,index) in lookDatas"
+				 :key="index">
 					<template v-slot:content>
-						<view class="tui-goods-item"  >
-							
-							<image :src="item.url" class="tui-goods-img" @tap="gotoList(item.id)"/>
+						<view class="tui-goods-item">
+
+							<image :src="item.url" class="tui-goods-img" @tap="gotoList(item.id)" />
 							<view class="tui-goods-info">
 								<view class="tui-goods-title"> <text class="tag-tit">{{item.lableName}}</text>{{item.name}}</view>
 								<view class="tui-goods-model">
-									<view class="tui-model-text">{{item.kg1}}斤装</view>
+									<view class="tui-model-text">{{item.kg1}}斤装 x 1</view>
 								</view>
 								<view class="tui-price-box">
-									
+
 									<view class="tui-goods-price">
 										<text class="text-color2">￥</text>
-										{{item.platformPrice}}元<text class="price2">/件</text></view>
-								<view class="">
-									<image  src="../../static/images/like1.png"   mode="aspectFill" class="tui-shop-car"  v-if="item.isCollection" @tap="delLike(item.id)"></image>
-									<image  src="../../static/images/like2.png"   mode="aspectFill" class="tui-shop-car"  v-if="!item.isCollection" @tap="likeOrder(item.id)"></image>
-								</view>
+										{{item.platformPrice}} <text style="font-size: 20rpx;font-weight: 400;margin-left: 4rpx;">元</text><text class="price2">/件</text></view>
+									<view class="">
+										<image src="../../static/images/like1.png" mode="aspectFill" class="tui-shop-car" v-if="item.isCollection"
+										 @tap="delLike(item.id)"></image>
+										<image src="../../static/images/like2.png" mode="aspectFill" class="tui-shop-car" v-if="!item.isCollection"
+										 @tap="likeOrder(item.id)"></image>
+									</view>
 								</view>
 							</view>
 						</view>
@@ -48,70 +59,83 @@
 		<tui-loadmore v-if="loadding" :index="3" type="red"></tui-loadmore>
 		<!-- 提示 -->
 		<tips ref="tips"></tips>
-		
+
 	</view>
 </template>
 
 <script>
 	//请求方式
-	import {listing,publicing,publicing2} from '../../api/api.js'
+	import {
+		listing,
+		publicing,
+		publicing2
+	} from '../../api/api.js'
 	//请求地址
-	import {getRecently,postRecentlyDel,postLike,postDelLike,loginis,} from '../../api/request.js'
+	import {
+		getRecently,
+		postRecentlyDel,
+		postLike,
+		postDelLike,
+		loginis,
+	} from '../../api/request.js'
 	var setdata = uni.getStorageSync('usermen')
-	var {log} = console
+	var {
+		log
+	} = console
 	export default {
-		
+
 		data() {
-			
+
 			return {
 				tips: '',
-				modaishow:false,
-				isCollection:false,
-				isActive:true,//显示
-				hasError: false,//隐藏
-				showLike:true,
-				url:'http://192.168.1.10:8980/',
-				lookDatas:[],
-				
-				flag:false,
-				checkFlag:false,//默认选中
-				allFlag:'',//全选
-				checkedArr:[],//存放选中的数据
-				valueNum:0,
-				url:'http://192.168.1.10:8980',
-				orderObj:[],
-				openid:'',
-				neworder:[],
-				
+				modaishow: false,
+				isCollection: false,
+				isActive: true, //显示
+				hasError: false, //隐藏
+				showLike: true,
+				url: 'http://192.168.1.10:8980/',
+				lookDatas: [],
+
+				flag: false,
+				checkFlag: false, //默认选中
+				allFlag: '', //全选
+				checkedArr: [], //存放选中的数据
+				valueNum: 0,
+				url: 'http://192.168.1.10:8980',
+				orderObj: [],
+				openid: '',
+				neworder: [],
+
 				dataList: [{
-					id: "q2020811",
-					buyNum: 1,
-					price: 299.5,
-					selected: false,
-					imgsrc:'../../static/images/putao1.png',
-					shopName:'大葡萄'
-				}, {
-					id: 'q2020812',
-					buyNum: 2,
-					price: 499,
-					selected: false,
-					imgsrc:'../../static/images/niuyouguo1.png',
-					shopName:'大哈密瓜'
-				},
-				{
-					id: 'q2020813',
-					buyNum: 3,
-					price: 199,
-					selected: false,
-					imgsrc:'../../static/images/putao1.png',
-					shopName:'大紫葡萄'
-				}],
+						id: "q2020811",
+						buyNum: 1,
+						price: 299.5,
+						selected: false,
+						imgsrc: '../../static/images/putao1.png',
+						shopName: '大葡萄'
+					}, {
+						id: 'q2020812',
+						buyNum: 2,
+						price: 499,
+						selected: false,
+						imgsrc: '../../static/images/niuyouguo1.png',
+						shopName: '大哈密瓜'
+					},
+					{
+						id: 'q2020813',
+						buyNum: 3,
+						price: 199,
+						selected: false,
+						imgsrc: '../../static/images/putao1.png',
+						shopName: '大紫葡萄'
+					}
+				],
 				isAll: false,
 				totalPrice: 0,
 				buyNum: 0,
 				cartIds: [], //购物车id
 				actions: [
-					
+
 					{
 						name: '删除',
 						color: '#fff',
@@ -136,11 +160,11 @@
 					}
 				],
 				isEdit: false,
-				
+
 				pageIndex: 1,
 				loadding: false,
 				pullUpOn: true,
-				allPrice:0//总价
+				allPrice: 0 //总价
 			}
 		},
 		filters: {
@@ -149,293 +173,296 @@
 				return price.toFixed(2)
 			}
 		},
-		
+
 		//下拉刷新
-				 onPullDownRefresh() {
-					 this.getRecentlyData()
-				        console.log('refresh');
-				        setTimeout(function () {
-				            uni.stopPullDownRefresh();
-				        }, 1000);
-				    },
+		onPullDownRefresh() {
+			this.getRecentlyData()
+			console.log('refresh');
+			setTimeout(function() {
+				uni.stopPullDownRefresh();
+			}, 1000);
+		},
 		methods: {
-			init(bull,tips){
+			back: function() {
+				uni.navigateBack();
+			},
+			init(bull, tips) {
 				this.modaishow = bull
 				this.tips = tips
 			},
 			//获取头像昵称
-			getUserInfo(event){
+			getUserInfo(event) {
 				log(event)
-				 this.usering= event.detail.userInfo
-				uni.setStorageSync('userIN',event.detail.userInfo)//把头像存在本地，小程序提供如同浏览器cookie
-				let userING = uni.setStorageSync('userIN',event.detail.userInfo)
-				if(event.detail.userInfo){
+				this.usering = event.detail.userInfo
+				uni.setStorageSync('userIN', event.detail.userInfo) //把头像存在本地，小程序提供如同浏览器cookie
+				let userING = uni.setStorageSync('userIN', event.detail.userInfo)
+				if (event.detail.userInfo) {
 					let wxing = event.detail.userInfo
-					this.wxCode(wxing.avatarUrl,wxing.nickName)
+					this.wxCode(wxing.avatarUrl, wxing.nickName)
 				}
 				// wx.startPullDownRefresh()
-				
+
 				log('dddddddddd')
-				
-				
+
+
 			},
 			//获取code
-			wxCode(avatarUrl,nickName){
-				wx.login ({
-					success: (res)=>{
+			wxCode(avatarUrl, nickName) {
+				wx.login({
+					success: (res) => {
 						log(res)
 						let code = res.code
 						this.wxLoging(code)
 					},
-					fail:(err)=>{
+					fail: (err) => {
 						log(err)
 					}
 				})
-				
+
 			},
 			//发code给后台换取token
-			wxLoging(code){
+			wxLoging(code) {
 				log(code)
-							
+
 				// let appid = wx.getAccountInfoSync().miniProgram.appId
 				// let secret = "956f8c9345cbe06a42c6494f7bb53f7f"
 				let data = {
 					code,
 				}
-							uni.showLoading({
-								title:'加载中',
-								icon:'none'
-								// mask:true
-							})
-				publicing2(loginis,data)//发送请求携带参数
-				.then((res)=>{
-								if(res.statusCode == 500){
-									uni.showModal({
-									    title: '提示',
-									    content: '服务器错误，请重新登录获取信息',
-									    success: function (res) {
-									        if (res.confirm) {
-									            console.log('用户点击确定');
-												uni.hideLoading();
-									        } else if (res.cancel) {
-									            console.log('用户点击取消');
-												uni.hideLoading();
-									        }
-									    }
-									});
-									return
-								
-								}else if(res.statusCode == 200){
-									
-									log(res)
+				uni.showLoading({
+					title: '加载中',
+					icon: 'none'
+					// mask:true
+				})
+				publicing2(loginis, data) //发送请求携带参数
+					.then((res) => {
+						if (res.statusCode == 500) {
+							uni.showModal({
+								title: '提示',
+								content: '服务器错误，请重新登录获取信息',
+								success: function(res) {
+									if (res.confirm) {
+										console.log('用户点击确定');
+										uni.hideLoading();
+									} else if (res.cancel) {
+										console.log('用户点击取消');
+										uni.hideLoading();
+									}
 								}
-								
-					log(res)//获得token
-					uni.setStorageSync('usermen',res.data.token)//把token存在本地，小程序提供如同浏览器cookie
-								uni.hideLoading();
-								this.modaishow = false
-								this.getRecentlyData()
-								
-								
-				
-				})
-				.catch((err)=>{
-								uni.showToast({
-									title:`${err}`
-								})
-								
-					log(err)
-				})
-							
+							});
+							return
+
+						} else if (res.statusCode == 200) {
+
+							log(res)
+						}
+
+						log(res) //获得token
+						uni.setStorageSync('usermen', res.data.token) //把token存在本地，小程序提供如同浏览器cookie
+						uni.hideLoading();
+						this.modaishow = false
+						this.getRecentlyData()
+
+
+
+					})
+					.catch((err) => {
+						uni.showToast({
+							title: `${err}`
+						})
+
+						log(err)
+					})
+
 			},
 			//请求最近看过
-			getRecentlyData(){
+			getRecentlyData() {
 				uni.showLoading({
-					
+
 				})
 				let data = {
-					token:setdata,
-					pageNo:1,
-					pageSize:10
+					token: setdata,
+					pageNo: 1,
+					pageSize: 10
 				}
-				listing(getRecently,data)
-				.then((res)=>{
-					log(res)
-					this.lookDatas = res.data.data
-				})
-				.catch((err)=>{
-					log(err)
-				})
+				listing(getRecently, data)
+					.then((res) => {
+						log(res)
+						this.lookDatas = res.data.data
+					})
+					.catch((err) => {
+						log(err)
+					})
 				uni.hideLoading()
 			},
 			//收藏
-			likeOrder(id){
+			likeOrder(id) {
 				log(id)
-				
+
 				let setdata = uni.getStorageSync('usermen')
 				//判断是否登录才能收藏
-				if(!setdata){
+				if (!setdata) {
 					this.modaishow = true
-				}else{
+				} else {
 					this.modaishow = false
-					let data ={
-						goodsId:id,
-						token:setdata,
-						
+					let data = {
+						goodsId: id,
+						token: setdata,
+
 					}
-					publicing(postLike,data)
-					.then((res)=>{
-						log(res)
-						uni.showToast({
-							title:`${res.data.msg}`,
-							icon:'none',
-							duration:1000
+					publicing(postLike, data)
+						.then((res) => {
+							log(res)
+							uni.showToast({
+								title: `${res.data.msg}`,
+								icon: 'none',
+								duration: 1000
+							})
+							this.getRecentlyData()
+
 						})
-						this.getRecentlyData()
-						
-					})
-					.catch((err)=>{
-						log(err)
-					})
-						
-				}	
-				
-				
-						// let setdata = uni.getStorageSync('usermen')
-						log(setdata)
-						
-						
-						
-						
-				
+						.catch((err) => {
+							log(err)
+						})
+
+				}
+
+
+				// let setdata = uni.getStorageSync('usermen')
+				log(setdata)
+
+
+
+
+
 			},
 			//删除收藏
-			delLike(id){
-				let data ={
-					goodsId:id,
-					token:setdata
+			delLike(id) {
+				let data = {
+					goodsId: id,
+					token: setdata
 				}
 				uni.showModal({
-				    title: '提示',
-				    content: '取消收藏这件宝贝，确定吗？',
-				    success:(res)=> {
-				        if (res.confirm) {
-							publicing(postDelLike,data)
-							.then((res)=>{
-								log(res.data.msg)
-								uni.showToast({
-									title:`删除${res.data.msg}`
+					title: '提示',
+					content: '取消收藏这件宝贝，确定吗？',
+					success: (res) => {
+						if (res.confirm) {
+							publicing(postDelLike, data)
+								.then((res) => {
+									log(res.data.msg)
+									uni.showToast({
+										title: `删除${res.data.msg}`
+									})
+									this.getRecentlyData()
 								})
-								this.getRecentlyData()
-							})
-							.catch((err)=>{
-								log(err)
-							})
-				            console.log('用户点击确定');
-				        } else if (res.cancel) {
-				            console.log('用户点击取消');
-							
-				        }
-				    }
+								.catch((err) => {
+									log(err)
+								})
+							console.log('用户点击确定');
+						} else if (res.cancel) {
+							console.log('用户点击取消');
+
+						}
+					}
 				});
 			},
-			
-			
-			
-			
-			
-			
+
+
+
+
+
+
 			//商品详情页
-			gotoList(id){
+			gotoList(id) {
 				log(id)
 				// 	return
 				uni.navigateTo({
-					url:'../../pagesIII/productDetail/productDetail?id=' + id
+					url: '../../pagesIII/productDetail/productDetail?id=' + id
 				})
 			},
-			
-			
-		
-		
-			
+
+
+
+
+
 			//更新进货单数量
-			
+
 			//删除商品
 			handlerButton(id) {
 				log(id)
 				var setdata = uni.getStorageSync('usermen')
-				let data ={
-					
-					goodsId:id,
-					token:setdata
+				let data = {
+
+					goodsId: id,
+					token: setdata
 				}
 				log(data)
-				publicing(postRecentlyDel,data)
-				.then((res)=>{
-					log(res)
-					
-					uni.showToast({
-						title:`${res.data.msg}`
+				publicing(postRecentlyDel, data)
+					.then((res) => {
+						log(res)
+
+						uni.showToast({
+							title: `${res.data.msg}`
+						})
+						this.getRecentlyData()
+
+						// this.$forceUpdate();
 					})
-					this.getRecentlyData()
-					
-					// this.$forceUpdate();
-				})
-				.catch((err)=>{
-					log(err)
-					uni.showToast({
-						title:'删除失败'
+					.catch((err) => {
+						log(err)
+						uni.showToast({
+							title: '删除失败'
+						})
 					})
-				})
 				// let index = e.index;
 				// let item = e.item;
-				
-				
+
+
 			},
 			//反馈提示
-			tising(bull,tips){
-				this.init(bull,tips)
+			tising(bull, tips) {
+				this.init(bull, tips)
 			},
-			
+
 			detail: function() {
 				uni.navigateTo({
 					url: '../productDetail/productDetail'
 				})
 			},
-			
-		
+
+
 		},
-		 
+
 		// 看订单的前提条件就是是否登录
 		onShow() {
 			//请求最近看过
 			// this.getRecentlyData()
-			
-			
+
+
 			let setdata = uni.getStorageSync('usermen')
 			log(setdata)
-			if(!setdata){
+			if (!setdata) {
 				this.hasError = true
 				this.isActive = false
 				let bull = true
 				let tips = '请登录后再查看'
-				this.tising(bull,tips)
-			}else{
+				this.tising(bull, tips)
+			} else {
 				let bull = false
 				let tips = ''
-				this.tising(bull,tips)
-				
-				 this.getRecentlyData()
-				 log('显示订单')
-			}	
+				this.tising(bull, tips)
+
+				this.getRecentlyData()
+				log('显示订单')
+			}
 		},
 		onPullDownRefresh() {
 			setTimeout(() => {
 				uni.stopPullDownRefresh()
 			}, 200)
 		},
-		
-		
+
+
 		onNavigationBarButtonTap(e) {
 			this.isEdit = !this.isEdit;
 			let text = this.isEdit ? "完成" : "编辑";
@@ -445,43 +472,59 @@
 				text: text
 			});
 			// #endif
-		}
+		},
+		
 	}
 </script>
 
 <style>
-	/* 隐藏 */
-	.text-danger{
-		display: none!important;
+	
+	.tui-header-box {
+		display: flex;
+		align-items: center;
+		background: #fff;
+		font-size: 32rpx;
+		color: #393939;
+		padding: 50rpx 30rpx 20rpx;
 	}
+	/* 隐藏 */
+	.text-danger {
+		display: none !important;
+	}
+
 	/* 显示 */
-	.active{
+	.active {
 		display: block;
 	}
+
 	.container {
 		padding-bottom: 120rpx;
 	}
-	.container-img{
+
+	.container-img {
 		margin-top: 150rpx;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
 	}
-	.img-quanguo{
+
+	.img-quanguo {
 		height: 600rpx;
 		width: 300rpx;
-		
+
 	}
-	.color-text{
+
+	.color-text {
 		color: rgba(112, 112, 112, 1);
 	}
 
 	.tui-mtop {
-		margin-top: 24rpx;
+		margin: 20rpx 0;
 	}
-/* 头像 */
-	.tui-head-log{
+
+	/* 头像 */
+	.tui-head-log {
 		width: 40rpx;
 		height: 40rpx;
 		display: block;
@@ -516,8 +559,10 @@
 
 	.tui-goods-item {
 		display: flex;
-		padding: 10rpx 30rpx;
+		padding: 30rpx;
 		box-sizing: border-box;
+		border-bottom: 20rpx solid #f7f7f7;
+		
 	}
 
 	.tui-checkbox {
@@ -564,11 +609,12 @@
 
 	/* #endif */
 	.tui-goods-img {
-		width: 150rpx;
-		height: 150rpx !important;
+		width: 140rpx;
+		height: 140rpx !important;
 		border-radius: 12rpx;
 		flex-shrink: 0;
 		display: block;
+		background: #eee;
 	}
 
 	.tui-goods-info {
@@ -590,14 +636,15 @@
 		display: -webkit-box;
 		-webkit-box-orient: vertical;
 		-webkit-line-clamp: 2;
-		font-size: 24rpx;
+		font-size: 28rpx;
 		color: #333;
 	}
-	.tag-tit{
+
+	.tag-tit {
 		/* 渐变色 */
-		background-image: linear-gradient(to right, #00C94A , #00AC3F);
+		background-image: linear-gradient(to right, #00C94A, #00AC3F);
 		margin-right: 10rpx;
-		padding: 0 10rpx;
+		padding: 0 12rpx;
 		border-radius: 15rpx 0 15rpx 0;
 		color: #fff;
 		font-size: 20rpx;
@@ -605,12 +652,14 @@
 
 	.tui-goods-model {
 		max-width: 100%;
-		color: #333;
+		color: #555;
+		font-size: 24rpx;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		padding: 0 16rpx;
 		box-sizing: border-box;
+		margin: 14rpx 0;
+
 	}
 
 	.tui-model-text {
@@ -630,23 +679,27 @@
 		align-items: flex-end;
 		justify-content: space-between;
 	}
-.text-color2{
-		color:rgba(255, 86, 0, 1);
-		font-size: 18rpx;
+
+	.text-color2 {
+		font-size: 16rpx;
+		margin-right: 4rpx;
+
 	}
+
 	.tui-goods-price {
-		font-size: 28rpx;
+		font-size: 36rpx;
 		font-weight: 500;
 		color: #FF5600;
 	}
-	
-	.price2{
+
+	.price2 {
 		color: #B6B6B6;
-		font-size: 24rpx;
+		font-size: 20rpx;
 	}
-	.tui-shop-car{
-		width: 51rpx;
-		height: 48rpx;
+
+	.tui-shop-car {
+		width: 44rpx;
+		height: 40rpx;
 		display: block;
 	}
 
@@ -837,67 +890,75 @@
 		font-size: 24rpx;
 		color: #656565;
 	}
-	
+
 	/* ==== */
-	.order-no{width: 400upx; height: 400upx;
-	margin: 90upx auto 0 auto;
-	text-align: center;
-	font-size: 28upx;}
-	.order-no image{display: block;
-	width: 250upx; height: 250upx;
-	margin: 0 auto;
-	padding-bottom: 30upx;
+	.order-no {
+		width: 400upx;
+		height: 400upx;
+		margin: 90upx auto 0 auto;
+		text-align: center;
+		font-size: 28upx;
 	}
-	
-	
-	.container-img{
+
+	.order-no image {
+		display: block;
+		width: 250upx;
+		height: 250upx;
+		margin: 0 auto;
+		padding-bottom: 30upx;
+	}
+
+
+	.container-img {
 		margin-top: 150rpx;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
 	}
-	
-	.color-text{
+
+	.color-text {
 		color: rgba(112, 112, 112, 1);
 	}
-	
-	.btnbox{
+
+	.btnbox {
 		position: relative;
 		top: 100rpx;
 		width: 100%;
 	}
+
 	button::after {
-	
-	/* border: 2rpx solid #00AC3F; */
-	
+
+		/* border: 2rpx solid #00AC3F; */
+
 	}
-	
+
 	button {
-	background-color: #fff!important;
-	/* background-color: transparent; */
-	
-	padding-left: 0;
-	
-	
-	padding-right: 0;
-	
-	line-height:inherit;
-	
+		background-color: #fff !important;
+		/* background-color: transparent; */
+
+		padding-left: 0;
+
+
+		padding-right: 0;
+
+		line-height: inherit;
+
 	}
-	
+
 	button {
-	
-	border-radius:0;
-	
+
+		border-radius: 0;
+
 	}
-	.btn{
+
+	.btn {
 		border-radius: 100rpx;
 		height: 60rpx;
 		width: 30%;
 		background-color: #FFFFFF;
 		border: 1rpx solid rgba(0, 197, 42, 1);
-		color: rgba(0, 197, 42, 1)!important;
+		color: rgba(0, 197, 42, 1) !important;
 		padding: 10rpx 0;
 		font-size: 30rpx;
 	}

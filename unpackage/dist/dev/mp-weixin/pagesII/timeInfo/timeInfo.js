@@ -92,7 +92,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
-var components
+var components = {
+  jyfParser: function() {
+    return Promise.all(/*! import() | components/jyf-parser/jyf-parser */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/jyf-parser/jyf-parser")]).then(__webpack_require__.bind(null, /*! @/components/jyf-parser/jyf-parser.vue */ 495))
+  }
+}
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -146,6 +150,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var _api = __webpack_require__(/*! ../../api/api.js */ 19);
 
 var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
@@ -163,30 +168,31 @@ var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
 //
 //
 //
+//
 //请求地址
-var _console = console,log = _console.log;var _default = { data: function data() {return { title: '', content: '', createDate: '', id: '' };}, methods: { getMsgData: function getMsgData() {var _this = this;var data = { id: this.id };(0, _api.listing)(_request.getMsg, data).
-      then(function (res) {
+var _console = console,log = _console.log;var _default = { data: function data() {return { title: '', content: '', createDate: '', id: '' };}, methods: { getMsgData: function getMsgData() {var _this = this;var data = { id: this.id };(0, _api.listing)(_request.getMsg, data).then(function (res) {
         log(res);
-        _this.content = res.data.data.data.content;
+        var contents = res.data.data.data.content;
+        _this.content = contents.replace(/\<image/g, '<image style="width:100%;max-width:100%;height:auto" ');
         _this.createDate = res.data.data.data.createDate;
         _this.title = res.data.data.data.title;
       }).
       catch(function (err) {
         log(err);
       });
+    },
+    clickLink: function clickLink(e) {
+      console.log(e);
     } },
 
 
   onLoad: function onLoad(options) {
-
     this.id = options.id;
     console.log(this.id);
     this.getMsgData();
     // this.content= options.content
     // this.createDate= options.createDate
     // this.title= options.title
-
-
   },
   //下拉刷新
   onPullDownRefresh: function onPullDownRefresh() {

@@ -1,4 +1,5 @@
 <template>
+
 	<view class="">
 		<!--header-->
 		<view class="tui-header-box">
@@ -33,12 +34,7 @@
 				<text class="title">13978860880</text>
 			</view>
 		</view>
-
-
 	</view>
-
-
-
 
 </template>
 

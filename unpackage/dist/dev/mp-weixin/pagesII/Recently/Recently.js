@@ -93,6 +93,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
+  tuiIcon: function() {
+    return __webpack_require__.e(/*! import() | components/tui-icon/tui-icon */ "components/tui-icon/tui-icon").then(__webpack_require__.bind(null, /*! @/components/tui-icon/tui-icon.vue */ 357))
+  },
   tuiSwipeAction: function() {
     return __webpack_require__.e(/*! import() | components/tui-swipe-action/tui-swipe-action */ "components/tui-swipe-action/tui-swipe-action").then(__webpack_require__.bind(null, /*! @/components/tui-swipe-action/tui-swipe-action.vue */ 399))
   }
@@ -190,10 +193,33 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
 var _api = __webpack_require__(/*! ../../api/api.js */ 19);
 
+
+
+
+
 var _request = __webpack_require__(/*! ../../api/request.js */ 21);var _data$filters$onPullD;function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
+
+
+
+
+
+
 var setdata = uni.getStorageSync('usermen');var _console =
+
+
 console,log = _console.log;var _default = (_data$filters$onPullD = {
 
 
@@ -241,6 +267,7 @@ console,log = _console.log;var _default = (_data$filters$onPullD = {
       selected: false,
       imgsrc: '../../static/images/putao1.png',
       shopName: '大紫葡萄' }]), _defineProperty(_ref, "isAll",
+
 
     false), _defineProperty(_ref, "totalPrice",
     0), _defineProperty(_ref, "buyNum",
@@ -295,6 +322,9 @@ console,log = _console.log;var _default = (_data$filters$onPullD = {
     }, 1000);
   },
   methods: {
+    back: function back() {
+      uni.navigateBack();
+    },
     init: function init(bull, tips) {
       this.modaishow = bull;
       this.tips = tips;

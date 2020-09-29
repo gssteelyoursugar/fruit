@@ -1021,8 +1021,8 @@
 			// #endif
 
 			setTimeout(() => {
-				this.$refs.mychild.Handleclick();
-				log('我执行了倒计时')
+				// this.$refs.mychild.Handleclick();
+				// log('我执行了倒计时')
 				// uni.getSystemInfo({
 				// 	success: res => {
 				// 		log(res)

@@ -6,50 +6,65 @@ page {
 	/* padding-bottom: 110rpx; */
 	background-color: #00C42A;
 }
-.tui-rank-list{
+.tui-rank-list {
 	padding: 0 30rpx;
 }
 
 /* 滑动广告 */
-.scroll{
+.scroll {
 	white-space: nowrap;
 	width: 100%;
 	/* height: 180upx; */
 	/* border-bottom: 1px solid #f5f5f5; */
 }
-.tui-cent--title{
-		margin-left: 30rpx;
-		color: #fff;
-		font-weight: 700;
-		font-size: 50rpx;
-		padding: 30rpx 0;
+.tui-cent--title {
+	margin-left: 30rpx;
+	color: #fff;
+	font-weight: 700;
+	font-size: 50rpx;
+	padding: 0 0 30rpx;
 }
-.tui-tag-mag{
-		margin-left: 30rpx;
+.tui-cent--title text{
+	position: relative;
+	z-index: 3;
 }
-.tui-tag-name{
-		margin: 0 10rpx;
-		background-color: rgba(255, 119, 9, 1);
-		color: #fff;
-		font-size: 17rpx;
-		border-radius: 20rpx;
-		padding: 2rpx 10rpx;
+.tui-cent--title text::before{
+	content: "";
+	position: absolute;
+	bottom: 10rpx;
+	left: 0;
+	width: 100%;
+	height: 8rpx;
+	background: #FF6500;
+	z-index: -1;
 }
-.tui-tag-name2{
-		color: rgba(85, 85, 85, 1);
-		font-size: 22rpx;
+.tui-tag-mag {
+	margin-left: 20rpx;
 }
-.tui-tag-time{
-		font-size: 20rpx;
-		color: rgba(112, 112, 112, 1);
-		margin-left: 72rpx;
+.tui-tag-name {
+	margin: 0 10rpx;
+	background-color: rgba(255, 119, 9, 1);
+	color: #fff;
+	font-size: 24rpx;
+	-webkit-border-radius: 20rpx;
+	        border-radius: 20rpx;
+	padding: 2rpx 16rpx;
 }
-.prefer-dis{
+.tui-tag-name2 {
+	color: #555555;
+	font-size: 32rpx;
+}
+.tui-tag-time {
+	font-size: 28rpx;
+	color: #707070;
+	margin-left: 100rpx;
+}
+.prefer-dis {
 	display: -webkit-box;
 	display: -webkit-flex;
-	display: flex; 
-	-webkit-box-pack: justify; 
-	-webkit-justify-content: space-between; 
+	display: flex;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
 	        justify-content: space-between;
 }
 .prefer-view {
@@ -57,32 +72,34 @@ page {
 	width: 650rpx;
 	padding: 0 20rpx;
 }
-.tui-img{
-		width: 650rpx;
-		height: 173rpx;
-		border-radius: 20rpx;
-		display: block;
+.tui-img {
+	width: 650rpx;
+	height: 173rpx;
+	-webkit-border-radius: 20rpx;
+	        border-radius: 20rpx;
+	display: block;
 }
-.tui-img-text{
-		width: 650rpx;
-		height: 262rpx;
-		border-radius: 20rpx;
-		display: block;
-		background-color:#fff ;
+.tui-img-text {
+	width: 650rpx;
+	height: 262rpx;
+	-webkit-border-radius: 20rpx;
+	        border-radius: 20rpx;
+	display: block;
+	background-color: #fff;
 }
-.swipe-img{
+.swipe-img {
 	width: 80%;
 	height: 100rpx;
 	display: block;
 }
-.swiper-box{
+.swiper-box {
 	width: 100%;
 	height: 150rpx;
 }
 .tui-my-bg {
-	width: 100%;
-	/* height: 464rpx; */
+	width: 750rpx;
 	display: block;
+	height: 2000rpx;
 }
 .tui-rank-bg {
 	position: absolute;
@@ -91,7 +108,8 @@ page {
 	left: 0;
 	top: 170rpx;
 	padding: 0 30rpx;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;
@@ -101,86 +119,103 @@ page {
 }
 
 /* 新果榜 */
-.tui-cent-box{
-	
+.tui-cent-box {
+
 	position: relative;
 }
-.tui-tab-rank-cent{
+.tui-tab-rank-cent {
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;
-	padding: 20rpx ;
+	padding: 20rpx;
 	background-color: #fff;
-	border-radius: 20rpx;
+	-webkit-border-radius: 20rpx;
+	        border-radius: 20rpx;
 }
-.img-rink{
+.img-rink {
 	width: 180rpx;
 	height: 180rpx;
 	display: block;
-	margin-right: 20rpx;
+	margin-right: 10rpx;
+	background: #eee;
+	-webkit-border-radius: 6rpx;
+	        border-radius: 6rpx;
 }
 .tui-pro-tit {
 	-webkit-box-flex: 5;
 	-webkit-flex: 5;
 	        flex: 5;
 }
-.tag-tit{
+.tag-tit {
 	/* 渐变色 */
-	background-image: -webkit-linear-gradient(left, #00C94A , #00AC3F);
-	background-image: linear-gradient(to right, #00C94A , #00AC3F);
+	background-image: -webkit-gradient(linear, left top, right top, from(#00C94A), to(#00AC3F));
+	background-image: -webkit-linear-gradient(left, #00C94A, #00AC3F);
+	background-image: linear-gradient(to right, #00C94A, #00AC3F);
 	margin-right: 10rpx;
 	padding: 0 10rpx;
-	border-radius: 15rpx 0 15rpx 0;
+	-webkit-border-radius: 15rpx 0 15rpx 0;
+	        border-radius: 15rpx 0 15rpx 0;
 	color: #fff;
-	font-size: 20rpx;
+	font-size: 24rpx;
 }
-.tag-tit2{
+.tag-tit2 {
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;
 	-webkit-box-pack: justify;
 	-webkit-justify-content: space-between;
 	        justify-content: space-between;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
 }
-.tag-tit2-price{
+.tag-tit2-price {
 	color: #FF5600;
 	font-size: 24rpx;
+	margin-top: 28rpx;
 }
-.tag-tit2-text{
-	color: #555;
+.tag-tit2-text {
+	color: #707070;
 	font-size: 24rpx;
 }
-.tui-shop-car{
+.tui-shop-car {
 	width: 80rpx;
 	height: 80rpx;
 	display: block;
 }
-.tui-rob{
-	background-image: -webkit-linear-gradient(left, rgba(255, 119, 9, 1) , rgba(255, 101, 0, 1));
-	background-image: linear-gradient(to right, rgba(255, 119, 9, 1) , rgba(255, 101, 0, 1));
+.tui-rob {
+	background-image: -webkit-gradient(linear, left top, right top, from(rgba(255, 119, 9, 1)), to(rgba(255, 101, 0, 1)));
+	background-image: -webkit-linear-gradient(left, rgba(255, 119, 9, 1), rgba(255, 101, 0, 1));
+	background-image: linear-gradient(to right, rgba(255, 119, 9, 1), rgba(255, 101, 0, 1));
 	color: #fff;
 	padding: 10rpx 20rpx;
 	font-size: 28rpx;
-	border-radius: 40rpx;
+	-webkit-border-radius: 40rpx;
+	        border-radius: 40rpx;
 }
-.tag-tit-text{
+.tag-tit-text {
 	font-size: 28rpx;
 	color: #333;
 }
-.tui-tab-rank{
+.tui-tab-rank {
 	margin: 10rpx 0;
 	/* border-bottom: 1rpx solid #ccc; */
 }
-.actineclass{display: block;
+.actineclass {
+	display: block;
 }
-.errorclass{display: none;}
-.activetext{
+.errorclass {
+	display: none;
+}
+.activetext {
 	color: #fff !important;
-	background-image: -webkit-linear-gradient(left, #FF943D , #FF5600);
-	background-image: linear-gradient(to right, #FF943D , #FF5600);
-	border-radius: 60rpx;
+	background-image: -webkit-gradient(linear, left top, right top, from(#FF943D), to(#FF5600));
+	background-image: -webkit-linear-gradient(left, #FF943D, #FF5600);
+	background-image: linear-gradient(to right, #FF943D, #FF5600);
+	-webkit-border-radius: 60rpx;
+	        border-radius: 60rpx;
 }
-.tui-cent-tab{
+.tui-cent-tab {
 	position: absolute;
 	top: 50rpx;
 	height: 60rpx;
@@ -190,15 +225,16 @@ page {
 	-webkit-box-pack: justify;
 	-webkit-justify-content: space-between;
 	        justify-content: space-between;
-	border-radius: 60rpx;
+	-webkit-border-radius: 60rpx;
+	        border-radius: 60rpx;
 	background-color: #f7f7f7;
 	margin-bottom: 80rpx;
 }
-.tui-rink-sceate{
+.tui-rink-sceate {
 	position: absolute;
 	background-color: #00C42A;
 }
-.tui-tab-btn{
+.tui-tab-btn {
 	-webkit-box-flex: 1;
 	-webkit-flex: 1;
 	        flex: 1;
@@ -263,7 +299,9 @@ page {
 	width: 20px !important;
 	padding: 6px !important;
 
-	border-radius: 50%;
+	-webkit-border-radius: 50%;
+
+	        border-radius: 50%;
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;
@@ -276,6 +314,8 @@ page {
 }
 .tui-banner-swiper {
 	position: relative;
+	height: 576rpx;
+	overflow: hidden;
 }
 
 /* 地区 */
@@ -287,17 +327,18 @@ page {
 	left: 0;
 	top: 300rpx;
 	padding: 0 30rpx;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	/* display: flex; */
 	-webkit-box-align: center;
 	-webkit-align-items: center;
 	        align-items: center;
 	color: #fff;
 }
-.tui-info-day{
+.tui-info-day {
 	font-size: 20rpx;
 }
-.tui-info-quanguo{
+.tui-info-quanguo {
 	font-size: 28rpx;
 }
 .tui-banner-tag {
@@ -312,6 +353,4 @@ page {
 }
 
 /*顶部菜单*/
-
-
 

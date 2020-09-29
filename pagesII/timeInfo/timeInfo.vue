@@ -5,7 +5,8 @@
 			<view class="color top-title">{{title}}</view>
 			<view class="color top-title top1" >{{createDate}}</view>
 			<!-- <view class="color size"  >周一至周六 </view> -->
-			<view class="html-content" v-html="content"> </view>
+			<!-- <view class="html-content" v-html="content"> </view> -->
+			<jyf-parser selectable @linkpress="clickLink" :html="content"></jyf-parser>
 			
 			<!-- <view class="color size">18000000000 </view> -->
 			
@@ -35,26 +36,27 @@
 				listing(getMsg,data)
 				.then((res)=>{
 					log(res)
-					this.content = res.data.data.data.content
+					let contents = res.data.data.data.content
+					this.content = contents.replace(/\<image/g, '<image style="width:100%;max-width:100%;height:auto" ');
 					this.createDate = res.data.data.data.createDate
 					this.title = res.data.data.data.title
 				})
 				.catch((err)=>{
 					log(err)
 				})
+			},
+			clickLink(e){
+				console.log(e)
 			}
 			
 		},
 		onLoad(options) {
-			
 			this.id= options.id
 			console.log(this.id)
 			this.getMsgData()
 			// this.content= options.content
 			// this.createDate= options.createDate
 			// this.title= options.title
-			
-			
 		},
 		//下拉刷新
 		 onPullDownRefresh() {
@@ -71,12 +73,15 @@
 	page{
 		background-color: #fff;
 	}
+	.html-content image{
+		width: 100%;
+	}
 	.top{
 		height: 20rpx;
 		background-color: rgba(245, 245, 245, 1);
 	}
 	.container{
-		margin: 10rpx 0 0 20rpx;
+		margin: 10rpx  20rpx;
 	}
 	.color{
 		color: rgba(57, 57, 57, 1);

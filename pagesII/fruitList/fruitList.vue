@@ -5,7 +5,7 @@
 		<view class="tui-header-box" :style="{ height: height + 'px', background: 'rgba(255,255,255,' + opcity + ')' }">
 			<view class="tui-header" :style="{ paddingTop: top + 'px', opacity: opcity }">新果上市</view>
 			<view class="tui-header-icon" :style="{ marginTop: top + 'px' }">
-				<view class="tui-icon-box"  @tap="back">
+				<view class="tui-icon-box" @tap="back">
 					<tui-icon name="arrowleft" :size="30" :color="opcity >= 1 ? '#000' : '#fff'"></tui-icon>
 				</view>
 			</view>
@@ -13,13 +13,13 @@
 		<!--header-->
 		<!--banner-->
 		<view class="tui-banner-swiper">
-		<image :src="imageUrl" class="tui-my-bg" mode="aspectFill"></image>
+			<image :src="imageUrl" class="tui-my-bg" mode=""></image>
 		</view>
 		<view class="tui-cent-box">
-			<view class="tui-cent--title" >
-				上市预告
+			<view class="tui-cent--title">
+				<text>上市预告</text>
 			</view>
-			 <view class="page-section-spacing">
+			<view class="page-section-spacing">
 				<view class=" tui-cell-view">
 					<scroll-view scroll-x="true" class="scroll" scroll-with-animation="true">
 						<view class="prefer-dis">
@@ -28,28 +28,24 @@
 									<view class="tui-img-text">
 										<image :src="item.image" mode="aspectFill" class="tui-img"></image>
 										<view class="tui-tag-mag">
-										  <text class="tui-tag-name">柚子</text> 
-										  <text class="tui-tag-name2">正宗容县沙田柚老树果水分足</text>
-										  <view class="tui-tag-time">预计上市时间2020-9-11</view>
+											<text class="tui-tag-name">柚子</text>
+											<text class="tui-tag-name2">正宗容县沙田柚老树果水分足</text>
+											<view class="tui-tag-time">预计上市时间2020-9-11</view>
 										</view>
-										
 									</view>
-									
-									
-									
 								</view>
-							</block>	
+							</block>
 						</view>
 					</scroll-view>
 				</view>
 			</view>
-			
-			<view class="tui-cent--title" >
-				刚刚上市
+
+			<view class="tui-cent--title">
+				<text>刚刚上市</text>
 			</view>
 		</view>
 		<view class="tui-rink-sceate">
-			<view class="tui-rank-list" >
+			<view class="tui-rank-list">
 				<view class="tui-tab-rank" v-for="(item,index) in GoodsData" :key="index">
 					<view class="tui-tab-rank-cent" @tap="gotoList(item.id)">
 						<image :src="item.url" mode="aspectFill" class="img-rink"></image>
@@ -61,21 +57,25 @@
 										刚刚上市{{item.day}}天
 									</view>
 									<view class="tag-tit2-price">
-										{{item.platformPrice}}元/件
+										<text style="font-size: 24rpx;color: #555;margin-right: 12rpx;">限量价</text>
+										<text style="font-size: 16rpx;">¥</text>
+										<text style="font-size: 40rpx;font-weight: bold;margin: 0 4rpx;">{{item.platformPrice}}</text>
+										<text style="font-size: 24rpx;font-weight: 400;">元</text>
+										<text style="font-size: 20rpx;color: #b6b6b6;">/件</text>
 									</view>
-									
+
 								</view>
 								<!-- <image src="../../static/images/shopcar@2x.png" mode="aspectFill" class="tui-shop-car"></image> -->
 								<view class="tui-rob">马上抢鲜</view>
 							</view>
-							
+
 						</view>
 					</view>
 				</view>
 			</view>
-			
-			
-			
+
+
+
 		</view>
 		<!-- <Progress></Progress> -->
 
@@ -85,36 +85,42 @@
 
 <script>
 	//请求
-	import {listing2} from '../../api/api.js'
+	import {
+		listing2
+	} from '../../api/api.js'
 	//请求地址
-	import {getNewsAll,imgurl} from '../../api/request.js'
-	var {log} = console
-	
+	import {
+		getNewsAll,
+		imgurl
+	} from '../../api/request.js'
+	var {
+		log
+	} = console
+
 	export default {
-	
+
 		data() {
 			return {
-				GoodsData:[],
-				url:'',
-				preferdata:[
-					{
-						image:'/static/images/youzi@3x.png'
+				GoodsData: [],
+				url: '',
+				preferdata: [{
+						image: '/static/images/youzi@3x.png'
 					},
 					{
-						image:'/static/images/youzi@3x.png'
+						image: '/static/images/youzi@3x.png'
 					},
 					{
-						image:'/static/images/youzi@3x.png'
+						image: '/static/images/youzi@3x.png'
 					},
 					{
-						image:'/static/images/youzi@3x.png'
+						image: '/static/images/youzi@3x.png'
 					}
 				],
 				hideing: 0,
-				num:0,
-				ranking:['销量榜','评价榜','关注榜','回购榜'],
-				imageUrl:"/static/images/shangshi@3x.png",
-				
+				num: 0,
+				ranking: ['销量榜', '评价榜', '关注榜', '回购榜'],
+				// imageUrl: "../../static/images/new_fruit.png",
+				imageUrl: "/static/images/shangshi@3x.png",
 				height: 64, //header高度
 				top: 26, //标题图标距离顶部距离
 				scrollH: 0, //滚动总高度
@@ -153,45 +159,45 @@
 			}, 0);
 		},
 		//下拉刷新
-		 onPullDownRefresh() {
-			 this.getGoodsAll()
-				console.log('refresh');
-				setTimeout(function () {
-					uni.stopPullDownRefresh();
-				}, 1000);
-			},
-		
-		
+		onPullDownRefresh() {
+			this.getGoodsAll()
+			console.log('refresh');
+			setTimeout(function() {
+				uni.stopPullDownRefresh();
+			}, 1000);
+		},
+
+
 		methods: {
 			//请求鲜果上市所有水果
-			getGoodsAll(){
+			getGoodsAll() {
 				let data = {
-					pageNo:1,
-					pageSize:10
-					
+					pageNo: 1,
+					pageSize: 10
+
 				}
-				listing2(getNewsAll,data)
-				.then((res)=>{
-					log(res)
-					this.GoodsData = res.data.data
-				})
-				.catch((err)=>{
-					log(err)
-				})
+				listing2(getNewsAll, data)
+					.then((res) => {
+						log(res)
+						this.GoodsData = res.data.data
+					})
+					.catch((err) => {
+						log(err)
+					})
 			},
 			//商品详情页
-			gotoList(id){
+			gotoList(id) {
 				log(id)
 				// 	return
 				uni.navigateTo({
-					url:'../../pagesIII/productDetail/productDetail?id=' + id
+					url: '../../pagesIII/productDetail/productDetail?id=' + id
 				})
 			},
-			
-			
-			menubtn(index){
+
+
+			menubtn(index) {
 				this.num = index
-				console.log(this.num )
+				console.log(this.num)
 				// 子组件调试父组件方法 ：parent
 				// this.$parent.fatherMethod(index)
 			},
@@ -236,10 +242,10 @@
 						phoneNumber: "10086"
 					})
 				} else if (index == 6) {
-                    // #ifdef MP
-                    this.common()
-                    // #endif
-					
+					// #ifdef MP
+					this.common()
+					// #endif
+
 					// #ifndef MP
 					this.onShare()
 					// #endif
@@ -305,83 +311,115 @@
 		/* padding-bottom: 110rpx; */
 		background-color: #00C42A;
 	}
-	.tui-rank-list{
+
+	.tui-rank-list {
 		padding: 0 30rpx;
 	}
+
 	/* 滑动广告 */
-	.scroll{
+	.scroll {
 		white-space: nowrap;
 		width: 100%;
 		/* height: 180upx; */
 		/* border-bottom: 1px solid #f5f5f5; */
-		}
-		.tui-cent--title{
-			margin-left: 30rpx;
-			color: #fff;
-			font-weight: 700;
-			font-size: 50rpx;
-			padding: 30rpx 0;
-		}
-		.tui-tag-mag{
-			margin-left: 30rpx;
-		}
-		.tui-tag-name{
-			margin: 0 10rpx;
-			background-color: rgba(255, 119, 9, 1);
-			color: #fff;
-			font-size: 17rpx;
-			border-radius: 20rpx;
-			padding: 2rpx 10rpx;
-			
-		}
-		.tui-tag-name2{
-			color: rgba(85, 85, 85, 1);
-			font-size: 22rpx;
-		}
-		.tui-tag-time{
-			font-size: 20rpx;
-			color: rgba(112, 112, 112, 1);
-			margin-left: 72rpx;
-		}
-	.prefer-dis{
-		display: flex; 
+	}
+
+	.tui-cent--title {
+		margin-left: 30rpx;
+		color: #fff;
+		font-weight: 700;
+		font-size: 50rpx;
+		padding: 0 0 30rpx;
+		
+	}
+	
+	.tui-cent--title text{
+		position: relative;
+		z-index: 3;
+	}
+	.tui-cent--title text::before{
+		content: "";
+		position: absolute;
+		bottom: 10rpx;
+		left: 0;
+		width: 100%;
+		height: 8rpx;
+		background: #FF6500;
+		z-index: -1;
+	}
+	
+
+	.tui-tag-mag {
+		margin-left: 20rpx;
+	}
+
+	.tui-tag-name {
+		margin: 0 10rpx;
+		background-color: rgba(255, 119, 9, 1);
+		color: #fff;
+		font-size: 24rpx;
+		border-radius: 20rpx;
+		padding: 2rpx 16rpx;
+
+	}
+
+	.tui-tag-name2 {
+		color: #555555;
+		font-size: 32rpx;
+		
+	}
+
+	.tui-tag-time {
+		font-size: 28rpx;
+		color: #707070;
+		margin-left: 100rpx;
+	}
+
+	.prefer-dis {
+		display: flex;
 		justify-content: space-between;
-		}
-		.prefer-view {
+	}
+
+	.prefer-view {
 		height: 300rpx;
 		width: 650rpx;
 		padding: 0 20upx;
-		
-		}
-		.tui-img{
-			width: 650rpx;
-			height: 173rpx;
-			border-radius: 20rpx;
-			display: block;
-		}
-		.tui-img-text{
-			width: 650rpx;
-			height: 262rpx;
-			border-radius: 20rpx;
-			display: block;
-			background-color:#fff ;
-		}
-		
-	.swipe-img{
+
+	}
+
+	.tui-img {
+		width: 650rpx;
+		height: 173rpx;
+		border-radius: 20rpx;
+		display: block;
+	}
+
+	.tui-img-text {
+		width: 650rpx;
+		height: 262rpx;
+		border-radius: 20rpx;
+		display: block;
+		background-color: #fff;
+	}
+
+	.swipe-img {
 		width: 80%;
 		height: 100rpx;
 		display: block;
-		
+
 	}
-	.swiper-box{
+
+	.swiper-box {
 		width: 100%;
 		height: 150rpx;
 	}
+
 	.tui-my-bg {
-		width: 100%;
-		/* height: 464rpx; */
+		width: 750rpx;
 		display: block;
+		height: 2000rpx;
 	}
+
 	.tui-rank-bg {
 		position: absolute;
 		width: 381rpx;
@@ -393,81 +431,105 @@
 		display: flex;
 		align-items: center;
 	}
+
 	/* 新果榜 */
-	.tui-cent-box{
-		
+	.tui-cent-box {
+
 		position: relative;
-		
-		
-		
+
+
+
 	}
-	.tui-tab-rank-cent{
+
+	.tui-tab-rank-cent {
 		display: flex;
-		padding: 20rpx ;
+		padding: 20rpx;
 		background-color: #fff;
 		border-radius: 20rpx;
-		
-		
-		
+
+
+
 	}
-	.img-rink{
+
+	.img-rink {
 		width: 180rpx;
 		height: 180rpx;
 		display: block;
-		margin-right: 20rpx;
+		margin-right: 10rpx;
+		background: #eee;
+		border-radius: 6rpx;
 	}
+
 	.tui-pro-tit {
 		flex: 5;
 	}
-	.tag-tit{
+
+	.tag-tit {
 		/* 渐变色 */
-		background-image: linear-gradient(to right, #00C94A , #00AC3F);
+		background-image: linear-gradient(to right, #00C94A, #00AC3F);
 		margin-right: 10rpx;
 		padding: 0 10rpx;
 		border-radius: 15rpx 0 15rpx 0;
 		color: #fff;
-		font-size: 20rpx;
+		font-size: 24rpx;
 	}
-	.tag-tit2{
+
+	.tag-tit2 {
 		display: flex;
 		justify-content: space-between;
+		align-items: center;
 	}
-	.tag-tit2-price{
+
+	.tag-tit2-price {
 		color: #FF5600;
 		font-size: 24rpx;
+		margin-top: 28rpx;
 	}
-	.tag-tit2-text{
-		color: #555;
+
+	.tag-tit2-text {
+		color: #707070;
 		font-size: 24rpx;
 	}
-	.tui-shop-car{
+
+	.tui-shop-car {
 		width: 80rpx;
 		height: 80rpx;
 		display: block;
 	}
-	.tui-rob{
-		background-image: linear-gradient(to right, rgba(255, 119, 9, 1) , rgba(255, 101, 0, 1));
+
+	.tui-rob {
+		background-image: linear-gradient(to right, rgba(255, 119, 9, 1), rgba(255, 101, 0, 1));
 		color: #fff;
 		padding: 10rpx 20rpx;
 		font-size: 28rpx;
 		border-radius: 40rpx;
 	}
-	.tag-tit-text{
+
+	.tag-tit-text {
 		font-size: 28rpx;
 		color: #333;
 	}
-	.tui-tab-rank{
+
+	.tui-tab-rank {
 		margin: 10rpx 0;
 		/* border-bottom: 1rpx solid #ccc; */
 	}
-	.actineclass{display: block; }
-	.errorclass{display: none;}
-	.activetext{
+
+	.actineclass {
+		display: block;
+	}
+
+	.errorclass {
+		display: none;
+	}
+
+	.activetext {
 		color: #fff !important;
-		background-image: linear-gradient(to right, #FF943D , #FF5600);
+		background-image: linear-gradient(to right, #FF943D, #FF5600);
 		border-radius: 60rpx;
-		}
-	.tui-cent-tab{
+	}
+
+	.tui-cent-tab {
 		position: absolute;
 		top: 50rpx;
 		height: 60rpx;
@@ -476,21 +538,24 @@
 		border-radius: 60rpx;
 		background-color: #f7f7f7;
 		margin-bottom: 80rpx;
-		
+
 	}
-	.tui-rink-sceate{
+
+	.tui-rink-sceate {
 		position: absolute;
 		background-color: #00C42A;
 	}
-	.tui-tab-btn{
+
+	.tui-tab-btn {
 		flex: 1;
 		width: 25%;
 		text-align: center;
 		font-size: 20rpx;
 		color: #333333;
 		line-height: 60rpx;
-		
+
 	}
+
 	.tui-header-box {
 		width: 100%;
 		position: fixed;
@@ -546,7 +611,11 @@
 
 	.tui-banner-swiper {
 		position: relative;
+		height: 576rpx;
+		overflow: hidden;
+
 	}
+
 	/* 地区 */
 	.tui-info-center {
 		position: absolute;
@@ -561,10 +630,12 @@
 		align-items: center;
 		color: #fff;
 	}
-	.tui-info-day{
+
+	.tui-info-day {
 		font-size: 20rpx;
 	}
-	.tui-info-quanguo{
+
+	.tui-info-quanguo {
 		font-size: 28rpx;
 	}
 
@@ -581,6 +652,4 @@
 	}
 
 	/*顶部菜单*/
-
-	
 </style>

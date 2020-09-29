@@ -1142,7 +1142,7 @@ var isFirst1 = true;var _default =
   //   }
 
   //初始化
-  onLoad: function onLoad() {var _this7 = this;
+  onLoad: function onLoad() {
     this.getMerchants();
 
     this.getIndexClass();
@@ -1173,8 +1173,8 @@ var isFirst1 = true;var _default =
 
 
     setTimeout(function () {
-      _this7.$refs.mychild.Handleclick();
-      log('我执行了倒计时');
+      // this.$refs.mychild.Handleclick();
+      // log('我执行了倒计时')
       // uni.getSystemInfo({
       // 	success: res => {
       // 		log(res)

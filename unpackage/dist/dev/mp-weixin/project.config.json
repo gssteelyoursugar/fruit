@@ -39,64 +39,16 @@
 			"list": [
 				{
 					"id": -1,
-					"name": "进货单",
-					"pathName": "pages/order/order",
-					"query": "",
+					"name": "新果",
+					"pathName": "pagesII/fruitList/fruitList",
+					"query": "__id__=1",
 					"scene": null
 				},
 				{
 					"id": -1,
-					"name": "我的",
-					"pathName": "pages/my/my",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "店铺信息",
-					"pathName": "pagesII/StoreInformation/StoreInformation",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "更新店铺",
-					"pathName": "pagesII/updataStore/updataStore",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "合作",
-					"pathName": "pagesII/cooperation/cooperation",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "设置",
-					"pathName": "pagesII/SetUp/SetUp",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "进口水果",
-					"pathName": "pagesII/ImportedFruit/ImportedFruit",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "热门水果",
-					"pathName": "pagesII/hotFruit/hotFruit",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "最近看过",
-					"pathName": "pagesII/Recently/Recently",
+					"name": "排行榜",
+					"pathName": "pagesII/rankingList/rankingList",
+					"query": "index=0&value=order_total&__id__=1",
 					"scene": null
 				}
 			]

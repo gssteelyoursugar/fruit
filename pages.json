@@ -119,6 +119,7 @@
                     "path" : "rankingList/rankingList",
                     "style" : {
 						"enablePullDownRefresh": true,
+						"navigationBarTextStyle": "white",//透明胶囊
 						"navigationStyle":"custom"
 					}
                 },
@@ -156,6 +157,7 @@
                     "path" : "fruitList/fruitList",
                     "style" : {
 						"enablePullDownRefresh": true,
+						"navigationBarTextStyle": "white",//透明胶囊
 						"navigationStyle":"custom"
 					}
                 }
@@ -269,7 +271,8 @@
                     "path" : "Recently/Recently",
                     "style" : {
 						"enablePullDownRefresh": true,
-						"navigationBarTitleText": "最近看过"
+						"navigationBarTitleText": "最近看过",
+						"navigationStyle":"custom"
 					}
                 }
                 ,{

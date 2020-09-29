@@ -221,9 +221,37 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 var _api = __webpack_require__(/*! ../../api/api.js */ 19);
 
+
+
 var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -314,16 +342,8 @@ var _console = console,log = _console.log;var _default = { data: function data()
       startTime: 0, endTime: 0, createTime: 0, ts: 0, te: 3 };}, onLoad: function onLoad(options) {var _this = this;this.WxActivityID = options.id;log(this.WxActivityID);this.getLimit();this.url = _request.imgurl;this.getLimit();var obj = {};var that = this;setTimeout(function () {that.loading = true;}, 500);obj = wx.getMenuButtonBoundingClientRect();setTimeout(function () {uni.getSystemInfo({ success: function success(res) {_this.width = obj.left || res.windowWidth;_this.height = obj.top ? obj.top + obj.height + 8 : res.statusBarHeight + 44;_this.top = obj.top ? obj.top + (obj.height - 32) / 2 : res.statusBarHeight + 6;_this.scrollH = res.windowWidth;} });}, 0);}, methods: { //商品详情页
     gotoList: function gotoList(id) {log(id);uni.navigateTo({ url: '../../pagesIII/productDetail/productDetail?id=' + id });}, //倒计时
     endOfTime: function endOfTime() {console.log('倒计时结束');}, //下拉刷新
-    onPullDownRefresh: function onPullDownRefresh() {this.getLimit();console.log('refresh');setTimeout(function () {uni.stopPullDownRefresh();
-      }, 1000);
-    },
-    //请求限量区列表
-    getLimit: function getLimit() {var _this2 = this;
-      var data = {
-        pageNo: 1,
-        pageSize: 10,
-        id: this.WxActivityID };
-
+    onPullDownRefresh: function onPullDownRefresh() {this.getLimit();console.log('refresh');setTimeout(function () {uni.stopPullDownRefresh();}, 1000);}, //请求限量区列表
+    getLimit: function getLimit() {var _this2 = this;var data = { pageNo: 1, pageSize: 10, id: this.WxActivityID };
       (0, _api.listing2)(_request.getActivity, data).
       then(function (res) {
         log(res);
@@ -333,7 +353,6 @@ var _console = console,log = _console.log;var _default = { data: function data()
         _this2.endTime = res.data.data.endTime;
         _this2.createTime = res.data.data.createTime;
         _this2.ts = (_this2.endTime - _this2.createTime) / 1000;
-        log(_this2.ts);
         _this2.dd = parseInt(_this2.ts / 60 / 60 / 24, 10); //计算剩余的天数
         _this2.hh = parseInt(_this2.ts / 60 / 60 % 24, 10); //计算剩余的小时数
         _this2.mm = parseInt(_this2.ts / 60 % 60); //计算剩余的分钟数
