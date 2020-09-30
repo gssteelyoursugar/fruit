@@ -81,6 +81,11 @@
 	position: absolute;
 	line-height: 70rpx;
 	right: 0;
+	top:52rpx;
+	text-align: center;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
 	-webkit-border-radius: 60rpx 0 0 60rpx;
 	        border-radius: 60rpx 0 0 60rpx;
 }
@@ -151,7 +156,7 @@
 .tui-icon-text {
 	font-size: 20rpx;
 	color: #fff;
-	margin-right: 20rpx;
+	margin-left: 4rpx;
 }
 
 /* 未认证 */

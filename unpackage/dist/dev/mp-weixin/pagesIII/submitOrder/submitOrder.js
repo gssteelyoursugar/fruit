@@ -251,8 +251,23 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
 var _api = __webpack_require__(/*! ../../api/api.js */ 19);
+
+
+
 var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -367,7 +382,7 @@ var _default = { components: {}, data: function data() {return { ids: '', //orde
       goodsData: [], //结算的商品信息
       // imgUrl:'http://192.168.1.10:8980/js/userfiles/fileupload/202008/1295611300690604034.png',
       hasCoupon: true, insufficient: false, show: false, extraUserInfo: {}, totalPrice: {}, ids2: '', //order结算后的ids2
-      orderNumber: '', extraData: {}, idList: '', url: '' };}, methods: { //立即购买
+      orderNumber: '', extraData: {}, idList: '', url: '', name: 'arrowright', unit: 'rpx', size: 32, color: '#000', margin: '0' };}, methods: { //立即购买
     gtePayORderTel: function gtePayORderTel() {var _this = this;var setdata = uni.getStorageSync('usermen');var data = { id: this.ids, token: setdata }; // Promise.all([publicing(postSettle,data),publicing(postSubmitOrder,data2)])
       (0, _api.publicing)(_request.postSettle, data).then(function (res) {console.log(res);_this.extraUserInfo = res.data.data.extraData.userInfo;_this.goodsData = res.data.data.data;_this.extraData = res.data.data.extraData;}).catch(function (err) {console.log(err);});}, //进来页面请求结算获得一串id
     gtePayORder: function gtePayORder() {var _this2 = this;var setdata = uni.getStorageSync('usermen');var data = { id: this.ids, token: setdata }; // Promise.all([publicing(postSettle,data),publicing(postSubmitOrder,data2)])
@@ -380,7 +395,13 @@ var _default = { components: {}, data: function data() {return { ids: '', //orde
         // log(this.ids2)
         // this.SubmitOrder(idList)
       }).catch(function (err) {console.log(err);});}, //获得订单号，才能支付
-    SubmitOrder: function SubmitOrder() {var _this3 = this;var setdata = uni.getStorageSync('usermen');var data2 = { id: this.ids, token: setdata };log(2);(0, _api.listing)(_request.getSubmitOrder, data2).then(function (res) {log(res);log(res.data.data.orderNumber);var orderNumber = res.data.data.orderNumber;uni.showModal({ title: '提示', content: '确认支付', success: function success(res) {if (res.confirm) {console.log('用户点击确定');_this3.btnPay(orderNumber);} else if (res.cancel) {uni.showToast({ title: '订单已取消', icon: 'none', duration: 2000 });uni.reLaunch({ url: '../../pagesII/myOrder/myOrder' });return;}} });}).
+    SubmitOrder: function SubmitOrder() {var _this3 = this;var setdata = uni.getStorageSync('usermen');var data2 = { id: this.ids, token: setdata };log(2);(0, _api.listing)(_request.getSubmitOrder, data2).then(function (res) {log(res);log(res.data.data.orderNumber);var orderNumber = res.data.data.orderNumber;uni.showModal({ title: '提示', content: '确认支付', success: function success(res) {if (res.confirm) {console.log('用户点击确定');_this3.btnPay(orderNumber);} else if (res.cancel) {uni.showToast({ title: '订单已取消', icon: 'none', duration: 2000 });uni.reLaunch({ url: '../../pagesII/myOrder/myOrder' });return;
+            }
+          } });
+
+
+
+      }).
       catch(function (err) {
         log(err);
       });
@@ -437,7 +458,7 @@ var _default = { components: {}, data: function data() {return { ids: '', //orde
     this.gtePayORderTel();
 
     var pages = getCurrentPages();
-
+    console.log(pages, 1241212);
     var curPage = pages[pages.length - 1]; // 当前页面路径
 
     var beforePage = pages[pages.length - 2]; // 前一个页面路径
@@ -446,7 +467,6 @@ var _default = { components: {}, data: function data() {return { ids: '', //orde
 
       log('我执行了加购清单');
       this.gtePayORder(); //请求结算
-
     } else if (beforePage.$page.fullPath == '/pagesIII/productDetail/productDetail') {
       log('我执行了立即购买');
     }

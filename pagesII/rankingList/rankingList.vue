@@ -21,7 +21,7 @@
 					南宁&nbsp;·&nbsp;圈果
 				</view>
 				<view class="tui-info-day">
-					按截至前一天的累计评价数量排序 8月11日更新
+					按截至前一天的累计评价数量排序 {{currMonth}}月{{currDay}}日更新
 				</view>
 			</view>
 		</view>
@@ -55,7 +55,7 @@
 											<text style="font-size: 20rpx;color: #b6b6b6;">/件</text>
 										</view>
 										<view class="tag-tit2-text">
-											累计成交 <text class="tag-tit3-text">{{item.totalPrice}}</text> 万元
+											累计成交 <text class="tag-tit3-text">{{item.totalPrice || 0}}</text> 万元
 										</view>
 									</view>
 									<image src="../../static/images/shopcar@2x.png" mode="aspectFill" class="tui-shop-car"></image>
@@ -82,12 +82,12 @@
 											<view class="tag-tit2-price">
 												<!-- <text style="font-size: 24rpx;color: #555;margin-right: 12rpx;">限量价</text> -->
 												<text style="font-size: 16rpx;">¥</text>
-												<text style="font-size: 40rpx;font-weight: bold;margin: 0 4rpx;">{{item.platformPrice}}</text>
+												<text style="font-size: 40rpx;font-weight: bold;margin: 0 4rpx;">{{item.platformPrice ||0.00}}</text>
 												<text style="font-size: 24rpx;font-weight: 400;">元</text>
 												<text style="font-size: 20rpx;color: #b6b6b6;">/件</text>
 											</view>
 											<view class="tag-tit2-text">
-												{{item.evaluateNumber}}人点了赞
+												{{item.evaluateNumber || 0}}人点了赞
 											</view>
 										</view>
 										<image src="../../static/images/shopcar@2x.png" mode="aspectFill" class="tui-shop-car"></image>
@@ -119,7 +119,7 @@
 												<text style="font-size: 20rpx;color: #b6b6b6;">/件</text>
 											</view>
 											<view class="tag-tit2-text">
-												{{item.followNumber}}人关注收藏了
+												{{item.followNumber ||0}}人关注收藏了
 											</view>
 										</view>
 										<image src="../../static/images/shopcar@2x.png" mode="aspectFill" class="tui-shop-car"></image>
@@ -151,7 +151,7 @@
 												<text style="font-size: 20rpx;color: #b6b6b6;">/件</text>
 											</view>
 											<view class="tag-tit2-text">
-												{{item.backNumber}}人买了之后又买
+												{{item.backNumber || 0}}人买了之后又买
 											</view>
 										</view>
 										<image src="../../static/images/shopcar@2x.png" mode="aspectFill" class="tui-shop-car"></image>
@@ -256,6 +256,14 @@
 					}
 				});
 			}, 0);
+		},
+		computed: {
+			currMonth(){
+				return new Date().getMonth()+1
+			},
+			currDay(){
+				return new Date().getDate()
+			}
 		},
 		methods: {
 			onPullDownRefresh() {

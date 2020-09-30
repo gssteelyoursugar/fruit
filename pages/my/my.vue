@@ -24,43 +24,40 @@
 						<button plain="true" type="primary" :text="loginText" open-type="getUserInfo" @getuserinfo="getUserInfo">点击登录</button>
 					</view>
 					<view class="tui-explain">
-
 					</view>
-
 				</view>
-
 				<!-- #ifdef MP -->
 				<!-- 未登录店铺按钮 -->
-				<view class="tui-set-box3" v-if="!wxlogin">
+				<!-- <view class="tui-set-box3" v-if="!wxlogin">
+					<view class="tui-icon-box " @tap="tendShop">
+						去登录
+					</view> -->
 					<!-- <view class="tui-icon-box " >
 						<button plain="true" type="primary" :text="loginText" open-type="getUserInfo" @getuserinfo="getUserInfo">去认证我的店铺</button>
 					</view>
 					 -->
-					<view class="tui-icon-box " @tap="tendShop">
-						<text class="tui-icon-text3">去认证我的店铺 </text>
-					</view>
-				</view>
-				<view class="tui-set-box3" v-if="wxlogin" @tap="tendShop">
-					<view class="tui-icon-box ">
+					<!-- <view class="tui-icon-box " @tap="tendShop">
+						<text class="tui-icon-text3">{{logMsg}}</text>
+					</view> -->
+				<!-- </view> -->
+				<!-- <view class="tui-set-box3" v-if="wxlogin" @tap="tendShop">
+					<view class="tui-icon-box">
 						<text class="tui-icon-text3">{{logMsg}}</text>
 					</view>
-				</view>
-				<view class="tui-set-box3" v-if="Goauth">
+				</view> -->
+				<view class="tui-set-box3" v-if="wxlogin && Goauth && ApproveStatus === 0">
 					<view class="tui-icon-box ">
 						<view class="tui-icon-box " @tap="tendShop">
 							<text class="tui-icon-text3">{{logMsg}}</text>
 						</view>
 					</view>
-
 				</view>
-
-				<view class="tui-set-box3" v-if="Goauth2">
-					<view class="tui-icon-box ">
+				<view class="tui-set-box3" v-if="wxlogin && Goauth2 && ApproveStatus === 0">
+					<view class="tui-icon-box">
 						<view class="tui-icon-box " @tap="tendShop2">
 							<text class="tui-icon-text3">{{logMsg}} <text style="margin-left: 6rpx;"> ></text></text>
 						</view>
 					</view>
-
 				</view>
 
 				<!-- 已登录/未认证 -->
@@ -80,7 +77,7 @@
 					</view>
 				</view> -->
 				<!-- 已认证 -->
-				<view class="tui-set-box" v-if="ApproveStatus === 1 ">
+				<view class="tui-set-box" v-if="ApproveStatus === 1">
 					<view class="tui-icon-box ">
 						<image src="../../static/images/dianpu@2x.png" mode="aspectFill" class="tui-icon-shop"></image>
 					</view>
@@ -293,22 +290,22 @@
 			})
 		},
 		data() {
-			var value = this.ApproveStatus
-			log(value)
-			var msg = ''
-			if (value == 0) {
-				// this.Goauth2 = true
-				//  //状态为0时证明已经认证
-				this.logMsg = '审核中待通过'
-			} else if (value == 1) {
-				this.logMsg = '我的店铺已认证'
-				// this.Goauth3 = true
-			} else if (value == 2) {
-				this.logMsg = '未通过'
-				// this.Goauth4 = true
-			} else if (!setdata) {
-				this.logMsg = "去认证我的店铺"
-			}
+			// var value = this.ApproveStatus
+			// log(value)
+			// var msg = ''
+			// if (value == 0) {
+			// 	// this.Goauth2 = true
+			// 	//  //状态为0时证明已经认证
+			// 	this.logMsg = '审核中待通过'
+			// } else if (value == 1) {
+			// 	this.logMsg = '我的店铺已认证'
+			// 	// this.Goauth3 = true
+			// } else if (value == 2) {
+			// 	this.logMsg = '未通过'
+			// 	// this.Goauth4 = true
+			// } else if (!setdata) {
+			// 	this.logMsg = "去认证我的店铺"
+			// }
 			return {
 				modaishow: false,
 				show: true,
@@ -433,13 +430,9 @@
 			//一、认证店铺首先判断是否登录
 			ifLogin() {
 				var value = this.ApproveStatus
-
-
 				if (!setdata) { //判断有无token，没有就显示去认证店铺
 					log('没有token信息请点击登录')
-
 					log(this.logMsg)
-
 				} else if (value == 0) {
 					this.Goauth2 = true
 					//状态为0时证明已经认证
@@ -455,8 +448,6 @@
 					this.Goauth2 = false
 					this.logMsg = '去认证我的店铺'
 				}
-
-
 			},
 			//获取申请店铺状态信息
 			getMerchants() {
@@ -470,28 +461,22 @@
 						log(res)
 						///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
 						this.ApproveStatus = res.data.data.approveStatus //获取状态码，0未认证，1已认证，2拒绝
-
 						uni.setStorageSync('StoreStatus', res.data.data.approveStatus)
 						let setStore = uni.getStorageSync('StoreStatus') //状态码
 						log(setStore)
 						//log(this.ApproveStatus)
-
-
-
 						var valu2 = this.ApproveStatus
 						if (valu2 == undefined) { //判断如果请求返回为空说明未申请过店铺认证
 							//显示去认证店铺的按钮
 							this.Goauth = true
 							this.Goauth2 = false
 							this.logMsg = '去认证我的店铺'
-
 						} else if (valu2 == 0) {
 							this.Goauth2 = true
 							this.Goauth = flase
 							//状态为0时证明已经认证
 							this.logMsg = '审核中待通过'
 							//
-
 						} else if (valu2 == 1) {
 							this.logMsg = '我的店铺已认证'
 							this.Goauth3 = true
@@ -793,6 +778,9 @@
 		position: absolute;
 		line-height: 70rpx;
 		right: 0;
+		top:52rpx;
+		text-align: center;
+		justify-content: center;
 		border-radius: 60rpx 0 0 60rpx;
 	}
 
@@ -856,7 +844,7 @@
 	.tui-icon-text {
 		font-size: 20rpx;
 		color: #fff;
-		margin-right: 20rpx;
+		margin-left: 4rpx;
 	}
 
 	/* 未认证 */

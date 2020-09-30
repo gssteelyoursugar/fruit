@@ -491,14 +491,22 @@ var _console = console,log = _console.log;var _default = { data: function data()
       scrollH: 0, //滚动总高度
       opcity: 0, iconOpcity: 0.5, bannerIndex: 0, menuShow: false, popupShow: false, value: 1, collected: false, valueText: '' };}, onLoad: function onLoad(options) {var _this = this;this.url = _request.imgurl;var obj = { options: options }; //指定跳转
     this.menubtn(parseInt(options.index), options.value); //this.postRanking()
-    obj = wx.getMenuButtonBoundingClientRect();setTimeout(function () {uni.getSystemInfo({ success: function success(res) {_this.width = obj.left || res.windowWidth;_this.height = obj.top ? obj.top + obj.height + 8 : res.statusBarHeight + 44;_this.top = obj.top ? obj.top + (obj.height - 32) / 2 : res.statusBarHeight + 6;_this.scrollH = res.windowWidth;} });}, 0);}, methods: { onPullDownRefresh: function onPullDownRefresh() {this.postRanking();console.log('refresh');setTimeout(function () {uni.stopPullDownRefresh();}, 1000);}, //商品详情页
+    obj = wx.getMenuButtonBoundingClientRect();setTimeout(function () {uni.getSystemInfo({ success: function success(res) {_this.width = obj.left || res.windowWidth;_this.height = obj.top ? obj.top + obj.height + 8 : res.statusBarHeight + 44;_this.top = obj.top ? obj.top + (obj.height - 32) / 2 : res.statusBarHeight + 6;_this.scrollH = res.windowWidth;} });}, 0);}, computed: { currMonth: function currMonth() {return new Date().getMonth() + 1;}, currDay: function currDay() {return new Date().getDate();} }, methods: { onPullDownRefresh: function onPullDownRefresh() {this.postRanking();console.log('refresh');setTimeout(function () {uni.stopPullDownRefresh();}, 1000);}, //商品详情页
     gotoList: function gotoList(id) {//log(name)
       uni.navigateTo({ url: '../../pagesIII/productDetail/productDetail?id=' + id });}, //请求数据
     postRanking: function postRanking() {var _this2 = this;uni.showLoading({});var val = this.valueText;var data = { value: val, pageNo: 1, pageSize: 10 };(0, _api.publicing)(_request.postOrder, data).then(function (res) {log(res);_this2.goodList = res.data.data;}).catch(function (err) {});uni.hideLoading();}, menubtn: function menubtn(index, value) {this.valueText = value; //这个地方你都注释掉了，没有赋值，
       this.num = index;this.postRanking(); //那这个方法里面的this.valueText怎么会能拿到嘛
       // 子组件调试父组件方法 ：parent
       // this.$parent.fatherMethod(index)
-    }, previewImage: function previewImage(e) {var index = e.currentTarget.dataset.index;uni.previewImage({ current: this.banner[index], urls: this.banner });}, back: function back() {uni.navigateBack();}, openMenu: function openMenu() {this.menuShow = true;}, closeMenu: function closeMenu() {this.menuShow = false;}, showPopup: function showPopup() {this.popupShow = true;}, hidePopup: function hidePopup() {this.popupShow = false;}, change: function change(e) {this.value = e.value;}, collecting: function collecting() {this.collected = !this.collected;}, common: function common() {this.tui.toast('功能开发中~');}, btnTopMenu: function btnTopMenu(index) {this.closeMenu();if (index == 4) {uni.makePhoneCall({ phoneNumber: "10086" });} else if (index == 6) {this.common();} else {var url = { 0: '../message/message', 1: "../mall/mall", 2: '../my/my', 3: '../shopcart/shopcart', 5: '/pages/my/feedback/feedback?page=mall' }[index];url && this.tui.href(url);}},
+    }, previewImage: function previewImage(e) {var index = e.currentTarget.dataset.index;uni.previewImage({ current: this.banner[index], urls: this.banner });}, back: function back() {uni.navigateBack();}, openMenu: function openMenu() {this.menuShow = true;}, closeMenu: function closeMenu() {this.menuShow = false;}, showPopup: function showPopup() {this.popupShow = true;}, hidePopup: function hidePopup() {this.popupShow = false;}, change: function change(e) {this.value = e.value;}, collecting: function collecting() {this.collected = !this.collected;}, common: function common() {this.tui.toast('功能开发中~');}, btnTopMenu: function btnTopMenu(index) {this.closeMenu();if (index == 4) {uni.makePhoneCall({ phoneNumber: "10086" });} else if (index == 6) {this.common();} else {var url = { 0: '../message/message',
+          1: "../mall/mall",
+          2: '../my/my',
+          3: '../shopcart/shopcart',
+          5: '/pages/my/feedback/feedback?page=mall' }[
+        index];
+        url && this.tui.href(url);
+      }
+    },
 
     coupon: function coupon() {
 

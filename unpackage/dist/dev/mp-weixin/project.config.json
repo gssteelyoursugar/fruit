@@ -13,6 +13,8 @@
 	"libVersion": "",
 	"appid": "wxb820c791e554616c",
 	"projectname": "圈果项目",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,
@@ -22,41 +24,48 @@
 			"current": -1,
 			"list": []
 		},
-		"plugin": {
-			"current": -1,
-			"list": []
-		},
 		"game": {
 			"current": -1,
 			"list": []
 		},
-		"gamePlugin": {
-			"current": -1,
-			"list": []
-		},
 		"miniprogram": {
-			"current": -1,
+			"current": 1,
 			"list": [
 				{
-					"id": -1,
-					"name": "pagesIII/productDetail/productDetail",
-					"pathName": "pagesIII/productDetail/productDetail",
+					"name": "我的123",
+					"query": "",
+					"id": 0,
+					"pathName": "pages/my/my"
+				},
+				{
+					"name": "进货单",
+					"query": "",
+					"id": 1,
+					"pathName": "pages/order/order"
+				},
+				{
+					"name": "我的订单",
+					"query": "",
+					"id": 2,
+					"pathName": "pagesII/myOrder/myOrder"
+				},
+				{
+					"name": "详情",
 					"query": "id=1299160628273971200&__id__=2",
-					"scene": null
+					"id": 3,
+					"pathName": "pagesIII/productDetail/productDetail"
 				},
 				{
-					"id": -1,
-					"name": "评价管理",
-					"pathName": "pagesII/Evaluate/Evaluate",
-					"query": "__id__=1",
-					"scene": null
+					"name": "确认订单",
+					"query": "ids=1311225686585892864&__id__=1",
+					"id": 4,
+					"pathName": "pagesIII/submitOrder/submitOrder"
 				},
 				{
-					"id": -1,
-					"name": "订单统计",
-					"pathName": "pagesII/OrderStatistics/OrderStatistics",
-					"query": "__id__=1",
-					"scene": null
+					"name": "支付成功",
+					"query": "",
+					"id": 5,
+					"pathName": "pagesIII/PayOK/PayOK"
 				}
 			]
 		}

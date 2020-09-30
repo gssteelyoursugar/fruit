@@ -375,7 +375,7 @@
 	-webkit-flex: 2;
 	        flex: 2;
 }
-.tui-rate-price text.data-v-57280228{
+.tui-rate-price text.data-v-57280228 {
 	font-size: 16rpx;
 	color: #B6B6B6;
 	margin-right: 2rpx;

@@ -224,7 +224,7 @@
 											{{item.platformPrice}}
 										</view>
 										<text class="tui-rate-text "> /件</text>
-										<view class="tui-rate-price"><text>&yen;</text>{{item.marketPrice}}</view> 
+										<view class="tui-rate-price"><text>&yen;</text>{{item.marketPrice}}</view>
 										<text class="tui-praise  " @tap="praise(index)">
 											<text class="tui-praise iconfont icon-like  " v-if="!item.showSearch1"></text>
 											<text class="tui-praise iconfont icon-dianzan " v-if="item.showSearch1"></text>{{item.praiseNumber}}
@@ -472,14 +472,11 @@
 				let data = {
 					token: setdata
 				}
-				log(data)
 				listing(getClient, data)
 					.then((res) => {
-						log(res)
 						///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
 						this.ApproveStatus = res.data.data.approveStatus //获取电偶状态码，0未认证，1已认证，2拒绝
-						log(this.ApproveStatus)
-
+						log("认证状态:" + this.ApproveStatus,)
 					})
 					.catch((err) => {
 						log(err)
@@ -507,17 +504,13 @@
 				})
 			},
 			//弹出协议
-			popupState(state) {
-				console.log(state);
-			},
+			popupState(state) {},
 			//资讯页面
 			goTimeInfo(id, content, title, createDate) {
-				log(id, content, title, createDate)
 				//拼接路径携带参数
 				uni.navigateTo({
 					url: '../../pagesII/timeInfo/timeInfo?id=' + id + '&content=' + content + '&createDate=' + createDate +
 						'&title=' + title
-
 				})
 			},
 			//倒计时
@@ -526,9 +519,6 @@
 			},
 			//金刚区跳转
 			hrefKing(index) {
-				log(index)
-
-
 				let url = "";
 				switch (index) {
 					case 0:
@@ -583,11 +573,9 @@
 			},
 			// 头部
 			onPageScroll(e) {
-				// log(e.scrollTop)
 				this.opcity = 1
 				this.WeatherHide = false
 				// this.heightg = 64
-				// log(this.opcity)
 				// let scroll = e.scrollTop <= 0 ? 0 : e.scrollTop;
 				// let opcity = scroll / this.scrollH;
 				if (e.scrollTop === 0) {
@@ -602,8 +590,6 @@
 
 			//获取头像昵称
 			getUserInfo(event) {
-
-				log(event)
 				this.userInfo = event.detail.userInfo
 				log(this.userInfo)
 				if (event.detail.userInfo) {
@@ -614,7 +600,6 @@
 			wxCode(avatarUrl, nickName) {
 				wx.login({
 					success: (res) => {
-						log(res)
 						let code = res.code
 						this.wxLogin(avatarUrl, nickName, code)
 
@@ -636,10 +621,8 @@
 
 				publicing(loginis, data) //发送请求携带参数
 					.then((res) => {
-						log(res.data.token) //获得token
 						uni.setStorageSync('usermen', res.data.token) //把token存在本地，小程序提供如同浏览器cookie
 						this.ifUser()
-
 						// if(res.data.msg == 'success'){
 						// 	//存入本地
 						// 	uni.setStorageSync('usermen',res.data.datas)
@@ -658,14 +641,12 @@
 						title: '请登陆',
 						duration: 2000
 					});
-					log('用户没有登陆')
 					this.wxlogin = false
 				} else {
 					uni.showToast({
 						title: '已登录',
 						duration: 2000
 					});
-					log('用户已经登陆')
 					this.wxlogin = true
 					this.usering = setdata
 				}
@@ -675,7 +656,6 @@
 			//请求首页
 			getHomelist() {
 				let setdata = uni.getStorageSync('usermen')
-				log(setdata)
 				let data = {
 					pageNo: '1',
 					pageSize: '30',
@@ -684,9 +664,7 @@
 				listing(getIndex, data) //请求首页数据接口
 					// listing(getIndex,data) //单发请求
 					.then((res) => {
-						console.log(res)
 						this.address = res.data.data.address
-
 						this.HotVarieties = res.data.data.HotVarieties //【0】首页分类列表
 						this.WxTopNavigationBar = res.data.data.WxTopNavigationBar
 						this.WxIndexViewpager = res.data.data.WxIndexViewpager
@@ -700,9 +678,7 @@
 						this.startTime = res.data.data.WxActivity.startTime
 						this.endTime = res.data.data.WxActivity.endTime
 						this.createTime = res.data.data.WxActivity.createTime
-						log(this.WxPublicMsg)
 						this.ts = (this.endTime - this.createTime) / 1000
-
 						this.dd = parseInt(this.ts / 60 / 60 / 24, 10); //计算剩余的天数
 						this.hh = parseInt(this.ts / 60 / 60 % 24, 10); //计算剩余的小时数
 						this.mm = parseInt(this.ts / 60 % 60); //计算剩余的分钟数
@@ -722,7 +698,6 @@
 				}
 				listing(getClassify, data2)
 					.then((res) => {
-						log(res)
 						//处理数据格式,praiseNumber
 						let goodsData = res.data.data.data;
 						for (let index in goodsData) {
@@ -730,10 +705,8 @@
 						}
 						for (let index in goodsData) {
 							goodsData[index].total = this.numConvert(goodsData[index].total)
-							log(goodsData[index].total)
 						}
 						this.IndexGoods = goodsData //【1】首页分类数据
-						log(this.IndexGoods)
 					})
 					.catch((err) => {
 						log(err)
@@ -769,7 +742,6 @@
 			// 	}
 			// 	publicing(activity,data)
 			// 	.then((res)=>{
-			// 		log(res)
 
 			// 	})
 			// 	.catch((err)=>{
@@ -791,7 +763,6 @@
 					this.Sumify = 3
 					this.getIndexClass()
 				}
-				log(this.Sumify)
 
 			},
 
@@ -830,7 +801,6 @@
 			},
 			//商品详情页
 			gotoList(id) {
-				log(id)
 				uni.navigateTo({
 					url: '../../pagesIII/productDetail/productDetail?id=' + id
 				})
@@ -915,7 +885,6 @@
 				  　　   isFirst = false;
 					  }
 				 log(e) */
-				log(index)
 			},
 			// 点赞列表2
 			praise1(e) {
@@ -924,7 +893,6 @@
 					this.praiseNum1++ //点赞一次
 					isFirst1 = false;
 				}
-				log(e)
 			},
 
 			// 调起摄像头扫码
@@ -957,10 +925,9 @@
 						city: e,
 					},
 					success: (res) => {
-						// console.log(res)
 						this.temperature = res.data.lives[0].temperature //气温
 						this.citys = res.data.lives[0].city //获取区域
-						console.log(this.temperature)
+						console.log("天气：" + this.temperature)
 					}
 				});
 			}
@@ -970,6 +937,10 @@
 			if (e.index === 0) {
 				this.$refs.rtBubble.toggle();
 			}
+		},
+		onShow() {
+			this.getMerchants()
+			this.getHomelist()
 		},
 		// 转发
 		onShareAppMessage: function() {
@@ -992,22 +963,15 @@
 		//初始化
 		onLoad() {
 			this.getMerchants()
-
 			this.getIndexClass()
 			// this.getGoodsAll()
 			//请求首页
 			this.getHomelist()
-
-
 			var text = '{"id":1301422737316712448}';
 			const id = text.match(/\d{17,}/)[0]; // 正则获取大于17位数字的值
 			text = text.replace(id, `"${id}"`); // 补上双引号
 			const data = JSON.parse(text);
-			log(data)
-
-
 			// this.postactivity()
-
 			//新版头部
 			let obj = {};
 			// #ifdef MP-WEIXIN
@@ -1033,41 +997,30 @@
 				// 	}
 				// });
 			}, 5000);
-
-
-
-			//this.postAct()
-
+			// this.postAct()
 			// this.postactivity()
-
-
-			//     this.amapPlugin = new amap.AMapWX({
-			//         //高德地图小程序KEY，替换为自己的KEY，参考：http://ask.dcloud.net.cn/article/35070
-			//         key: this.key
-			//     });
+			// this.amapPlugin = new amap.AMapWX({
+			// 	//高德地图小程序KEY，替换为自己的KEY，参考：http://ask.dcloud.net.cn/article/35070
+			// 	key: this.key
+			// });
 			//定位地址
 			// this.amapPlugin.getRegeo({
-			//     success: (res)=> {
-			//         //this.city = data[0].regeocodeData.addressComponent.city.replace(/市/g, ''); //把"市"去掉
-			//         this.city = res[0].regeocodeData.addressComponent.city.replace(/市/g, ''); 
-			//         let adData = res[0].regeocodeData.addressComponent.adcode//拿到城市的编码用于查寻天气
-			//         //使用说明https://lbs.amap.com/api/webservice/guide/api/weatherinfo/#instructions
-			//         console.log( adData) 
-			//          this.tian(adData)
-			//     }
+			// 	success: (res) => {
+			// 		//this.city = data[0].regeocodeData.addressComponent.city.replace(/市/g, ''); //把"市"去掉
+			// 		this.city = res[0].regeocodeData.addressComponent.city.replace(/市/g, '');
+			// 		let adData = res[0].regeocodeData.addressComponent.adcode //拿到城市的编码用于查寻天气
+			// 		//使用说明https://lbs.amap.com/api/webservice/guide/api/weatherinfo/#instructions
+			// 		console.log(adData)
+			// 		this.tian(adData)
+			// 	}
 			// });
 		},
 		// 监听页面滚动距离
 
-		mounted() {
-			log('每次执行')
-
-		},
+		mounted() {},
 
 		computed: {
 			...mapState(['screendata']),
-
-
 			// 筛选来的商家数据
 			count() {
 				this.takeshop = this.screendata.screenarr
@@ -1284,7 +1237,7 @@
 		color: #FF4300;
 		font-size: 28rpx;
 	}
-	
+
 	.tui-rate text {
 		font-size: 16rpx;
 		margin-right: 2rpx;
@@ -1298,12 +1251,12 @@
 		margin-left: 4rpx;
 		flex: 2;
 	}
-	
-	.tui-rate-price text{
+
+	.tui-rate-price text {
 		font-size: 16rpx;
 		color: #B6B6B6;
 		margin-right: 2rpx;
-		
+
 	}
 
 	.tui-rate-text {

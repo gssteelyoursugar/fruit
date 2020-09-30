@@ -153,7 +153,7 @@
 				let data ={
 					token:setdata,
 					afterSaleStatus:3
-					
+				
 				}
 				if(this.currentTab ===0 ){  //如果是默认全部不传afterSaleStatus参数
 					delete data.afterSaleStatus

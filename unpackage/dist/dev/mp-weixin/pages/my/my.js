@@ -384,9 +384,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
 var _api = __webpack_require__(/*! ../../api/api.js */ 19);
 
 
@@ -634,19 +631,28 @@ var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
 //
 //
 //
-//
-//
-//
 var setuserdata = uni.getStorageSync('userIN'); //用户信息
 var setdata = uni.getStorageSync('usermen'); //Token
 var _console = console,log = _console.log;var logins = __webpack_require__(/*! ../../login/login.js */ 54);var _default = { onLoad: function onLoad(options) {var _this = this;this.$forceUpdate();log('执行了=====');this.getMerchants();log(this.ApproveStatus);this.ifLogin();log(setdata); // this.getMerchants()
     // this.getWxdata()
     var obj = {}; // obj = wx.getMenuButtonBoundingClientRect();
-    uni.getSystemInfo({ success: function success(res) {log(res);_this.width = obj.left || res.windowWidth;_this.height = obj.top ? obj.top + obj.height + 8 : res.statusBarHeight + 44;_this.top = obj.top ? obj.top + (obj.height - 32) / 2 : res.statusBarHeight + 6;_this.scrollH = res.windowWidth * 0.6;} });}, data: function data() {var value = this.ApproveStatus;log(value);var msg = '';if (value == 0) {// this.Goauth2 = true
-      //  //状态为0时证明已经认证
-      this.logMsg = '审核中待通过';} else if (value == 1) {this.logMsg = '我的店铺已认证'; // this.Goauth3 = true
-    } else if (value == 2) {this.logMsg = '未通过'; // this.Goauth4 = true
-    } else if (!setdata) {this.logMsg = "去认证我的店铺";}return { modaishow: false, show: true, wxlogin: true, usering: {}, imageUrl: "/static/images/wode.png", kefuID: '', loadding: false, pullUpOn: true, ApproveStatus: 0, loginText: '', logMsg: this.logMsg, //店铺状态信息展示
+    uni.getSystemInfo({ success: function success(res) {log(res);_this.width = obj.left || res.windowWidth;_this.height = obj.top ? obj.top + obj.height + 8 : res.statusBarHeight + 44;_this.top = obj.top ? obj.top + (obj.height - 32) / 2 : res.statusBarHeight + 6;_this.scrollH = res.windowWidth * 0.6;} });}, data: function data() {// var value = this.ApproveStatus
+    // log(value)
+    // var msg = ''
+    // if (value == 0) {
+    // 	// this.Goauth2 = true
+    // 	//  //状态为0时证明已经认证
+    // 	this.logMsg = '审核中待通过'
+    // } else if (value == 1) {
+    // 	this.logMsg = '我的店铺已认证'
+    // 	// this.Goauth3 = true
+    // } else if (value == 2) {
+    // 	this.logMsg = '未通过'
+    // 	// this.Goauth4 = true
+    // } else if (!setdata) {
+    // 	this.logMsg = "去认证我的店铺"
+    // }
+    return { modaishow: false, show: true, wxlogin: true, usering: {}, imageUrl: "/static/images/wode.png", kefuID: '', loadding: false, pullUpOn: true, ApproveStatus: 0, loginText: '', logMsg: this.logMsg, //店铺状态信息展示
       showBtn: false, //已登录未认证
       Goauth: true, //未认证
       Goauth2: false, //以申请待审核
@@ -698,30 +704,9 @@ var _console = console,log = _console.log;var logins = __webpack_require__(/*! .
     // },
     ifUser: function ifUser() {var setuserdata = uni.getStorageSync('userIN');if (!setuserdata) {this.wxlogin = false;} else {this.wxlogin = true;this.usering = setuserdata;}}, //认证店铺
     tendShop: function tendShop() {var setdata = uni.getStorageSync('usermen');if (!setdata) {uni.showToast({ title: '请先登录', icon: 'none' });log(setdata);this.modaishow = true;} else {// this.modaishow = false
-        uni.navigateTo({ url: '../../pagesII/tendShop/tendShop' });}}, tendShop2: function tendShop2() {uni.navigateTo({ url: '../../pagesII/StoreInformation/StoreInformation' });}, tendShop3: function tendShop3() {uni.navigateTo({ url: '../../pagesII/StoreInformation/StoreInformation' });}, tendShop1: function tendShop1() {
-      uni.navigateTo({
-        url: '../../pagesII/StoreInformation/StoreInformation' });
-
-    },
-    gotoAfter: function gotoAfter() {
-      uni.navigateTo({
-        url: '../../pagesII/afterSale/afterSale' });
-
-    },
-
-    //获取微信code
-
+        uni.navigateTo({ url: '../../pagesII/tendShop/tendShop' });}}, tendShop2: function tendShop2() {uni.navigateTo({ url: '../../pagesII/StoreInformation/StoreInformation' });}, tendShop3: function tendShop3() {uni.navigateTo({ url: '../../pagesII/StoreInformation/StoreInformation' });}, tendShop1: function tendShop1() {uni.navigateTo({ url: '../../pagesII/StoreInformation/StoreInformation' });}, gotoAfter: function gotoAfter() {uni.navigateTo({ url: '../../pagesII/afterSale/afterSale' });}, //获取微信code
     //发送给后台
-
-    ifUser2: function ifUser2() {
-
-
-      log(setdata);
-      if (!setdata) {
-        uni.showToast({
-          title: '登录失败',
-          duration: 2000,
-          icon: 'none' });
+    ifUser2: function ifUser2() {log(setdata);if (!setdata) {uni.showToast({ title: '登录失败', duration: 2000, icon: 'none' });
 
         log('用户没有登陆');
         this.wxlogin = false;

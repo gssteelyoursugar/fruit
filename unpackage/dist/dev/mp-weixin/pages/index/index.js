@@ -624,14 +624,11 @@ var isFirst1 = true;var _default =
       var data = {
         token: setdata };
 
-      log(data);
       (0, _api.listing)(_request.getClient, data).
       then(function (res) {
-        log(res);
         ///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
         _this.ApproveStatus = res.data.data.approveStatus; //获取电偶状态码，0未认证，1已认证，2拒绝
-        log(_this.ApproveStatus);
-
+        log("认证状态:" + _this.ApproveStatus);
       }).
       catch(function (err) {
         log(err);
@@ -659,17 +656,13 @@ var isFirst1 = true;var _default =
 
     },
     //弹出协议
-    popupState: function popupState(state) {
-      console.log(state);
-    },
+    popupState: function popupState(state) {},
     //资讯页面
     goTimeInfo: function goTimeInfo(id, content, title, createDate) {
-      log(id, content, title, createDate);
       //拼接路径携带参数
       uni.navigateTo({
         url: '../../pagesII/timeInfo/timeInfo?id=' + id + '&content=' + content + '&createDate=' + createDate +
         '&title=' + title });
-
 
     },
     //倒计时
@@ -678,9 +671,6 @@ var isFirst1 = true;var _default =
     },
     //金刚区跳转
     hrefKing: function hrefKing(index) {
-      log(index);
-
-
       var url = "";
       switch (index) {
         case 0:
@@ -735,11 +725,9 @@ var isFirst1 = true;var _default =
     },
     // 头部
     onPageScroll: function onPageScroll(e) {
-      // log(e.scrollTop)
       this.opcity = 1;
       this.WeatherHide = false;
       // this.heightg = 64
-      // log(this.opcity)
       // let scroll = e.scrollTop <= 0 ? 0 : e.scrollTop;
       // let opcity = scroll / this.scrollH;
       if (e.scrollTop === 0) {
@@ -754,8 +742,6 @@ var isFirst1 = true;var _default =
 
     //获取头像昵称
     getUserInfo: function getUserInfo(event) {
-
-      log(event);
       this.userInfo = event.detail.userInfo;
       log(this.userInfo);
       if (event.detail.userInfo) {
@@ -766,7 +752,6 @@ var isFirst1 = true;var _default =
     wxCode: function wxCode(avatarUrl, nickName) {var _this2 = this;
       wx.login({
         success: function success(res) {
-          log(res);
           var code = res.code;
           _this2.wxLogin(avatarUrl, nickName, code);
 
@@ -788,10 +773,8 @@ var isFirst1 = true;var _default =
 
       (0, _api.publicing)(loginis, data) //发送请求携带参数
       .then(function (res) {
-        log(res.data.token); //获得token
         uni.setStorageSync('usermen', res.data.token); //把token存在本地，小程序提供如同浏览器cookie
         _this3.ifUser();
-
         // if(res.data.msg == 'success'){
         // 	//存入本地
         // 	uni.setStorageSync('usermen',res.data.datas)
@@ -810,14 +793,12 @@ var isFirst1 = true;var _default =
           title: '请登陆',
           duration: 2000 });
 
-        log('用户没有登陆');
         this.wxlogin = false;
       } else {
         uni.showToast({
           title: '已登录',
           duration: 2000 });
 
-        log('用户已经登陆');
         this.wxlogin = true;
         this.usering = setdata;
       }
@@ -827,7 +808,6 @@ var isFirst1 = true;var _default =
     //请求首页
     getHomelist: function getHomelist() {var _this4 = this;
       var setdata = uni.getStorageSync('usermen');
-      log(setdata);
       var data = {
         pageNo: '1',
         pageSize: '30',
@@ -836,9 +816,7 @@ var isFirst1 = true;var _default =
       (0, _api.listing)(_request.getIndex, data) //请求首页数据接口
       // listing(getIndex,data) //单发请求
       .then(function (res) {
-        console.log(res);
         _this4.address = res.data.data.address;
-
         _this4.HotVarieties = res.data.data.HotVarieties; //【0】首页分类列表
         _this4.WxTopNavigationBar = res.data.data.WxTopNavigationBar;
         _this4.WxIndexViewpager = res.data.data.WxIndexViewpager;
@@ -852,9 +830,7 @@ var isFirst1 = true;var _default =
         _this4.startTime = res.data.data.WxActivity.startTime;
         _this4.endTime = res.data.data.WxActivity.endTime;
         _this4.createTime = res.data.data.WxActivity.createTime;
-        log(_this4.WxPublicMsg);
         _this4.ts = (_this4.endTime - _this4.createTime) / 1000;
-
         _this4.dd = parseInt(_this4.ts / 60 / 60 / 24, 10); //计算剩余的天数
         _this4.hh = parseInt(_this4.ts / 60 / 60 % 24, 10); //计算剩余的小时数
         _this4.mm = parseInt(_this4.ts / 60 % 60); //计算剩余的分钟数
@@ -874,7 +850,6 @@ var isFirst1 = true;var _default =
 
       (0, _api.listing)(_request.getClassify, data2).
       then(function (res) {
-        log(res);
         //处理数据格式,praiseNumber
         var goodsData = res.data.data.data;
         for (var index in goodsData) {
@@ -882,10 +857,8 @@ var isFirst1 = true;var _default =
         }
         for (var _index in goodsData) {
           goodsData[_index].total = _this5.numConvert(goodsData[_index].total);
-          log(goodsData[_index].total);
         }
         _this5.IndexGoods = goodsData; //【1】首页分类数据
-        log(_this5.IndexGoods);
       }).
       catch(function (err) {
         log(err);
@@ -930,7 +903,6 @@ var isFirst1 = true;var _default =
 
 
 
-
   e) {
     this.num = e;
     if (this.num === 0) {
@@ -943,7 +915,6 @@ var isFirst1 = true;var _default =
       this.Sumify = 3;
       this.getIndexClass();
     }
-    log(this.Sumify);
 
   }), _defineProperty(_methods, "goLimit", function goLimit()
 
@@ -982,7 +953,6 @@ var isFirst1 = true;var _default =
   }), _defineProperty(_methods, "gotoList", function gotoList(
 
   id) {
-    log(id);
     uni.navigateTo({
       url: '../../pagesIII/productDetail/productDetail?id=' + id });
 
@@ -1067,7 +1037,6 @@ var isFirst1 = true;var _default =
         　　   isFirst = false;
       	  }
        log(e) */
-    log(index);
   }), _defineProperty(_methods, "praise1", function praise1(
 
   e) {
@@ -1076,7 +1045,6 @@ var isFirst1 = true;var _default =
       this.praiseNum1++; //点赞一次
       isFirst1 = false;
     }
-    log(e);
   }), _defineProperty(_methods, "scanCode", function scanCode()
 
 
@@ -1109,10 +1077,9 @@ var isFirst1 = true;var _default =
         city: e },
 
       success: function success(res) {
-        // console.log(res)
         _this6.temperature = res.data.lives[0].temperature; //气温
         _this6.citys = res.data.lives[0].city; //获取区域
-        console.log(_this6.temperature);
+        console.log("天气：" + _this6.temperature);
       } });
 
   }), _methods),
@@ -1122,6 +1089,10 @@ var isFirst1 = true;var _default =
     if (e.index === 0) {
       this.$refs.rtBubble.toggle();
     }
+  },
+  onShow: function onShow() {
+    this.getMerchants();
+    this.getHomelist();
   },
   // 转发
   onShareAppMessage: function onShareAppMessage() {
@@ -1144,22 +1115,15 @@ var isFirst1 = true;var _default =
   //初始化
   onLoad: function onLoad() {
     this.getMerchants();
-
     this.getIndexClass();
     // this.getGoodsAll()
     //请求首页
     this.getHomelist();
-
-
     var text = '{"id":1301422737316712448}';
     var id = text.match(/\d{17,}/)[0]; // 正则获取大于17位数字的值
     text = text.replace(id, "\"".concat(id, "\"")); // 补上双引号
     var data = JSON.parse(text);
-    log(data);
-
-
     // this.postactivity()
-
     //新版头部
     var obj = {};
 
@@ -1185,41 +1149,30 @@ var isFirst1 = true;var _default =
       // 	}
       // });
     }, 5000);
-
-
-
-    //this.postAct()
-
+    // this.postAct()
     // this.postactivity()
-
-
-    //     this.amapPlugin = new amap.AMapWX({
-    //         //高德地图小程序KEY，替换为自己的KEY，参考：http://ask.dcloud.net.cn/article/35070
-    //         key: this.key
-    //     });
+    // this.amapPlugin = new amap.AMapWX({
+    // 	//高德地图小程序KEY，替换为自己的KEY，参考：http://ask.dcloud.net.cn/article/35070
+    // 	key: this.key
+    // });
     //定位地址
     // this.amapPlugin.getRegeo({
-    //     success: (res)=> {
-    //         //this.city = data[0].regeocodeData.addressComponent.city.replace(/市/g, ''); //把"市"去掉
-    //         this.city = res[0].regeocodeData.addressComponent.city.replace(/市/g, ''); 
-    //         let adData = res[0].regeocodeData.addressComponent.adcode//拿到城市的编码用于查寻天气
-    //         //使用说明https://lbs.amap.com/api/webservice/guide/api/weatherinfo/#instructions
-    //         console.log( adData) 
-    //          this.tian(adData)
-    //     }
+    // 	success: (res) => {
+    // 		//this.city = data[0].regeocodeData.addressComponent.city.replace(/市/g, ''); //把"市"去掉
+    // 		this.city = res[0].regeocodeData.addressComponent.city.replace(/市/g, '');
+    // 		let adData = res[0].regeocodeData.addressComponent.adcode //拿到城市的编码用于查寻天气
+    // 		//使用说明https://lbs.amap.com/api/webservice/guide/api/weatherinfo/#instructions
+    // 		console.log(adData)
+    // 		this.tian(adData)
+    // 	}
     // });
   },
   // 监听页面滚动距离
 
-  mounted: function mounted() {
-    log('每次执行');
-
-  },
+  mounted: function mounted() {},
 
   computed: _objectSpread(_objectSpread({},
   (0, _vuex.mapState)(['screendata'])), {}, {
-
-
     // 筛选来的商家数据
     count: function count() {
       this.takeshop = this.screendata.screenarr;

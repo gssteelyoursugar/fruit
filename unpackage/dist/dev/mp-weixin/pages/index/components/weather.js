@@ -136,9 +136,6 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 //
 //
 //
-//
-//
-//
 
 //高德SDKjs
 var _default =
@@ -158,14 +155,11 @@ var _default =
     } },
 
 
-  onLoad: function onLoad() {
-
-  },
-  onShow: function onShow() {
-    console.log('每次执行');
+  created: function created() {var _this = this;
     setTimeout(function () {
-      console.log('========倒计时结束');
+      console.log("我好了", _this.address, _this.ApproveStatus);
     }, 1000);
+
   } };exports.default = _default;
 
 /***/ }),

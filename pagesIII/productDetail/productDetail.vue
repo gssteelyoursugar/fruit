@@ -55,9 +55,9 @@
 
 					<view class="tui-pro-titbox">
 						<view class="tui-pro-title">
-							<text class="tui-pro-title-tag">仅剩{{shopListdata.data.number}}件</text>
-							<text class="tui-pro-title-tag">成交{{shopListdata.data.totalPirce}}万元</text>
-							<text class="tui-pro-title-tag">{{shopListdata.data.viewNumber}}多人看</text></view>
+							<text class="tui-pro-title-tag">仅剩{{shopListdata.data.number||0}}件</text>
+							<text class="tui-pro-title-tag">成交{{shopListdata.data.totalPirce||0 |filterNum}}多元</text>
+							<text class="tui-pro-title-tag">{{shopListdata.data.viewNumber | filterNum}}多人看</text></view>
 						<button open-type="share" class="tui-share-btn tui-share-position" @tap="onShare">
 							<tui-tag type="gray" shape="circleLeft" padding="12rpx 16rpx">
 								<view class="tui-share-box">
@@ -72,7 +72,7 @@
 						<view class="tui-sale-info tui-size tui-gray">
 							<view class="tui-magin"> <text class="tui-code">￥</text> <text class="tui-price-one">{{shopListdata.data.platformPrice}}</text>
 								<text style="font-size:28rpx;color: #FF6500;">元</text> /件</view>
-							<view class="tui-huaxian">￥{{shopListdata.data.totalPirce}}/件</view>
+							<view class="tui-huaxian" >￥{{shopListdata.data.totalPirce}}/件</view>
 							<view>{{shopListdata.data.specification}}, 水果净重约{{shopListdata.data.kg2}}斤</view>
 						</view>
 					</view>
@@ -143,7 +143,7 @@
 							<text class="tui-text-left tui-title-class">果径大小</text>
 							<text class=" tui-text-left tui-title-class">{{shopListdata.data.platformPrice}}mm</text>
 						</view>
-						<view class="tui-right-one"  style="flex: 4;">
+						<view class="tui-right-one" style="flex: 4;">
 							<text class=" tui-text-left tui-title-class ">不良率</text>
 							<text class=" tui-text-left tui-title-class">{{shopListdata.data.rejectRatio}}</text>
 						</view>
@@ -154,7 +154,7 @@
 							<text class="tui-text-left tui-title-class">糖分</text>
 							<text class=" tui-text-left tui-title-class">{{shopListdata.data.sugar}}</text>
 						</view>
-						<view class="tui-right-one"  style="flex: 4;">
+						<view class="tui-right-one" style="flex: 4;">
 							<text class="tui-text-left tui-title-class">酸度</text>
 							<text class="tui-text-left tui-title-class">{{shopListdata.data.acidity}}</text>
 						</view>
@@ -167,7 +167,7 @@
 						</view>
 						<view class="tui-right-one" style="flex: 4;">
 							<text class="tui-text-left tui-title-class">硬度</text>
-							<text class="tui-text-left tui-title-class" >{{shopListdata.data.hardness}}</text>
+							<text class="tui-text-left tui-title-class">{{shopListdata.data.hardness}}</text>
 						</view>
 
 					</view>
@@ -217,7 +217,8 @@
 						<text>物流配送</text>
 					</view>
 					<view class="tui-height-flex tui-bottom-border">
-						<text class="" style="font-size: 28rpx;padding: 20rpx 0;color: #333;">配送至 {{userInfoData.address}} {{userInfoData.addressDetails}}</text>
+						<text class="" style="font-size: 28rpx;padding: 20rpx 0;color: #333;">配送至 {{userInfoData.address}}
+							{{userInfoData.addressDetails}}</text>
 					</view>
 					<view class="">
 						<text class="tui-pay-color">16:00前完成支付，{{shopListdata.data.shipmentsDay}}天送达</text>
@@ -351,16 +352,19 @@
 					<view class="tui-tab-rank">
 						<view class="tui-tab-rank-cent">
 							<image :src="urlList[0]" mode="aspectFill" class="img-rink"></image>
-							<view class="tui-pro-tit" style="">
-								<text class="tag-tit">{{item.name}}</text> <text class="tag-tit-text">{{shopListdata.data.name}}</text>
+							<view class="tui-pro-tit" style="padding: 0 30rpx 0 0;">
+								<text class="tag-tit">{{item.name}}</text> <text class="tag-tit-text" style="font-size:28rpx">{{shopListdata.data.name}}</text>
 								<view class="tag-tit2">
 									<view class="">
-										<view class="tag-tit2-price">
-											5斤装 x 1
+										<view class="tag-tit2-price list-desc">
+											{{shopListdata.data.specification}}
 										</view>
-										<view class="tag-tit2-num">
-											<view class=""> <text class="tui-price-one">￥</text> <text class="tui-price-one">{{shopListdata.data.platformPrice}}元</text>
-												/件</view>
+										<view class="tag-tit2-num" style="align-items: baseline;">
+											<view class="shabi">
+												<text class="tui-price-one" style="font-size: 20rpx;">￥</text>
+												<view class="tui-price-one">{{shopListdata.data.platformPrice}}<text style="font-size: 24rpx;">元</text></view>
+												/件
+											</view>
 											<view class="tui-huaxian">￥{{shopListdata.data.totalPirce}}</view>
 										</view>
 									</view>
@@ -373,7 +377,7 @@
 						</view>
 						<view class="tag-tit3-flex">
 							<view class="tag-tit2-price">
-								5斤装 x {{value2}}
+								购买数量
 							</view>
 							<view class="tag-tit2-text">
 								<tui-numberbox :min="1" :max="99" :value="value2" @change="change2"></tui-numberbox>
@@ -384,7 +388,12 @@
 				<view class="tui-pay-flex-box">
 					<view class="tui-pay-flex">
 						<view class="tui-pay1-flex">
-							<text>合计{{shopListdata.data.platformPrice * value2}}含运费</text>
+							<!-- <text>合计{{shopListdata.data.platformPrice * value2}}含运费</text> -->
+							<text style="color: #333333;font-size: 24rpx;margin-right:4rpx">合计:</text>
+							<text style="color: #FF5600;font-size: 20rpx;">¥</text>
+							<text style="font-weight: bold;">{{shopListdata.data.platformPrice * value2}}</text>
+							<text style="color: #FF5600;font-size: 22rpx;margin-right:8rpx">元</text>
+							<text style="color: #888888;font-size: 22rpx;">含运费</text>
 						</view>
 
 						<button class="tui-pay2-flex" @tap="buyNow(shopListdata.data.id)">结算</button>
@@ -549,6 +558,35 @@
 					}
 				});
 			}, 0);
+		},
+
+		filters: {
+			filterNum(val) {
+				if (val) {
+					let words = (val + "").split("")
+					console.log(words)
+					
+					let res = ""
+					if(words.length===3) {
+						res = words[0]+"00"
+					}
+					if (words.length===4) {
+						res = words[0]+"千"
+					}
+					if (words.length===5) {
+						res = words[0]+"万"
+					}
+					if (words.length===6) {
+						res = words[0]+words[1]+"万"
+					}
+					if (words.length===7) {
+						res = words[0]+"百万"
+					}
+					return res
+				} else {
+					return val
+				}
+			}
 		},
 		methods: {
 			//购买前获取申请店铺状态信息
@@ -1045,19 +1083,19 @@
 	}
 
 	.tui-tab-rank {
-		margin: 10rpx 0;
+		margin: 10rpx 0 0;
 		border-bottom: 1rpx solid rgba(245, 245, 245, 1);
 	}
 
 	.tui-tab-rank-cent {
 		display: flex;
-		padding: 20rpx 0;
+		padding: 20rpx 0 0;
 
 	}
 
 	.img-rink {
-		width: 180rpx;
-		height: 180rpx;
+		width: 220rpx;
+		height: 220rpx;
 		display: block;
 		margin-right: 10rpx;
 		background: #eee;
@@ -1094,15 +1132,42 @@
 		font-size: 24rpx;
 	}
 
+	.list-desc {
+		background: rgba(255, 119, 9, 0.1);
+		border: 1px solid #FF7709;
+		color: #FF7709;
+		min-width: 160rpx;
+		text-align: center;
+		font-size: 24rpx;
+		padding: 10rpx 0;
+		border-radius: 6rpx;
+		margin: 10rpx 0;
+
+	}
+
 	.tag-tit2-num {
 		display: flex;
 		justify-content: start;
 		color: rgba(182, 182, 182, 1);
 	}
 
+	.shabi {
+		font-size: 24rpx;
+		font-size: 12px;
+		display: flex;
+		align-items: baseline;
+	}
+
+
 	.tag-tit3-flex {
 		display: flex;
 		justify-content: space-between;
+		padding: 20rpx 0;
+		align-items: center;
+	}
+
+	.tag-tit3-flex .tag-tit2-price {
+		font-size: 26rpx;
 	}
 
 	.tag-tit2-text {
@@ -1119,29 +1184,31 @@
 	}
 
 	.tui-pay-flex {
-
 		display: flex;
 		justify-content: space-between;
-		width: 90%;
+		width: 690rpx;
+		align-items: center;
 	}
 
 	.tui-pay1-flex {
 		text-align: center;
 		border-radius: 80rpx 0 0 80rpx;
-		height: 80rpx;
-		line-height: 80rpx;
-		padding: 20rpx;
-		width: 100%;
+		line-height: 100rpx;
+		width: 60%;
+		height: 100rpx;
 		background-color: rgba(228, 228, 228, 1);
+		font-size: 32rpx;
+		color: #FF5600;
+
 	}
 
 	.tui-pay2-flex {
 		text-align: center;
 		border-radius: 0 80rpx 80rpx 0;
 		color: #fff;
-		line-height: 80rpx;
-		padding: 20rpx 0;
-		width: 100%;
+		line-height: 100rpx;
+		width: 40%;
+		height: 100rpx;
 		background: #00AC3F;
 		background-color: rgba(0, 197, 42, 1);
 	}
@@ -1204,7 +1271,7 @@
 		right: -4px;
 	}
 
-	
+
 
 	.tui-icon-box {
 		position: relative;
@@ -1217,7 +1284,8 @@
 		justify-content: center;
 		position: relative;
 	}
-	.box-line::after{
+
+	.box-line::after {
 		content: "";
 		position: absolute;
 		top: 30rpx;
@@ -1227,6 +1295,7 @@
 		background: #D8D8D8;
 
 	}
+
 	.tui-banner-swiper {
 		position: relative;
 		padding-top: 220rpx;
@@ -1351,6 +1420,7 @@
 	.tui-huaxian {
 		text-decoration: line-through;
 		margin: 0 10rpx;
+		font-size: 24rpx;
 	}
 
 	.tui-magin {
@@ -1363,7 +1433,7 @@
 	}
 
 	.tui-price-one {
-		font-size: 48rpx;
+		font-size: 40rpx;
 		font-weight: bold;
 		color: rgba(255, 101, 0, 1);
 	}
@@ -1406,17 +1476,18 @@
 		padding: 30rpx 30rpx;
 		margin-top: 20rpx;
 	}
-	
+
 	.shuoming {
 		line-height: 60rpx;
 		font-size: 28rpx;
 		padding: 20rpx 10rpx;
 	}
-	
+
 	.shuoming text {
 		color: #00BC45;
 		font-weight: bold;
 	}
+
 	.tui-title-line {
 		color: rgba(51, 51, 51, 1);
 		font-weight: 400;

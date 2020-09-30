@@ -41,12 +41,12 @@
 	}
 
 	.logo {
-		height: 200rpx;
-		width: 200rpx;
+		height: 184rpx !important;
+		width: 160rpx;
 		margin-top: 200rpx;
 		margin-left: auto;
 		margin-right: auto;
-		margin-bottom: 50rpx;
+		margin-bottom: 56rpx;
 	}
 
 	.text-area {
@@ -65,7 +65,7 @@
 	}
 	.btnbox{
 		position: relative;
-		top: 100rpx;
+		top: 116rpx;
 		width: 100%;
 	}
 	button::after {
