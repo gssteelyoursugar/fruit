@@ -43,9 +43,9 @@
 	color: #fff;
 }
 .tui-left.data-v-87e6745e {
-	-webkit-box-flex: 1;
-	-webkit-flex: 1;
-	        flex: 1;
+	-webkit-box-flex: 3;
+	-webkit-flex: 3;
+	        flex: 3;
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;

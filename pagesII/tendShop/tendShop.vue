@@ -77,7 +77,7 @@
 			<view class="tui-line-cell">
 				<view class="tui-title">客服专员：</view><text></text>
 				<input placeholder-class="tui-phcolor" class="tui-input" name="serviceNumber" :placeholder="serviceNumber" maxlength="50" type="text" />
-				<text></text>
+				<view class="screen-img"><image src="../../static/images/sceen_phone.png" mode=""></image></view>
 			</view>
 		</tui-list-cell>
 			<view class="tui-btn-box">
@@ -415,7 +415,7 @@
 				let rules = [{
 					name: "storeName",
 					rule: ["required", "isChinese", "minLength:2", "maxLength:20"], //可使用区间，此处主要测试功能
-					msg: ["请输入店铺名称", "店铺名必须全部为中文", "姓名必须2个或以上字符", "不能超过6个字符"]
+					msg: ["请输入店铺名称", "店铺名必须全部为中文", "姓名必须2个或以上字符", "姓名不能超过6个字符"]
 				},
 				{
 					name: "merchantsName",
@@ -645,9 +645,10 @@
 		color: rgba(241, 0, 0, 1);
 	}
 	.imgUplod{
-		width: 256rpx;
-		height: 206rpx;
-		
+		width: 322rpx;
+		height: 220rpx;
+margin: 0 30rpx;
+
 	}
 	.tui-list-title{
 		height: 30rpx;
@@ -713,14 +714,16 @@
 		
 		align-items: center;
 	}
-
+	
+	.tui-title {
+		min-width: 140rpx;
+	}
 	.tui-title2 {
 		display: flex;
 		line-height: 32rpx;
 		min-width: 120rpx;
 		flex-shrink: 0;
 	}
-
 	.tui-input {
 		font-size: 28rpx;
 		color: rgba(182, 182, 182, 1);
@@ -728,7 +731,11 @@
 		flex: 1;
 		overflow: visible;
 	}
-
+	
+	.screen-img image{
+		width: 40rpx;
+		height: 40rpx;
+	}
 	.radio-group {
 		margin-left: auto;
 		transform: scale(0.8);
@@ -752,6 +759,12 @@
 		box-sizing: border-box;
 		background-color: #fff;
 		z-index: 999;
+		border-top: 1px solid #e5e5e5;
+
+	}
+	
+	.tui-btn-box .tui-button-primary {
+		border-radius: 40rpx;
 	}
 
 	.tui-button-gray {
@@ -823,16 +836,17 @@
 	
 	}
 	.colot-text-1{
-		color: rgba(85, 85, 85, 1);
+		color: #00C52A;
+		font-size: 24rpx;
+
 	}
 	
 	.tui-order-item {
 		width: 50%;
 		text-align: center;
-		
-		
-		
-		
+	}
+	.tui-icon-box {
+		margin: 46rpx 0;
 	}
 	
 	.tui-order-text,

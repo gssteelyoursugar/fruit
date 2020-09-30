@@ -24,7 +24,7 @@
 		</view>
 
 		<!-- #endif -->
-		<checkbox-group @change="buyChange">
+		<checkbox-group @change="buyChange" >
 			<view class="tui-cart-cell  tui-mtop" v-for="(item,index) in orderObj" :key="index">
 				<view class="tui-activity">
 					<view class="tui-bold">
@@ -143,7 +143,7 @@
 				orderObj: [],
 				openid: '',
 				neworder: [],
-
+				isCheck:false,
 				dataList: [{
 						id: "q2020811",
 						buyNum: 1,
@@ -321,7 +321,6 @@
 					})
 
 			},
-
 			//计算总价
 			jieSuanPrice() {
 				console.log("====ji")
@@ -351,14 +350,14 @@
 				log(setdata)
 				listing(getCart, data)
 					.then((res) => {
-						// log(res.data.data)
+						log(res.data.data)
 						this.orderObj = res.data.data
-
 						// for(var i=0;i<this.orderObj.length;i++){
 						// 	for( var j=0; j<this.orderObj[i].list.length;j++){
 						// 		this.orderObj[i].list[j].selected = false
 						// 	}
 						// }
+						
 						log(this.orderObj)
 
 
@@ -499,9 +498,7 @@
 					})
 					return
 				}
-
 				log('结算=============')
-
 				if (this.cartIds.length <= 0) {
 					this.isAll = false
 					this.checkFlag = false
@@ -514,10 +511,8 @@
 					console.log("提示没有选择任何商品，不可结算")
 					return;
 				}
-
 				//结算,获取到选中的商品id数组
 				console.log(this.cartIds);
-
 				let setdata = uni.getStorageSync('usermen')
 				//拼接字符串id
 				let ids = "";
@@ -558,9 +553,7 @@
 					})
 					return
 				}
-
 				log('结算=============')
-
 				if (this.cartIds.length <= 0) {
 					//提示没有选择任何商品，不可结算
 					uni.showToast({
@@ -570,10 +563,8 @@
 					console.log("提示没有选择任何商品，不可结算")
 					return;
 				}
-
 				//结算,获取到选中的商品id数组
 				console.log(this.cartIds);
-
 				//拼接字符串id
 				let ids = "";
 				for (let index in this.cartIds) {
@@ -592,20 +583,21 @@
 			},
 			//加购单,勾选
 			buyChange(e) {
-
 				//获取选中的数组id
+				let oLength = this.orderObj.length
 				this.cartIds = e.detail.value;
-
+				console.log(this.cartIds)
+				if(oLength === e.detail.value.length){
+					this.isAll = true
+				}
+				if(e.detail.value.length===0 ) {
+					this.isAll = false
+				}
 				//计算价格
 				this.jieSuanPrice();
-
-
-
-
 			},
 			//全选
 			checkAll(e) {
-
 				log(e)
 				this.isAll = false
 				this.flag = false; //默认为不选中
@@ -617,7 +609,6 @@
 					this.$forceUpdate();
 				}
 				this.cartIds = []; //清空id
-
 				console.log("全选状态======", this.flag);
 				for (let index in this.orderObj) {
 					for (let indexTwo in this.orderObj[index].list) {
@@ -628,12 +619,8 @@
 					}
 				}
 				this.$forceUpdate(); //强制刷新当前数据，因为 this.orderObj[index].list[indexTwo]. 双层数组，层级太高了，导致不渲染数据
-
 				//计算价格
 				this.jieSuanPrice();
-
-
-
 				// for(var i=0;i<this.orderObj.length;i++){
 				// 	for( var j=0; j<this.orderObj[i].list.length;j++){
 				// 		this.orderObj[i].list[j].selected = false
@@ -652,8 +639,6 @@
 				// })
 				// this.totalPrice = totalPrice;
 				// this.buyNum = buyNum;
-
-
 			},
 			onclike() {
 				this.flag = false
@@ -676,17 +661,14 @@
 			}, 100);
 			log(this.flag = false)
 			//下拉刷新
-
 			this.allPrice = 0
 			this.onclike()
-			this.isAll = false
+			// this.isAll = true
+			this.isCheck = false
 			this.flag = false
 			this.cartIds = []; //清空id
 			this.getMerchants()
-
-
 			let setdata = uni.getStorageSync('usermen')
-			log(setdata)
 			if (!setdata) {
 				this.hasError = true
 				this.isActive = false
@@ -700,9 +682,23 @@
 				this.orderIng()
 				log('显示订单')
 			}
-
-
-
+			let olist = this.orderObj
+			if (olist.length ===0 ){
+				return
+			} else {
+				olist.forEach((item,index)=>{
+					console.log(item,1)
+					item.list.forEach((itm,idx)=>{	
+						console.log(itm,1)
+						if(!itm){
+							return
+						} else{
+							itm.selected = false
+						}
+					})
+				})
+				this.orderObj = olist
+			}
 		},
 
 

@@ -99,7 +99,7 @@
 	}
 
 	.tui-left {
-		flex: 1;
+		flex: 3;
 		display: flex;
 		align-items: center;
 

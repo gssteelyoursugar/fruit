@@ -11,11 +11,10 @@
 				<!-- 已登录个人信息状态wxlogin -->
 				<view class="tui-info" v-if="wxlogin">
 					<view class="tui-explain">{{usering.nickName}}</view>
-					<!-- 后端从微信获取的信息中没有手机号码的字段，此处我判断用户登录并且通过了店铺验证才就显示手机号码，
-						具体字段不清楚，你们自行修改就行 -->
-					<view class="tui-user-phone"> <!-- v-if="wxlogin && ApproveStatus === 1" -->
+
+					<view class="tui-user-phone" v-if="wxlogin && ApproveStatus === 1">
 						<image src="../../static/images/cellphone.png" mode="aspectFill"></image>
-						<text>1943243232</text>
+						<text>{{user_phone}}</text>
 					</view>
 				</view>
 				<!-- 未登录个人信息状态!wxlogin-->
@@ -32,11 +31,11 @@
 					<view class="tui-icon-box " @tap="tendShop">
 						去登录
 					</view> -->
-					<!-- <view class="tui-icon-box " >
+				<!-- <view class="tui-icon-box " >
 						<button plain="true" type="primary" :text="loginText" open-type="getUserInfo" @getuserinfo="getUserInfo">去认证我的店铺</button>
 					</view>
 					 -->
-					<!-- <view class="tui-icon-box " @tap="tendShop">
+				<!-- <view class="tui-icon-box " @tap="tendShop">
 						<text class="tui-icon-text3">{{logMsg}}</text>
 					</view> -->
 				<!-- </view> -->
@@ -124,27 +123,27 @@
 							<image src="/static/images/daifukuan@3x.png" class="tui-order-icon"></image>
 							<!-- <view class="tui-badge tui-badge-red">1</view> -->
 						</view>
-						<view class="tui-order-text">待付款</view>
+						<view class="tui-order-text">待付款<text v-if="fukuanList !== ''">{{fukuanList}}</text></view>
 					</view>
 					<view class="tui-order-item" @tap="ToBeDelivered">
 						<view class="tui-icon-box">
 							<image src="/static/images/daifahuo@3x.png" class="tui-order-icon"></image>
 						</view>
-						<view class="tui-order-text">待发货</view>
+						<view class="tui-order-text">待发货<text v-if="fahuoList !== ''">{{fahuoList}}</text></view>
 					</view>
 					<view class="tui-order-item" @tap="ToBeReceived">
 						<view class="tui-icon-box">
 							<image src="/static/images/daishouhuo@3x.png" class="tui-order-icon"></image>
 							<view class="tui-badge tui-badge-red" v-if="false">12</view>
 						</view>
-						<view class="tui-order-text">待收货</view>
+						<view class="tui-order-text">待收货<text v-if="shouhuoList !== ''">{{shouhuoList}}</text></view>
 					</view>
 					<view class="tui-order-item" @tap="gotoAfter">
 						<view class="tui-icon-box">
 							<image src="/static/images/shouhou@3x.png" class="tui-order-icon"></image>
 							<!-- <view class="tui-badge tui-badge-red">2</view> -->
 						</view>
-						<view class="tui-order-text">退款/售后</view>
+						<view class="tui-order-text">退款/售后<text v-if="tuikuanList !== ''">{{tuikuanList}}</text></view>
 					</view>
 				</view>
 			</view>
@@ -256,6 +255,7 @@
 	import {
 		loginis,
 		getClient,
+		getMyOrder
 	} from '../../api/request.js'
 
 	export default {
@@ -307,6 +307,7 @@
 			// 	this.logMsg = "去认证我的店铺"
 			// }
 			return {
+				lists: [],
 				modaishow: false,
 				show: true,
 				wxlogin: true,
@@ -322,7 +323,12 @@
 				Goauth: true, //未认证
 				Goauth2: false, //以申请待审核
 				Goauth3: false, //通过认证
-				Goauth4: false, //被拒绝
+				Goauth4: false, //被拒绝,
+				user_phone: "",
+				fukuanList: '',
+				fahuoList: '',
+				shouhuoList: "",
+				tuikuanList: ''
 
 			}
 		},
@@ -350,8 +356,6 @@
 				// wx.startPullDownRefresh()
 				this.ifUser()
 				log('dddddddddd')
-
-
 			},
 			//获取code
 			wxCode(avatarUrl, nickName) {
@@ -463,6 +467,7 @@
 						this.ApproveStatus = res.data.data.approveStatus //获取状态码，0未认证，1已认证，2拒绝
 						uni.setStorageSync('StoreStatus', res.data.data.approveStatus)
 						let setStore = uni.getStorageSync('StoreStatus') //状态码
+						this.user_phone = res.data.data.phone
 						log(setStore)
 						//log(this.ApproveStatus)
 						var valu2 = this.ApproveStatus
@@ -506,6 +511,44 @@
 			// 	})
 
 			// },
+			getOrderData() {
+				let setdata = uni.getStorageSync('usermen')
+				let data = {
+					token: setdata,
+					pageNo: 1,
+					pageSize: 100000,
+				}
+				listing(getMyOrder, data)
+					.then((res) => {
+						let list = res.data.data
+						let fukuanList = []
+						let fahuoList = []
+						let shouhuoList = []
+						let tuikuanList = []
+						list.forEach(item => {
+							console.log(item)
+							if (item.payStatus == 0) {
+								fukuanList.push(item)
+							}
+							if (item.tradeStatus == 1 || item.tradeStatus == 3) {
+								fahuoList.push(item)
+							}
+							if (item.tradeStatus == 4) {
+								shouhuoList.push(item)
+							}
+							if (item.tradeStatus == 7) {
+								tuikuanList.push(item)
+							}
+						})
+						this.fukuanList = fukuanList.length
+						this.fahuoList = fahuoList.length
+						this.shouhuoList = shouhuoList.length
+						this.tuikuanList = tuikuanList.length
+					})
+					.catch((err) => {
+						log(err)
+					})
+			},
 			ifUser() {
 				let setuserdata = uni.getStorageSync('userIN')
 				if (!setuserdata) {
@@ -686,6 +729,7 @@
 		onShow() {
 			log('每次都执行')
 			this.getMerchants()
+			this.getOrderData()
 			this.ifUser()
 			this.ifLogin()
 		},
@@ -778,7 +822,7 @@
 		position: absolute;
 		line-height: 70rpx;
 		right: 0;
-		top:52rpx;
+		top: 52rpx;
 		text-align: center;
 		justify-content: center;
 		border-radius: 60rpx 0 0 60rpx;
@@ -812,19 +856,19 @@
 		bottom: -12rpx;
 		border-radius: 60rpx 0 0 60rpx;
 	}
-	
+
 	.tui-set-box3 .tui-icon-box {
 		position: relative;
 		width: 100%;
 		text-align: center;
 	}
-	
-	.tui-set-box3 .tui-icon-box  .tui-icon-text3{
+
+	.tui-set-box3 .tui-icon-box .tui-icon-text3 {
 		margin: 0;
 		font-size: 24rpx;
 		color: #b6b6b6;
 	}
-	
+
 
 
 	/* #endif */
@@ -1089,12 +1133,13 @@
 		align-items: center;
 		justify-content: space-between;
 	}
-	
+
 	.tui-order-list-wrap .tui-order-item image {
 		width: 48rpx;
 		height: 48rpx;
 	}
-	.tui-order-list-wrap .tui-order-item:last-child image{
+
+	.tui-order-list-wrap .tui-order-item:last-child image {
 		width: 40rpx;
 	}
 
@@ -1111,6 +1156,30 @@
 		font-weight: 400;
 		color: #555;
 		padding-top: 12rpx;
+	}
+	.tui-order-text {
+		position: relative;
+		z-index: 2;
+	}
+	.tui-order-text text{
+		display: block;
+		position: absolute;
+		top: -72rpx;
+		right: -18rpx;
+		background: #f93b3f;
+		width: 30rpx;
+		text-align: center;
+		height: 30rpx;
+		z-index: 1;
+		border: 1px solid #f93b3f;
+		color: #fff;
+		font-weight: 500;
+		-webkit-border-radius: 50%;
+		border-radius: 50%;
+		line-height: 30rpx;
+		z-index: -1;
+		font-size: 22rpx;
+
 	}
 
 	.tui-tool-text {

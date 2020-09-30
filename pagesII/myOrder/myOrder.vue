@@ -597,14 +597,12 @@
 			},
 			//请求订单数据
 			getOrderData() {
-
 				let data = {
 					token: setdata,
 					pageNo: this.pageIndex,
 					pageSize: 10,
 					payStatus: this.payStatus,
 					tradeStatus: this.tradeStatus
-
 				}
 				log(data)
 				if (this.currentTab === 0) { //如果是默认全部不传payStatus参数

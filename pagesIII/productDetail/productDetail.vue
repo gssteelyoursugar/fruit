@@ -56,8 +56,8 @@
 					<view class="tui-pro-titbox">
 						<view class="tui-pro-title">
 							<text class="tui-pro-title-tag">仅剩{{shopListdata.data.number||0}}件</text>
-							<text class="tui-pro-title-tag">成交{{shopListdata.data.totalPirce||0 |filterNum}}多元</text>
-							<text class="tui-pro-title-tag">{{shopListdata.data.viewNumber | filterNum}}多人看</text></view>
+							<text class="tui-pro-title-tag">成交{{shopListdata.data.totalPirce||0 |filterNum}}元</text>
+							<text class="tui-pro-title-tag">{{shopListdata.data.viewNumber||0  | filterNum}}人看</text></view>
 						<button open-type="share" class="tui-share-btn tui-share-position" @tap="onShare">
 							<tui-tag type="gray" shape="circleLeft" padding="12rpx 16rpx">
 								<view class="tui-share-box">
@@ -72,7 +72,7 @@
 						<view class="tui-sale-info tui-size tui-gray">
 							<view class="tui-magin"> <text class="tui-code">￥</text> <text class="tui-price-one">{{shopListdata.data.platformPrice}}</text>
 								<text style="font-size:28rpx;color: #FF6500;">元</text> /件</view>
-							<view class="tui-huaxian" >￥{{shopListdata.data.totalPirce}}/件</view>
+							<view class="tui-huaxian" >￥{{shopListdata.data.marketPrice}}/件</view>
 							<view>{{shopListdata.data.specification}}, 水果净重约{{shopListdata.data.kg2}}斤</view>
 						</view>
 					</view>
@@ -567,20 +567,26 @@
 					console.log(words)
 					
 					let res = ""
+					if (words.length === 1) {
+						res = val
+					}
+					if (words.length === 2){
+						res = words[0]+"0多"
+					}
 					if(words.length===3) {
-						res = words[0]+"00"
+						res = words[0]+"00多"
 					}
 					if (words.length===4) {
-						res = words[0]+"千"
+						res = words[0]+"千多"
 					}
 					if (words.length===5) {
-						res = words[0]+"万"
+						res = words[0]+"万多"
 					}
 					if (words.length===6) {
-						res = words[0]+words[1]+"万"
+						res = words[0]+words[1]+"万多"
 					}
 					if (words.length===7) {
-						res = words[0]+"百万"
+						res = words[0]+"百万多"
 					}
 					return res
 				} else {
@@ -601,7 +607,6 @@
 						///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
 						this.ApproveStatus = res.data.data.approveStatus //获取状态码，0未认证，1已认证，2拒绝
 						log(this.ApproveStatus)
-
 					})
 					.catch((err) => {
 						log(err)
@@ -2163,7 +2168,7 @@
 		position: fixed;
 		left: 0;
 		right: 0;
-		top: 0;
+		top: 130rpx;
 		bottom: 0;
 		background: rgba(0, 0, 0, 0.6);
 		z-index: 9999;

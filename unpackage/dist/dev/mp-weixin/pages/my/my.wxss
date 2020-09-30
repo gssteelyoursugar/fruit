@@ -81,7 +81,7 @@
 	position: absolute;
 	line-height: 70rpx;
 	right: 0;
-	top:52rpx;
+	top: 52rpx;
 	text-align: center;
 	-webkit-box-pack: center;
 	-webkit-justify-content: center;
@@ -137,7 +137,7 @@
 	width: 100%;
 	text-align: center;
 }
-.tui-set-box3 .tui-icon-box  .tui-icon-text3{
+.tui-set-box3 .tui-icon-box .tui-icon-text3 {
 	margin: 0;
 	font-size: 24rpx;
 	color: #b6b6b6;
@@ -430,7 +430,7 @@
 	width: 48rpx;
 	height: 48rpx;
 }
-.tui-order-list-wrap .tui-order-item:last-child image{
+.tui-order-list-wrap .tui-order-item:last-child image {
 	width: 40rpx;
 }
 .tui-order-item {
@@ -454,6 +454,29 @@
 	font-weight: 400;
 	color: #555;
 	padding-top: 12rpx;
+}
+.tui-order-text {
+	position: relative;
+	z-index: 2;
+}
+.tui-order-text text{
+	display: block;
+	position: absolute;
+	top: -72rpx;
+	right: -18rpx;
+	background: #f93b3f;
+	width: 30rpx;
+	text-align: center;
+	height: 30rpx;
+	z-index: 1;
+	border: 1px solid #f93b3f;
+	color: #fff;
+	font-weight: 500;
+	-webkit-border-radius: 50%;
+	border-radius: 50%;
+	line-height: 30rpx;
+	z-index: -1;
+	font-size: 22rpx;
 }
 .tui-tool-text {
 	font-size: 24rpx;

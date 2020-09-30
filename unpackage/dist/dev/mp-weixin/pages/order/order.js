@@ -397,7 +397,7 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       flag: false, checkFlag: false, //默认选中
       allFlag: '', //全选
       checkedArr: [], //存放选中的数据
-      valueNum: 0, url: 'http://192.168.1.10:8980', orderObj: [], openid: '', neworder: [], dataList: [{ id: "q2020811", buyNum: 1, price: 299.5, selected: false, imgsrc: '../../static/images/putao1.png', shopName: '大葡萄' }, { id: 'q2020812', buyNum: 2, price: 499, selected: false, imgsrc: '../../static/images/niuyouguo1.png', shopName: '大哈密瓜' }, { id: 'q2020813', buyNum: 3, price: 199, selected: false, imgsrc: '../../static/images/putao1.png', shopName: '大紫葡萄' }], isAll: false, totalPrice: 0, buyNum: 0, cartIds: [], //购物车id
+      valueNum: 0, url: 'http://192.168.1.10:8980', orderObj: [], openid: '', neworder: [], isCheck: false, dataList: [{ id: "q2020811", buyNum: 1, price: 299.5, selected: false, imgsrc: '../../static/images/putao1.png', shopName: '大葡萄' }, { id: 'q2020812', buyNum: 2, price: 499, selected: false, imgsrc: '../../static/images/niuyouguo1.png', shopName: '大哈密瓜' }, { id: 'q2020813', buyNum: 3, price: 199, selected: false, imgsrc: '../../static/images/putao1.png', shopName: '大紫葡萄' }], isAll: false, totalPrice: 0, buyNum: 0, cartIds: [], //购物车id
       actions: [{ name: '删除', color: '#fff', fontsize: 28, width: 64, background: '#F82400' }], actions2: [{ name: '看相似', color: '#fff', fontsize: 28, width: 64, background: '#FF7035' }, { name: '删除', color: '#fff', fontsize: 28, width: 64, background: '#F82400' }], isEdit: false, pageIndex: 1, loadding: false, pullUpOn: true, allPrice: 0 //总价
     };}, filters: { getPrice: function getPrice(price) {price = price || 0;return price.toFixed(2);} }, methods: { goIndex: function goIndex() {uni.switchTab({ url: '../index/index' });}, init: function init(bull, tips) {this.modaishow = bull;this.tips = tips;}, //获取头像昵称
     getUserInfo: function getUserInfo(event) {// log(event)
@@ -491,7 +491,6 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       });
 
     },
-
     //计算总价
     jieSuanPrice: function jieSuanPrice() {
       console.log("====ji");
@@ -521,14 +520,14 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       log(setdata);
       (0, _api.listing)(_request.getCart, data).
       then(function (res) {
-        // log(res.data.data)
+        log(res.data.data);
         _this4.orderObj = res.data.data;
-
         // for(var i=0;i<this.orderObj.length;i++){
         // 	for( var j=0; j<this.orderObj[i].list.length;j++){
         // 		this.orderObj[i].list[j].selected = false
         // 	}
         // }
+
         log(_this4.orderObj);
 
 
@@ -669,9 +668,7 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
 
         return;
       }
-
       log('结算=============');
-
       if (this.cartIds.length <= 0) {
         this.isAll = false;
         this.checkFlag = false;
@@ -684,10 +681,8 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
         console.log("提示没有选择任何商品，不可结算");
         return;
       }
-
       //结算,获取到选中的商品id数组
       console.log(this.cartIds);
-
       var setdata = uni.getStorageSync('usermen');
       //拼接字符串id
       var ids = "";
@@ -728,9 +723,7 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
 
         return;
       }
-
       log('结算=============');
-
       if (this.cartIds.length <= 0) {
         //提示没有选择任何商品，不可结算
         uni.showToast({
@@ -740,10 +733,8 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
         console.log("提示没有选择任何商品，不可结算");
         return;
       }
-
       //结算,获取到选中的商品id数组
       console.log(this.cartIds);
-
       //拼接字符串id
       var ids = "";
       for (var index in this.cartIds) {
@@ -762,20 +753,21 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
     },
     //加购单,勾选
     buyChange: function buyChange(e) {
-
       //获取选中的数组id
+      var oLength = this.orderObj.length;
       this.cartIds = e.detail.value;
-
+      console.log(this.cartIds);
+      if (oLength === e.detail.value.length) {
+        this.isAll = true;
+      }
+      if (e.detail.value.length === 0) {
+        this.isAll = false;
+      }
       //计算价格
       this.jieSuanPrice();
-
-
-
-
     },
     //全选
     checkAll: function checkAll(e) {
-
       log(e);
       this.isAll = false;
       this.flag = false; //默认为不选中
@@ -787,7 +779,6 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
         this.$forceUpdate();
       }
       this.cartIds = []; //清空id
-
       console.log("全选状态======", this.flag);
       for (var index in this.orderObj) {
         for (var indexTwo in this.orderObj[index].list) {
@@ -798,12 +789,8 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
         }
       }
       this.$forceUpdate(); //强制刷新当前数据，因为 this.orderObj[index].list[indexTwo]. 双层数组，层级太高了，导致不渲染数据
-
       //计算价格
       this.jieSuanPrice();
-
-
-
       // for(var i=0;i<this.orderObj.length;i++){
       // 	for( var j=0; j<this.orderObj[i].list.length;j++){
       // 		this.orderObj[i].list[j].selected = false
@@ -822,8 +809,6 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       // })
       // this.totalPrice = totalPrice;
       // this.buyNum = buyNum;
-
-
     },
     onclike: function onclike() {
       this.flag = false;
@@ -846,17 +831,14 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
     }, 100);
     log(this.flag = false);
     //下拉刷新
-
     this.allPrice = 0;
     this.onclike();
-    this.isAll = false;
+    // this.isAll = true
+    this.isCheck = false;
     this.flag = false;
     this.cartIds = []; //清空id
     this.getMerchants();
-
-
     var setdata = uni.getStorageSync('usermen');
-    log(setdata);
     if (!setdata) {
       this.hasError = true;
       this.isActive = false;
@@ -870,9 +852,23 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       this.orderIng();
       log('显示订单');
     }
-
-
-
+    var olist = this.orderObj;
+    if (olist.length === 0) {
+      return;
+    } else {
+      olist.forEach(function (item, index) {
+        console.log(item, 1);
+        item.list.forEach(function (itm, idx) {
+          console.log(itm, 1);
+          if (!itm) {
+            return;
+          } else {
+            itm.selected = false;
+          }
+        });
+      });
+      this.orderObj = olist;
+    }
   },
 
 
