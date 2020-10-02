@@ -802,7 +802,7 @@ var _console = console,log = _console.log;var _default = { data: function data()
       storage_mode: [], //储存方式
       taste_level: [], //口感等级
       variety: [], //品种
-      numNull: 0, numNull2: 0, numName: 0, url: 'http://192.168.1.10:8980', isActives1: false, isActives2: false, imgUrl: "http://192.168.1.10:8980/js/userfiles/fileupload/202008/1298932901905809410.png", colorLevelList: [], goodsList: [], fileUploadList: '', mouthfeelLevelList: [], slMangguo: '芒果', serrchGoods: '', slPinzhong: '品种', slGuobiao: '水果标准', slYanzheng: '验证保障', mangguoID: 0, ciData: [{ name: "芒果", bOn: false }, { name: "西瓜", bOn: false }, { name: "香蕉", bOn: false }, { name: "橘子", bOn: false }, { name: "猕猴桃", bOn: false }], dictDataList: [{ name: '芒果', isActive: false }, { name: '西瓜', isActive: false }, { name: '哈密瓜', isActive: false }], fruitLevelList: [], facadeLevelList: [], dictTypeList: [], dengji: [{ name: '特级' }, { name: 'A级' }, { name: 'B级' }], kouGanPicker: { selectOne: 0, selectTwo: 0, selectOneData: {}, selectTwoData: {} }, activeA: false, selecValue: '不限', selecTwoValue: '不限', searchKey: '', //搜索关键词
+      numNull: 0, numNull2: 0, numName: 0, url: 'http://192.168.1.10:8980', isActives1: false, isActives2: false, imgUrl: "http://192.168.1.10:8980/js/userfiles/fileupload/202008/1298932901905809410.png", colorLevelList: [], goodsList: [], fileUploadList: '', mouthfeelLevelList: [], slMangguo: '芒果', serrchGoods: '', slPinzhong: '品种', slGuobiao: '水果标准', slYanzheng: '验证保障', mangguoID: 0, ciData: [{ name: "芒果", bOn: false }, { name: "西瓜", bOn: false }, { name: "香蕉", bOn: false }, { name: "橘子", bOn: false }, { name: "猕猴桃", bOn: false }], dictDataList: [{ name: '芒果', isActive: false }, { name: '西瓜', isActive: false }, { name: '哈密瓜', isActive: false }], fruitLevelList: [], facadeLevelList: [], dictTypeList: [], dengji: [{ name: '特级' }, { name: 'A级' }, { name: 'B级' }], activeA: false, selecValue: '不限', selecTwoValue: '不限', searchKey: '', //搜索关键词
       width: 200, //header宽度
       height: 64, //header高度
       inputTop: 0, //搜索框距离顶部距离
@@ -818,7 +818,7 @@ var _console = console,log = _console.log;var _default = { data: function data()
       isList: false, //切换列表展示效果
       drawer: false, //显示选果标准抽屉
       drawerH: 0, //抽屉内部scrollview高度
-      selectedName: '综合', selectH: 0, num: 0, seleTopList: [{ name: '综合', selected: false }, { name: '销量', selected: false }, { name: '价格', selected: false }, { name: '视频选果', selected: false }], seleBottom: [{ name: '芒果', selected: false }, { name: '品种', selected: true }, { name: '水果标准', selected: false }, { name: '验证保障', selected: false }], dropdownList: [{ name: '综合', selected: true }, { name: '价格升序', selected: false }, { name: '价格降序', selected: false }], pageIndex: 1, loadding: false, pullUpOn: true, optionList: { level: '', //等级
+      selectedName: '综合', selectH: 0, num: 0, seleTopList: [{ name: '综合', selected: false }, { name: '销量', selected: false }, { name: '价格', selected: false }, { name: '视频选果', selected: false }], seleBottom: [{ name: '芒果', selected: false }, { name: '品种', selected: true }, { name: '水果标准', selected: false }, { name: '验证保障', selected: false }], dropdownList: [{ name: '综合', selected: true }, { name: '价格升序', selected: false }, { name: '价格降序', selected: false }], pageIndex: 1, loadding: false, pullUpOn: true, optionList: { level: '1295251270639849472', //等级
         ltWeight: '', //单果左
         rtWeight: '', //单果左
         ltWidth: '', //果径左
@@ -841,14 +841,7 @@ var _console = console,log = _console.log;var _default = { data: function data()
         //略小，避免误差带来的影响
         _this.dropScreenH = _this.height * 750 / res.windowWidth + 186;_this.drawerH = res.windowHeight - uni.upx2px(100) - _this.height;} });}, computed: { tasteBox: function tasteBox() {var arr = [];var data = this.taste_level;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title };arr.push(tmp);});return arr;}, colorBox: function colorBox() {var arr = [];var data = this.color_level;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title };arr.push(tmp);});return arr;}, facadeBox: function facadeBox() {var arr = [];var data = this.facade_level;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title };arr.push(tmp);});return arr;} }, methods: { //商品详情页
     gotoList: function gotoList(id) {log(id);uni.navigateTo({ url: '../../pagesIII/productDetail/productDetail?id=' + id });}, //下拉选
-    dropDownList: function dropDownList(index, name) {if (index !== -1) {console.log("index：" + index, name);}this.title = name;this.dropdownShow = !this.dropdownShow;}, dropDownList2: function dropDownList2(index, name) {if (index !== -1) {console.log("index：" + index, name);}this.title = name;this.dropdownShow2 = !this.dropdownShow2;}, getSearch: function getSearch(serrchName) {var _this2 = this;var data = { pageNo: 1, pageSize: 10, name: serrchName };(0, _api.listing)(_request.getGoodsall, data).then(function (res) {log(res);_this2.goods = res.data.data[0].goods;log(_this2.goods);}).catch(function (err) {log(err);});}, /* 第一个筛选 */Total: function Total(index) {this.num = index;log(this.num);if (this.num == 0) {this.ShopIng();log('综合');} else if (this.num == 1) {if (this.sleter) {log('销量升序');this.getshopDESC();} else {this.getshopASC();log('销量降序');}this.sleter = !this.sleter;} else if (this.num == 2) {if (this.sleter2) {log('价格升序');this.getpriceDESC();} else {log('价格降序');this.getpriceASC();}this.sleter2 = !this.sleter2;} else if (this.num == 3) {uni.navigateTo({ url: '../../pagesIII/videos/videos' });
-        log('视频选果');
-
-      } else if (this.num == 4) {
-
-        uni.navigateTo({
-          url: '../../pagesII/rankingList/rankingList' });
-
+    dropDownList: function dropDownList(index, name) {if (index !== -1) {console.log("index：" + index, name);}this.title = name;this.dropdownShow = !this.dropdownShow;}, dropDownList2: function dropDownList2(index, name) {if (index !== -1) {console.log("index：" + index, name);}this.title = name;this.dropdownShow2 = !this.dropdownShow2;}, getSearch: function getSearch(serrchName) {var _this2 = this;var data = { pageNo: 1, pageSize: 10, name: serrchName };(0, _api.listing)(_request.getGoodsall, data).then(function (res) {log(res);_this2.goods = res.data.data[0].goods;log(_this2.goods);}).catch(function (err) {log(err);});}, /* 第一个筛选 */Total: function Total(index) {this.num = index;log(this.num);if (this.num == 0) {this.ShopIng();log('综合');} else if (this.num == 1) {if (this.sleter) {log('销量升序');this.getshopDESC();} else {this.getshopASC();log('销量降序');}this.sleter = !this.sleter;} else if (this.num == 2) {if (this.sleter2) {log('价格升序');this.getpriceDESC();} else {log('价格降序');this.getpriceASC();}this.sleter2 = !this.sleter2;} else if (this.num == 3) {uni.navigateTo({ url: '../../pagesIII/videos/videos' });log('视频选果');} else if (this.num == 4) {uni.navigateTo({ url: '../../pagesII/rankingList/rankingList' });
       }
     },
 
@@ -970,28 +963,10 @@ var _console = console,log = _console.log;var _default = { data: function data()
       this.isActives2 = true;
       this.isActives = true;
     },
-    selectOne: function selectOne(options) {
-      //这个options返回的就是整个数据
-      this.selecValue = options.label;
-      this.kouGanPicker.selectOne = options.num;
-      this.kouGanPicker.selectOneData = options;
-      this.selecTwoValue = '不限';
-      console.log("范围1：", this.kouGanPicker.selectOneData);
-      console.log("范围2：", this.kouGanPicker.selectOneData);
-    },
-    selectTwo: function selectTwo(options) {
-      //这个options返回的就是整个数据
-      this.selecTwoValue = options.label;
-      this.kouGanPicker.selectTwo = options.num;
-      this.kouGanPicker.selectTwoData = options;
 
-      console.log("范围1：", this.kouGanPicker.selectOneData);
-      console.log("范围2：", this.kouGanPicker.selectOneData);
-    },
     useOutClickSide: function useOutClickSide() {
       this.$refs.easySelect.hideOptions && this.$refs.easySelect.hideOptions();
     },
-
     //销量升序
     getshopDESC: function getshopDESC() {var _this3 = this;
 
@@ -1030,7 +1005,6 @@ var _console = console,log = _console.log;var _default = { data: function data()
     },
     //价格升序
     getpriceDESC: function getpriceDESC() {var _this5 = this;
-
       var data = {
         pageNo: 1,
         pageSize: 10,
@@ -1047,7 +1021,6 @@ var _console = console,log = _console.log;var _default = { data: function data()
     },
     //价格降序
     getpriceASC: function getpriceASC() {var _this6 = this;
-
       var data = {
         pageNo: 1,
         pageSize: 10,
@@ -1055,14 +1028,12 @@ var _console = console,log = _console.log;var _default = { data: function data()
 
       (0, _api.listing)(_request.getGoodsall, data).
       then(function (res) {
-        log(res);
         _this6.goods = res.data.data[0].goods;
       }).
       catch(function (err) {
         log(err);
       });
     },
-
     //请求数据
     ShopIng: function ShopIng() {var _this7 = this;
       var data = {
@@ -1075,15 +1046,10 @@ var _console = console,log = _console.log;var _default = { data: function data()
       Promise.all([(0, _api.listing)(_request.getGoodsall, data), (0, _api.listing)(_request.getAttribute, data2)])
       // listing(getGoodsall,data)
       .then(function (res) {
-        log(res);
         _this7.seleVarieties = res[1].data.data;
-        // log(this.seleVarieties)
         if (_this7.seleVarieties === undefined) {
-          log('空对象');
           _this7.seleVarieties = _this7.seleVarieties;
-
         } else if (_this7.seleVarieties != undefined) {
-          log('有对象');
         }
         _this7.color_level = res[0].data.data[0].color_level;
         _this7.facade_level = res[0].data.data[0].facade_level;
@@ -1095,7 +1061,6 @@ var _console = console,log = _console.log;var _default = { data: function data()
         for (var i = 0; i < _this7.species.length; i++) {
           _this7.species[i].isActives = _this7.activeA;
         }
-        log(_this7.species);
         _this7.storage_mode = res[0].data.data[0].storage_mode;
         _this7.taste_level = res[0].data.data[0].taste_level;
         _this7.variety = res[0].data.data[0].variety;
@@ -1109,7 +1074,6 @@ var _console = console,log = _console.log;var _default = { data: function data()
     px: function px(num) {
       return uni.upx2px(num) + 'px';
     },
-
     //重置
     reset: function reset() {
       this.isActives2 = false;
@@ -1132,19 +1096,16 @@ var _console = console,log = _console.log;var _default = { data: function data()
       log('确定');
       this.btnCloseDrop();
       this.dropScreenShow = false;
-
     },
     showDropdownList: function showDropdownList() {
       this.selectH = 246;
       this.tabIndex = 0;
     },
     hideDropdownList: function hideDropdownList() {
-
       this.selectH = 0;
     },
     dropdownItem: function dropdownItem() {
       log('2');
-
     },
     //筛选事件汇总
     screen: function screen(e) {
@@ -1171,7 +1132,7 @@ var _console = console,log = _console.log;var _default = { data: function data()
     },
     clickToConfirm: function clickToConfirm() {
       console.log(this.optionList);
-      // this.closeDrawer()
+      this.closeDrawer();
     },
     clickToReset: function clickToReset() {
       this.optionList = {

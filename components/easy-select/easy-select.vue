@@ -2,7 +2,7 @@
 	<view class="easy-select" @click.stop="trigger" :style="[easySelectSize]">
 		<input type="text" v-model="value" :placeholder="placeholder" disabled clearable>
 		<view class="easy-select-suffix" :style="{border: '1px solid rgba（0,0,0,0)'}" :class="[showSuffix]">
-			<view class="easy-select-down-tag">^</view>
+			<tui-icon :name="iconName" :margin="iconMargin" :color="iconColor" :size="iconSize" :unit="iconUnit"></tui-icon>
 		</view>
 		 <!-- 
 		 v-if="item.num >= valueNum"
@@ -107,7 +107,12 @@
 				boundingClientRect: {},
 				currentSelect: {},
 				optionsGroupTop: 'auto',
-				optionsGroupMargin: ''
+				optionsGroupMargin: '',
+				iconName: 'arrowup',
+				iconColor: "#000",
+				iconMargin: "0",
+				iconSize: 28,
+				iconUnit: "rpx"
 			}
 		},
 		computed: {

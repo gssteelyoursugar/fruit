@@ -400,7 +400,6 @@
 						bOn: false
 					}
 				],
-
 				dictDataList: [{
 						name: '芒果',
 						isActive: false
@@ -427,12 +426,6 @@
 						name: 'B级'
 					}
 				],
-				kouGanPicker: {
-					selectOne: 0,
-					selectTwo: 0,
-					selectOneData: {},
-					selectTwoData: {}
-				},
 				activeA: false,
 				selecValue: '不限',
 				selecTwoValue: '不限',
@@ -509,7 +502,7 @@
 				loadding: false,
 				pullUpOn: true,
 				optionList: {
-					level: '', //等级
+					level: '1295251270639849472', //等级
 					ltWeight: '', //单果左
 					rtWeight: '', //单果左
 					ltWidth: '', //果径左
@@ -813,28 +806,10 @@
 				this.isActives2 = true
 				this.isActives = true
 			},
-			selectOne(options) {
-				//这个options返回的就是整个数据
-				this.selecValue = options.label
-				this.kouGanPicker.selectOne = options.num
-				this.kouGanPicker.selectOneData = options
-				this.selecTwoValue = '不限'
-				console.log("范围1：", this.kouGanPicker.selectOneData);
-				console.log("范围2：", this.kouGanPicker.selectOneData);
-			},
-			selectTwo(options) {
-				//这个options返回的就是整个数据
-				this.selecTwoValue = options.label
-				this.kouGanPicker.selectTwo = options.num
-				this.kouGanPicker.selectTwoData = options
-
-				console.log("范围1：", this.kouGanPicker.selectOneData);
-				console.log("范围2：", this.kouGanPicker.selectOneData);
-			},
+			
 			useOutClickSide() {
 				this.$refs.easySelect.hideOptions && this.$refs.easySelect.hideOptions()
 			},
-
 			//销量升序
 			getshopDESC() {
 
@@ -873,7 +848,6 @@
 			},
 			//价格升序
 			getpriceDESC() {
-
 				let data = {
 					pageNo: 1,
 					pageSize: 10,
@@ -890,7 +864,6 @@
 			},
 			//价格降序
 			getpriceASC() {
-
 				let data = {
 					pageNo: 1,
 					pageSize: 10,
@@ -898,14 +871,12 @@
 				}
 				listing(getGoodsall, data)
 					.then((res) => {
-						log(res)
 						this.goods = res.data.data[0].goods
 					})
 					.catch((err) => {
 						log(err)
 					})
 			},
-
 			//请求数据
 			ShopIng() {
 				let data = {
@@ -918,15 +889,10 @@
 				Promise.all([listing(getGoodsall, data), listing(getAttribute, data2)])
 					// listing(getGoodsall,data)
 					.then((res) => {
-						log(res)
 						this.seleVarieties = res[1].data.data
-						// log(this.seleVarieties)
 						if (this.seleVarieties === undefined) {
-							log('空对象')
 							this.seleVarieties = this.seleVarieties
-
 						} else if (this.seleVarieties != undefined) {
-							log('有对象')
 						}
 						this.color_level = res[0].data.data[0].color_level
 						this.facade_level = res[0].data.data[0].facade_level
@@ -938,7 +904,6 @@
 						for (var i = 0; i < this.species.length; i++) {
 							this.species[i].isActives = this.activeA
 						}
-						log(this.species)
 						this.storage_mode = res[0].data.data[0].storage_mode
 						this.taste_level = res[0].data.data[0].taste_level
 						this.variety = res[0].data.data[0].variety
@@ -952,7 +917,6 @@
 			px(num) {
 				return uni.upx2px(num) + 'px';
 			},
-
 			//重置
 			reset() {
 				this.isActives2 = false
@@ -975,19 +939,16 @@
 				log('确定')
 				this.btnCloseDrop();
 				this.dropScreenShow = false
-
 			},
 			showDropdownList: function() {
 				this.selectH = 246;
 				this.tabIndex = 0;
 			},
 			hideDropdownList: function() {
-
 				this.selectH = 0;
 			},
 			dropdownItem: function() {
 				log('2')
-
 			},
 			//筛选事件汇总
 			screen: function(e) {
@@ -1014,7 +975,7 @@
 			},
 			clickToConfirm() {
 				console.log(this.optionList)
-				// this.closeDrawer()
+				this.closeDrawer()
 			},
 			clickToReset() {
 				this.optionList = {

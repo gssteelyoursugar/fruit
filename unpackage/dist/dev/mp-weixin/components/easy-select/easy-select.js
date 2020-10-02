@@ -76,7 +76,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
-var components
+var components = {
+  tuiIcon: function() {
+    return __webpack_require__.e(/*! import() | components/tui-icon/tui-icon */ "components/tui-icon/tui-icon").then(__webpack_require__.bind(null, /*! @/components/tui-icon/tui-icon.vue */ 357))
+  }
+}
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -233,7 +237,12 @@ var SIZE = {
       boundingClientRect: {},
       currentSelect: {},
       optionsGroupTop: 'auto',
-      optionsGroupMargin: '' };
+      optionsGroupMargin: '',
+      iconName: 'arrowup',
+      iconColor: "#000",
+      iconMargin: "0",
+      iconSize: 28,
+      iconUnit: "rpx" };
 
   },
   computed: {
