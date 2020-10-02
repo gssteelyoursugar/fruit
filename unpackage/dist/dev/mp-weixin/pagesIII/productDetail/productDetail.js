@@ -100,10 +100,10 @@ var components = {
     return __webpack_require__.e(/*! import() | components/tui-tabs/tui-tabs */ "components/tui-tabs/tui-tabs").then(__webpack_require__.bind(null, /*! @/components/tui-tabs/tui-tabs.vue */ 448))
   },
   tuiTag: function() {
-    return __webpack_require__.e(/*! import() | components/tui-tag/tui-tag */ "components/tui-tag/tui-tag").then(__webpack_require__.bind(null, /*! @/components/tui-tag/tui-tag.vue */ 460))
+    return __webpack_require__.e(/*! import() | components/tui-tag/tui-tag */ "components/tui-tag/tui-tag").then(__webpack_require__.bind(null, /*! @/components/tui-tag/tui-tag.vue */ 467))
   },
   tuiRate: function() {
-    return __webpack_require__.e(/*! import() | components/tui-rate/tui-rate */ "components/tui-rate/tui-rate").then(__webpack_require__.bind(null, /*! @/components/tui-rate/tui-rate.vue */ 498))
+    return __webpack_require__.e(/*! import() | components/tui-rate/tui-rate */ "components/tui-rate/tui-rate").then(__webpack_require__.bind(null, /*! @/components/tui-rate/tui-rate.vue */ 505))
   },
   tuiNomore: function() {
     return __webpack_require__.e(/*! import() | components/tui-nomore/tui-nomore */ "components/tui-nomore/tui-nomore").then(__webpack_require__.bind(null, /*! @/components/tui-nomore/tui-nomore.vue */ 371))
@@ -112,7 +112,7 @@ var components = {
     return __webpack_require__.e(/*! import() | components/tui-button/tui-button */ "components/tui-button/tui-button").then(__webpack_require__.bind(null, /*! @/components/tui-button/tui-button.vue */ 413))
   },
   wybPopup: function() {
-    return __webpack_require__.e(/*! import() | components/wyb-popup/wyb-popup */ "components/wyb-popup/wyb-popup").then(__webpack_require__.bind(null, /*! @/components/wyb-popup/wyb-popup.vue */ 505))
+    return __webpack_require__.e(/*! import() | components/wyb-popup/wyb-popup */ "components/wyb-popup/wyb-popup").then(__webpack_require__.bind(null, /*! @/components/wyb-popup/wyb-popup.vue */ 512))
   },
   tuiNumberbox: function() {
     return __webpack_require__.e(/*! import() | components/tui-numberbox/tui-numberbox */ "components/tui-numberbox/tui-numberbox").then(__webpack_require__.bind(null, /*! @/components/tui-numberbox/tui-numberbox.vue */ 406))
@@ -169,6 +169,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
 
 
 
@@ -1011,6 +1012,7 @@ var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
 //
 //
 //
+//
 //请求地址
 var setdata = uni.getStorageSync('usermen');var _console = console,log = _console.log;var _default = { data: function data() {return { ApproveStatus: 0, //店铺认证状态
       current: 0, //星星
@@ -1051,8 +1053,7 @@ var setdata = uni.getStorageSync('usermen');var _console = console,log = _consol
       if (!setdata) {this.modaishow = true;} else {this.modaishow = false;var data = { goodsId: id, token: setdata };log(data);if (this.shopListdata.data.isCollection == true) {uni.showToast({ title: '重复收藏', icon: 'none' });return;} else if (this.shopListdata.data.isCollection == false) {(0, _api.publicing)(_request.postLike, data).then(function (res) {log(res);_this7.postDetails();uni.showToast({ title: '收藏成功', icon: 'none' });}).catch(function (err) {log(err);});}}}, //请求商品详情
     postDetails: function postDetails() {var _this8 = this;uni.showLoading({ title: '加载中' });var data = { id: this.productID, token: setdata }; // 批量并发请求多个接口，Promise.all =>可以并发请求多个接口。并且同时得到多个接口的数据
       //这个方法是异步执行的，值还没有赋值，后就先执行了postAct这个，异步，同步，
-      (0, _api.publicing)(_request.postdelist, data).then(function (res) {console.log(res.data);_this8.shopListdata = res.data;_this8.labelList = res.data.data.labelList;_this8.urlList = res.data.data.urlList;console.log(_this8.labelList);}).catch(function (err) {console.log(err);});uni.hideLoading();
-    },
+      (0, _api.publicing)(_request.postdelist, data).then(function (res) {console.log(res.data);_this8.shopListdata = res.data;_this8.labelList = res.data.data.labelList;_this8.urlList = res.data.data.urlList;console.log(_this8.labelList);}).catch(function (err) {console.log(err);});uni.hideLoading();},
     //立即购买/加进货单
     postShopping: function postShopping(id) {var _this9 = this;
       var setdata = uni.getStorageSync('usermen');

@@ -9977,11 +9977,11 @@ var wxloginurl = "".concat(url, "wxuser/wxlogin");
 // let url = 'http://192.168.1.10:8980/'
 // let url2 = 'http://192.168.1.10:8080/'
 // // 线上
-exports.wxloginurl = wxloginurl;var url = 'https://cs.zgqgpt.com/';exports.url = url;
-var url2 = 'https://cs.zgqgpt.com/';
-// let url = "http://testqg.natapp1.cc/"
+// let url = 'https://cs.zgqgpt.com/'
+exports.wxloginurl = wxloginurl;var url2 = 'https://cs.zgqgpt.com/';
+var url = "http://testqg.natapp1.cc/";
 // let url = 'http://dwh.natapp1.cc/js/'
-var imgurl = 'http://192.168.1.10:8980';
+exports.url = url;var imgurl = 'http://192.168.1.10:8980';
 
 
 //测试
@@ -10258,7 +10258,7 @@ module.exports = g;
 
 /***/ }),
 
-/***/ 493:
+/***/ 500:
 /*!******************************************************************************!*\
   !*** /Users/gsheng/Desktop/fruit/components/jyf-parser/libs/MpHtmlParser.js ***!
   \******************************************************************************/
@@ -10272,9 +10272,9 @@ module.exports = g;
  * @author JinYufeng
  * @listens MIT
  */
-var cfg = __webpack_require__(/*! ./config.js */ 494),
+var cfg = __webpack_require__(/*! ./config.js */ 501),
 blankChar = cfg.blankChar,
-CssHandler = __webpack_require__(/*! ./CssHandler.js */ 495),
+CssHandler = __webpack_require__(/*! ./CssHandler.js */ 502),
 windowWidth = uni.getSystemInfoSync().windowWidth;
 var emoji;
 
@@ -10804,7 +10804,7 @@ module.exports = MpHtmlParser;
 
 /***/ }),
 
-/***/ 494:
+/***/ 501:
 /*!************************************************************************!*\
   !*** /Users/gsheng/Desktop/fruit/components/jyf-parser/libs/config.js ***!
   \************************************************************************/
@@ -10894,14 +10894,14 @@ module.exports = cfg;
 
 /***/ }),
 
-/***/ 495:
+/***/ 502:
 /*!****************************************************************************!*\
   !*** /Users/gsheng/Desktop/fruit/components/jyf-parser/libs/CssHandler.js ***!
   \****************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var cfg = __webpack_require__(/*! ./config.js */ 494),
+var cfg = __webpack_require__(/*! ./config.js */ 501),
 isLetter = function isLetter(c) {return c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z';};
 
 function CssHandler(tagStyle) {

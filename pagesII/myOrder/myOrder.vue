@@ -3,16 +3,18 @@
 		<view class="top-tabs">
 			<tui-tabs :tabs="tabs" :isFixed="scrollTop>=0" :currentTab="currentTab" selectedColor="#00C52A" sliderBgColor="#00C52A"
 			 @change="change" itemWidth="20%"></tui-tabs>
-			 <view class="filter-box"><image src="../../static/images/loudou.png" mode=""></image></view>
-		 </view>
+			<view class="filter-box">
+				<image src="../../static/images/loudou.png" mode=""></image>
+			</view>
+		</view>
 		<!--选项卡全部订单-->
 		<view :class="[currentTab === 0 ? 'actineclass' : 'errorclass']">
 			<wyb-slide-listener @slideUp="onSlide" @slideDown="onSlide" @slideLeft="onSlide" @slideRight="onSlide">
-				<view class="container-img " v-if="myOrderData.length == 0">
+				<view class="container-img " v-if="allData.length == 0">
 					<!-- <image src="../../static/images/orderBMG.png" mode="widthFix"></image> -->
-					<text class="color-text">您还没有相关的订单</text>
+					<!-- <text class="color-text">您还没有相关的订单</text> -->
 				</view>
-				<view class="tui-order-item" v-for="(item,index) in myOrderData" :key="index">
+				<view class="tui-order-item" v-for="(item,index) in allData" :key="index">
 					<tui-list-cell :hover="false" :lineLeft="false">
 						<view class="tui-goods-title">
 							<view class="font-size-color">订单号：{{item.orderNumber}} <text class="iconfont icon-lujing182" @click="clipboard(item.orderNumber)"></text></view>
@@ -25,6 +27,7 @@
 							<view class="tui-order-status" v-if="item.tradeStatus == 6">已完成</view>
 							<view class="tui-order-status" v-if="item.tradeStatus == 7">售后中</view>
 							<view class="tui-order-status" v-if="item.tradeStatus == 8">待确认</view>
+							<view class="tui-order-status" v-if="item.tradeStatus == 9">已完成</view>
 						</view>
 					</tui-list-cell>
 
@@ -63,7 +66,7 @@
 					</tui-list-cell> -->
 					<view class="tui-order-btn">
 						<view class="tui-btn-ml" v-if="item.tradeStatus == 1 || item.tradeStatus == 2 || item.tradeStatus == 3 || item.tradeStatus == 4 || item.tradeStatus == 6 || item.tradeStatus == 7">
-							<button open-type="contact" type="primary" hover-class='none' class="icon-img3">联系客服</button>
+							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle">联系客服</tui-button>
 						</view>
 						<view class="tui-btn-ml" v-if="item.tradeStatus == 0 && item.payStatus == 2">
 							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle" @tap="buyAgain(item.wx_goods_id)">再次下单</tui-button>
@@ -71,13 +74,17 @@
 						<!-- <view class="tui-btn-ml" v-if="item.tradeStatus == 6 || item.tradeStatus == 5">
 							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle"  @tap="goDel(item.id)">删除订单</tui-button>
 						</view> -->
-						<view class="tui-btn-ml" v-if="item.payStatus == 0">
-							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle" @tap="goCancel(item.id)">取消支付</tui-button>
+						<view class="tui-btn-ml" v-if="item.tradeStatus == 1 ||  item.tradeStatus == 3 ||item.tradeStatus == 8||item.tradeStatus == 9 ||item.tradeStatus == 6">
+							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle">查看物流</tui-button>
+
+						</view>
+						<view class="tui-btn-ml" v-if="item.payStatus == 0 || item.payStatus == 2 ||item.tradeStatus == 4 ">
+							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle" @tap="goCancel(item.id)">取消订单</tui-button>
 						</view>
 						<view class="tui-btn-ml" v-if="item.payStatus == 0">
 							<view class="tui-btn-ml-pay" @tap="payGo(item.orderNumber)">
 								<text>去支付</text>
-								<tui-countdown :time="item.time - item.createDate" :hours="false" borderColor="#fff" @end="endOfTime(item.id)"></tui-countdown>
+								<tui-countdown :time="(item.time - item.createDate) /15" :hours="false" borderColor="#fff" @end="endOfTime(item.id)"></tui-countdown>
 							</view>
 						</view>
 						<view class="tui-btn-ml" v-if="item.tradeStatus == 5">
@@ -99,11 +106,11 @@
 		<!--选项卡待付款-->
 		<view :class="[currentTab === 1 ? 'actineclass' : 'errorclass']">
 			<wyb-slide-listener @slideUp="onSlide" @slideDown="onSlide" @slideLeft="onSlide" @slideRight="onSlide">
-				<view class="container-img " v-if="myOrderData.length == 0">
+				<view class="container-img " v-if="waitPay.length == 0">
 					<!-- <image src="../../static/images/orderBMG.png" mode="widthFix"></image> -->
-					<text class="color-text">您还没有相关的订单</text>
+					<!-- <text class="color-text">您还没有相关的订单</text> -->
 				</view>
-				<view class="tui-order-item" v-for="(item,index) in myOrderData" :key="index">
+				<view class="tui-order-item" v-for="(item,index) in waitPay" :key="index">
 					<tui-list-cell :hover="false" :lineLeft="false">
 						<view class="tui-goods-title">
 							<view class="font-size-color">订单号：{{item.orderNumber}} <text class="iconfont icon-lujing182" @click="clipboard(item.orderNumber)"></text></view>
@@ -111,7 +118,6 @@
 							<view class="tui-order-status" v-if="item.tradeStatus == 5">已取消</view>
 						</view>
 					</tui-list-cell>
-
 					<tui-list-cell padding="0" @click="detail">
 						<view class="tui-goods-item">
 							<image :src="item.url" class="tui-goods-img"></image>
@@ -152,10 +158,10 @@
 						<!-- <view class="tui-btn-ml" v-if="item.tradeStatus == 5">
 						<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle"  @tap="goDel(item.id)">删除订单</tui-button>
 					</view> -->
-						<view class="tui-btn-ml" v-if="item.tradeStatus == 5">
-							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle" @tap="buyAgain(item.wx_goods_id)">再次下单</tui-button>
+						<view class="tui-btn-ml">
+							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle" @tap="goCancel(item.id)">取消订单</tui-button>
 						</view>
-						<view class="tui-btn-ml" v-if="item.tradeStatus == 0">
+						<view class="tui-btn-ml">
 							<view class="tui-btn-ml-pay" @tap="payGo(item.orderNumber)">
 								<text>去支付</text>
 								<tui-countdown :time="(item.time - item.createDate) /15" :hours="false" borderColor="#fff" @end="endOfTime(item.id)"></tui-countdown>
@@ -172,11 +178,11 @@
 		<!--选项卡待发货-->
 		<view :class="[currentTab === 2 ? 'actineclass' : 'errorclass']">
 			<wyb-slide-listener @slideUp="onSlide" @slideDown="onSlide" @slideLeft="onSlide" @slideRight="onSlide">
-				<view class="container-img " v-if="myOrderData.length == 0">
+				<view class="container-img " v-if="waitDeliver.length == 0">
 					<!-- <image src="../../static/images/orderBMG.png" mode="widthFix"></image> -->
-					<text class="color-text">您还没有相关的订单</text>
+					<!-- <text class="color-text">您还没有相关的订单</text> -->
 				</view>
-				<view class="tui-order-item" v-for="(item,index) in myOrderData" :key="index">
+				<view class="tui-order-item" v-for="(item,index) of waitDeliver" :key="index">
 					<tui-list-cell :hover="false" :lineLeft="false">
 						<view class="tui-goods-title">
 							<view class="font-size-color">订单号：{{item.orderNumber}} <text class="iconfont icon-lujing182" @click="clipboard(item.orderNumber)"></text></view>
@@ -219,7 +225,13 @@
 					</tui-list-cell>
 					<view class="tui-order-btn">
 						<view class="tui-btn-ml">
-							<button open-type="contact" type="primary" hover-class='none' class="icon-img3">联系客服</button>
+							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle">联系客服</tui-button>
+							
+						</view>
+
+						<view class="tui-btn-ml">
+							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle">查看物流</tui-button>
+							
 						</view>
 						<!-- <view class="tui-btn-ml">
 						<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle">评价晒单</tui-button>
@@ -234,20 +246,18 @@
 		<!--选项卡待收货-->
 		<view :class="[currentTab === 3 ? 'actineclass' : 'errorclass']">
 			<wyb-slide-listener @slideUp="onSlide" @slideDown="onSlide" @slideLeft="onSlide" @slideRight="onSlide">
-				<view class="container-img " v-if="myOrderData.length == 0">
+				<view class="container-img " v-if="waitConfirm.length == 0">
 					<!-- <image src="../../static/images/orderBMG.png" mode="widthFix"></image> -->
-					<text class="color-text">您还没有相关的订单</text>
+					<!-- <text class="color-text">您还没有相关的订单</text> -->
 				</view>
-				<view class="tui-order-item" v-for="(item,index) in myOrderData" :key="index">
+				<view class="tui-order-item" v-for="(item,index) in waitConfirm" :key="index">
 					<tui-list-cell :hover="false" :lineLeft="false">
 						<view class="tui-goods-title">
 							<view class="font-size-color">订单号：{{item.orderNumber}} <text class="iconfont icon-lujing182" @click="clipboard(item.orderNumber)"></text></view>
-
 							<view class="tui-order-status" v-if="item.tradeStatus == 4">待收货</view>
 							<view class="tui-order-status" v-if="item.tradeStatus == 8">待确认</view>
 						</view>
 					</tui-list-cell>
-
 					<tui-list-cell padding="0" @click="detail">
 						<view class="tui-goods-item">
 							<image :src="item.url" class="tui-goods-img"></image>
@@ -282,16 +292,19 @@
 						</view>
 					</tui-list-cell>
 					<view class="tui-order-btn">
-						<view class="tui-btn-ml">
+						<!-- <view class="tui-btn-ml">
 							<button open-type="contact" type="primary" hover-class='none' class="icon-img3">联系客服</button>
 						</view>
-
+ -->
 						<!-- <view class="tui-btn-ml">
 						<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle">评价晒单</tui-button>
 					</view> -->
-						<!-- <view class="tui-btn-ml">
-						<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle" @tap="buyAgain(item.wx_goods_id)">再次下单</tui-button>
-					</view> -->
+						<view class="tui-btn-ml" v-if="item.tradeStatus == 4">
+							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle" @tap="goCancel(item.id)">取消订单</tui-button>
+						</view>
+						<view class="tui-btn-ml">
+							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle">查看物流</tui-button>
+						</view>
 						<view class="tui-btn-ml">
 							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle" @tap="goConfirm(item.id)">确认收货</tui-button>
 						</view>
@@ -302,11 +315,11 @@
 		<!--选项卡已完成-->
 		<view :class="[currentTab === 4 ? 'actineclass' : 'errorclass']">
 			<wyb-slide-listener @slideUp="onSlide" @slideDown="onSlide" @slideLeft="onSlide" @slideRight="onSlide">
-				<view class="container-img " v-if="myOrderData.length == 0">
+				<view class="container-img " v-if="done.length == 0">
 					<!-- <image src="../../static/images/orderBMG.png" mode="widthFix"></image> -->
-					<text class="color-text">您还没有相关的订单</text>
+					<!-- <text class="color-text">您还没有相关的订单</text> -->
 				</view>
-				<view class="tui-order-item" v-for="(item,index) in myOrderData" :key="index">
+				<view class="tui-order-item" v-for="(item,index) in done" :key="index">
 					<tui-list-cell :hover="false" :lineLeft="false">
 						<view class="tui-goods-title">
 							<view class="font-size-color">订单号：{{item.orderNumber}} <text class="iconfont icon-lujing182" @click="clipboard(item.orderNumber)"></text></view>
@@ -354,14 +367,14 @@
 						<view class="tui-btn-ml" v-if="item.tradeStatus == 6">
 							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle" @tap="goAfter(item.id)">申请售后</tui-button>
 						</view>
+						<view class="tui-btn-ml" v-if="item.tradeStatus == 6">
+							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle">评价</tui-button>
+						</view>
+
 						<view class="tui-btn-ml" v-if="item.tradeStatus == 7">
 							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle" @tap="goAfterDetails(item.afterSaleId)">售后详情</tui-button>
 						</view>
-
-						<!-- <view class="tui-btn-ml">
-						<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle">评价晒单</tui-button>
-					</view> -->
-						<view class="tui-btn-ml">
+						<view class="tui-btn-ml" v-if="item.tradeStatus == 9">
 							<tui-button type="black" plain width="152rpx" height="56rpx" :size="26" shape="circle" @tap="buyAgain(item.wx_goods_id)">再次下单</tui-button>
 						</view>
 						<!-- <view class="tui-btn-ml" >
@@ -372,10 +385,10 @@
 			</wyb-slide-listener>
 		</view>
 
-
+		<uni-load-more iconType="snow" :status="loadStatus"></uni-load-more>
 		<!--加载loadding-->
-		<tui-loadmore v-if="loadding" type="red"></tui-loadmore>
-		<tui-nomore v-if="!pullUpOn" backgroundColor="#fafafa"></tui-nomore>
+		<!-- <tui-loadmore v-if="loadding" type="red"></tui-loadmore>
+		<tui-nomore v-if="!pullUpOn" backgroundColor="#fafafa"></tui-nomore> -->
 		<!--加载loadding-->
 
 	</view>
@@ -404,10 +417,9 @@
 	export default {
 		data() {
 			return {
-
+				loadStatus: "loading",
 				payStatus: 0, //付款状态
 				tradeStatus: 0, //收货状态
-
 				timeList: 300,
 				tabs: [{
 					name: "全部"
@@ -429,6 +441,56 @@
 				url: ''
 			}
 		},
+		computed: {
+			// 全部数据
+			allData() {
+				let data = this.myOrderData
+				return data
+			},
+			// 待付款
+			waitPay() {
+				let data = this.myOrderData
+				let arr = []
+				data.map(item => {
+					if (item.payStatus == 0) {
+						arr.push(item)
+					}
+				})
+				return arr
+			},
+			// 待发货
+			waitDeliver() {
+				let data = this.myOrderData
+				let arr = []
+				data.map(item => {
+					if (item.tradeStatus == "1" || item.tradeStatus == "3") {
+						arr.push(item)
+					}
+				})
+				return arr
+			},
+			waitConfirm() {
+				let data = this.myOrderData
+				let arr = []
+				data.map(item => {
+					if (item.payStatus == 1 && item.tradeStatus == 4) {
+						arr.push(item)
+					}
+				})
+				return arr
+			},
+			done() {
+				let data = this.myOrderData
+				let arr = []
+				data.map(item => {
+					if (item.payStatus === 1 && item.tradeStatus === 6) {
+						arr.push(item)
+					}
+				})
+				return arr
+			}
+
+		},
 		methods: {
 			//手势
 			onSlide: function(e) {
@@ -446,7 +508,6 @@
 						uni.showLoading({
 							title: '加载中',
 							duration: 2000
-
 						})
 						this.getOrderData()
 						uni.hideLoading()
@@ -462,9 +523,7 @@
 			},
 			//支付倒计时
 			endOfTime(id) {
-				console.log('倒计时结束,取消支付')
 				this.goCancel(id)
-
 			},
 			//删除订单
 			goDel(id) {
@@ -477,6 +536,7 @@
 					.then((res) => {
 						log(res)
 						this.getOrderData()
+						this.$forceUpdate()
 					})
 					.catch((err) => {
 						log(err)
@@ -495,6 +555,7 @@
 					.then((res) => {
 						log(res)
 						this.getOrderData()
+						this.$forceUpdate()
 					})
 					.catch((err) => {
 						log(err)
@@ -523,8 +584,7 @@
 
 									});
 									this.getOrderData()
-
-
+									this.$forceUpdate()
 								})
 								.catch((err) => {
 									log(err)
@@ -540,11 +600,6 @@
 						}
 					}
 				});
-
-
-
-
-
 			},
 
 			//确认收货
@@ -559,6 +614,7 @@
 					.then((res) => {
 						log(res)
 						this.getOrderData()
+						this.$forceUpdate()
 					})
 					.catch((err) => {
 						log(err)
@@ -593,7 +649,6 @@
 				// .catch((err)=>{
 				// 	log(err)
 				// })
-
 			},
 			//请求订单数据
 			getOrderData() {
@@ -601,27 +656,56 @@
 					token: setdata,
 					pageNo: this.pageIndex,
 					pageSize: 10,
-					payStatus: this.payStatus,
-					tradeStatus: this.tradeStatus
+					// payStatus: this.payStatus,
+					// tradeStatus: this.tradeStatus
 				}
-				log(data)
+				// log(data)
 				if (this.currentTab === 0) { //如果是默认全部不传payStatus参数
-					delete data.payStatus
-					delete data.tradeStatus
-				} else if (this.currentTab === 1) {
-					delete data.tradeStatus
 				}
+				if (this.currentTab === 1) {
+					data.payStatus = 0
+					data.tradeStatus = 0
+				}
+				if (this.currentTab === 2) {
+					data.payStatus = 1
+					data.tradeStatus = 2
+				}
+				if (this.currentTab === 3) {
+					data.payStatus = 1
+					data.tradeStatus = 4
+				}
+				if (this.currentTab === 4) {
+					data.payStatus = 1
+					data.tradeStatus = 6
+				}
+				console.log(data)
 				listing(getMyOrder, data)
 					.then((res) => {
-						log(res)
-						this.myOrderData = res.data.data
+						log(res.data.data)
+						if (res.data.data.length === 0) {
+							// let dataLoad = "noMore"
+							this.loadStatus = "noMore"
+							// this.$set(this.loadStatus,dataLoad)
+							this.$forceUpdate()
+							return
+						}
+						let newData = res.data.data
+						// this.myOrderData = newData
+						// newData.map(item=>{
+						// 	console.log(item.tradeStatus ==1)
+						// })
+						console.log(newData)
+						// this.myOrderData.push(...newData)
+						let arr = this.myOrderData || []
+						arr.push(...newData)
+						this.$set(this.myOrderData, arr)
+						// this.myOrderData = [...this.myOrderData,...newData]
+						this.$forceUpdate()
 					})
 					.catch((err) => {
 						log(err)
 					})
 			},
-
-
 			//复制
 			//event 当需要异步请求返回数据再进行复制时，需要传入此参数，或者异步方法转为同步方法（H5端）
 			clipboard(event) {
@@ -639,7 +723,6 @@
 			},
 			//申请售后
 			goAfter(id) {
-
 				uni.navigateTo({
 					url: '../../pagesIII/applyAfter/applyAfter?id=' + id
 				})
@@ -650,11 +733,9 @@
 					url: '../../pagesIII/afterDetails/afterDetails?id=' + id
 				})
 			},
-
 			change(e) {
 				this.currentTab = e.index
-				console.log(this.currentTab)
-
+				console.log("这列是currentTab：" + this.currentTab)
 				if (this.currentTab === 0) { //全部默认0
 					this.payStatus = 0
 					this.getOrderData()
@@ -688,7 +769,7 @@
 		},
 		onShow() {
 			this.url = imgurl
-			this.getOrderData()
+			// this.getOrderData()
 		},
 		//
 		onLoad(options) {
@@ -702,10 +783,11 @@
 			} else if (options.index == 4) { //已完成
 				this.currentTab = parseInt(options.index);
 			}
+			console.log(this.currentTab)
+			this.getOrderData()
 		},
 		// onPullDownRefresh() {
 		// 	log("触发加载")
-
 
 
 		// 	setTimeout(() => {
@@ -714,12 +796,10 @@
 		// 	}, 200);
 		// },
 		onReachBottom() {
-			log('触发下拉加载')
-			uni.showLoading({
-				title: '加载中',
-				duration: 2000
-
-			})
+			if (this.loadStatus === "noMore") {
+				return
+			}
+			log('我真的触发了下拉加载')
 			this.pageIndex++
 			this.getOrderData()
 			this.loadding = true
@@ -728,7 +808,7 @@
 			setTimeout(() => {
 				this.loadding = false
 				this.pullUpOn = false
-			}, )
+			}, 1000)
 		},
 		onPageScroll(e) {
 			this.scrollTop = e.scrollTop;
@@ -763,13 +843,13 @@
 		color: #fff;
 		font-size: 20rpx;
 	}
-	
-	.top-tabs  {
+
+	.top-tabs {
 		position: relative;
 		display: flex;
 
 	}
-	
+
 	.filter-box {
 		position: absolute;
 		right: 0rpx;
@@ -782,13 +862,14 @@
 		bottom: 0rpx;
 
 	}
+
 	.filter-box image {
 		width: 40rpx;
 		height: 40rpx;
 		margin: 20rpx;
 
 	}
-	
+
 	.tui-order-item {
 		margin-top: 20rpx;
 		border-radius: 10rpx;
@@ -887,52 +968,56 @@
 		-webkit-box-orient: vertical;
 		-webkit-line-clamp: 2;
 	}
-	
+
 	.tui-goods-shabi {
 		display: flex;
 		margin: 20rpx 0;
 		justify-content: space-between;
 	}
-	
+
 	.total-price {
 		color: #FF5600;
 	}
+
 	.total-price text:first-child {
 		font-size: 16rpx;
 		margin-right: 4rpx;
 	}
+
 	.total-price text:nth-child(2) {
 		font-size: 32rpx;
 		font-weight: bold;
 	}
+
 	.total-price text:last-child {
 		font-size: 24rpx;
 		margin-left: 4rpx;
 	}
-	
+
 	.shifu-total {
 		margin-top: 20rpx;
 		color: FF5600;
 	}
-	
+
 	.shifu-total text:first-child {
 		font-size: 24rpx;
 		color: #666666;
 	}
-	
+
 	.shifu-total text:nth-child(2) {
 		font-size: 28rpx;
 		color: #333333;
 		font-weight: bold;
 	}
+
 	.shifu-total text:last-child {
 		font-size: 24rpx;
 		color: #666666;
 		margin-left: 4rpx;
 	}
-	
-	
-	
+
+
+
 	.tui-price-right {
 		text-align: right;
 		font-size: 24rpx;
@@ -975,6 +1060,17 @@
 		box-sizing: border-box;
 	}
 
+	.tui-order-btn .tui-btn-ml:last-child .tui-btn {
+		background: #00C52A !important;
+		color: #fff !important;
+		border-color: #00C52A !important;
+	}
+
+	.tui-order-btn .tui-btn-ml:last-child .tui-btn::after {
+
+		border-color: #00C52A !important;
+	}
+
 	.icon-img3 {
 		background-color: #fff !important;
 		color: #333 !important;
@@ -990,6 +1086,9 @@
 
 	.tui-btn-ml {
 		margin-left: 20rpx;
+		overflow: hidden;
+		border-radius: 40rpx;
+
 	}
 
 	.tui-btn-ml-pay {

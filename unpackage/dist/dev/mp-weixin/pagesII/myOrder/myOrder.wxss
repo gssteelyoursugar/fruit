@@ -24,7 +24,7 @@
 	color: #fff;
 	font-size: 20rpx;
 }
-.top-tabs  {
+.top-tabs {
 	position: relative;
 	display: -webkit-box;
 	display: -webkit-flex;
@@ -251,6 +251,15 @@
 	-webkit-box-sizing: border-box;
 	        box-sizing: border-box;
 }
+.tui-order-btn .tui-btn-ml:last-child .tui-btn {
+	background: #00C52A !important;
+	color: #fff !important;
+	border-color: #00C52A !important;
+}
+.tui-order-btn .tui-btn-ml:last-child .tui-btn::after {
+
+	border-color: #00C52A !important;
+}
 .icon-img3 {
 	background-color: #fff !important;
 	color: #333 !important;
@@ -264,6 +273,9 @@
 }
 .tui-btn-ml {
 	margin-left: 20rpx;
+	overflow: hidden;
+	-webkit-border-radius: 40rpx;
+	        border-radius: 40rpx;
 }
 .tui-btn-ml-pay {
 	font-size: 26rpx;

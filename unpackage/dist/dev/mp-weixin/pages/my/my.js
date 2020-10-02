@@ -631,10 +631,10 @@ var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
 //
 var setuserdata = uni.getStorageSync('userIN'); //用户信息
 var setdata = uni.getStorageSync('usermen'); //Token
-var _console = console,log = _console.log;var logins = __webpack_require__(/*! ../../login/login.js */ 54);var _default = { onLoad: function onLoad(options) {var _this = this;this.$forceUpdate();log('执行了=====');this.getMerchants();log(this.ApproveStatus);this.ifLogin();log(setdata); // this.getMerchants()
+var _console = console,log = _console.log;var logins = __webpack_require__(/*! ../../login/login.js */ 54);var _default = { onLoad: function onLoad(options) {var _this = this;this.$forceUpdate();this.getMerchants();this.ifLogin(); // this.getMerchants()
     // this.getWxdata()
     var obj = {}; // obj = wx.getMenuButtonBoundingClientRect();
-    uni.getSystemInfo({ success: function success(res) {log(res);_this.width = obj.left || res.windowWidth;_this.height = obj.top ? obj.top + obj.height + 8 : res.statusBarHeight + 44;_this.top = obj.top ? obj.top + (obj.height - 32) / 2 : res.statusBarHeight + 6;_this.scrollH = res.windowWidth * 0.6;} });}, data: function data() {// var value = this.ApproveStatus
+    uni.getSystemInfo({ success: function success(res) {_this.width = obj.left || res.windowWidth;_this.height = obj.top ? obj.top + obj.height + 8 : res.statusBarHeight + 44;_this.top = obj.top ? obj.top + (obj.height - 32) / 2 : res.statusBarHeight + 6;_this.scrollH = res.windowWidth * 0.6;} });}, data: function data() {// var value = this.ApproveStatus
     // log(value)
     // var msg = ''
     // if (value == 0) {
@@ -677,11 +677,10 @@ var _console = console,log = _console.log;var logins = __webpack_require__(/*! .
         log('没有token信息请点击登录');log(this.logMsg);} else if (value == 0) {this.Goauth2 = true; //状态为0时证明已经认证
         this.logMsg = '审核中待通过';} else if (value == 1) {this.logMsg = '我的店铺已认证';this.Goauth3 = true;} else if (value == 2) {this.logMsg = '未通过';this.Goauth4 = true;} else if (value == undefined) {this.Goauth = true;this.Goauth2 = false;this.logMsg = '去认证我的店铺';}}, //获取申请店铺状态信息
     getMerchants: function getMerchants() {var _this4 = this;var setdata = uni.getStorageSync('usermen'); //Token
-      var data = { token: setdata };log(data);(0, _api.listing)(_request.getClient, data).then(function (res) {log(res); ///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
+      var data = { token: setdata };(0, _api.listing)(_request.getClient, data).then(function (res) {///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
         _this4.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
         uni.setStorageSync('StoreStatus', res.data.data.approveStatus);var setStore = uni.getStorageSync('StoreStatus'); //状态码
-        _this4.user_phone = res.data.data.phone;log(setStore); //log(this.ApproveStatus)
-        var valu2 = _this4.ApproveStatus;if (valu2 == undefined) {//判断如果请求返回为空说明未申请过店铺认证
+        _this4.user_phone = res.data.data.phone;var valu2 = _this4.ApproveStatus;if (valu2 == undefined) {//判断如果请求返回为空说明未申请过店铺认证
           //显示去认证店铺的按钮
           _this4.Goauth = true;_this4.Goauth2 = false;_this4.logMsg = '去认证我的店铺';} else if (valu2 == 0) {_this4.Goauth2 = true;_this4.Goauth = flase; //状态为0时证明已经认证
           _this4.logMsg = '审核中待通过'; //
@@ -700,16 +699,10 @@ var _console = console,log = _console.log;var logins = __webpack_require__(/*! .
     // 		log(err)
     // 	})
     // },
-    getOrderData: function getOrderData() {var _this5 = this;var setdata = uni.getStorageSync('usermen');var data = { token: setdata, pageNo: 1, pageSize: 100000 };(0, _api.listing)(_request.getMyOrder, data).then(function (res) {var list = res.data.data;var fukuanList = [];var fahuoList = [];var shouhuoList = [];var tuikuanList = [];list.forEach(function (item) {console.log(item);if (item.payStatus == 0) {fukuanList.push(item);}if (item.tradeStatus == 1 || item.tradeStatus == 3) {fahuoList.push(item);}if (item.tradeStatus == 4) {shouhuoList.push(item);}if (item.tradeStatus == 7) {tuikuanList.push(item);}});_this5.fukuanList = fukuanList.length;_this5.fahuoList = fahuoList.length;_this5.shouhuoList = shouhuoList.length;_this5.tuikuanList = tuikuanList.length;}).catch(function (err) {log(err);});}, ifUser: function ifUser() {var setuserdata = uni.getStorageSync('userIN');if (!setuserdata) {this.wxlogin = false;} else {this.wxlogin = true;this.usering = setuserdata;}}, //认证店铺
-    tendShop: function tendShop() {var setdata = uni.getStorageSync('usermen');if (!setdata) {uni.showToast({ title: '请先登录', icon: 'none' });
-
-        log(setdata);
-        this.modaishow = true;
-      } else {
-        // this.modaishow = false
-
-        uni.navigateTo({
-          url: '../../pagesII/tendShop/tendShop' });
+    // 获取订单
+    getOrderData: function getOrderData() {var _this5 = this;var setdata = uni.getStorageSync('usermen');var data = { token: setdata, pageNo: 1, pageSize: 100 };(0, _api.listing)(_request.getMyOrder, data).then(function (res) {var list = res.data.data;var fukuanList = [];var fahuoList = [];var shouhuoList = [];var tuikuanList = [];list.forEach(function (item) {if (item.payStatus == 0) {fukuanList.push(item);}if (item.tradeStatus == 1 || item.tradeStatus == 3) {fahuoList.push(item);}if (item.tradeStatus == 4) {shouhuoList.push(item);}if (item.tradeStatus == 7) {tuikuanList.push(item);}});_this5.fukuanList = fukuanList.length;_this5.fahuoList = fahuoList.length;_this5.shouhuoList = shouhuoList.length;_this5.tuikuanList = tuikuanList.length;_this5.$forceUpdate();}).catch(function (err) {log(err);});}, ifUser: function ifUser() {var setuserdata = uni.getStorageSync('userIN');if (!setuserdata) {this.wxlogin = false;} else {this.wxlogin = true;this.usering = setuserdata;}}, //认证店铺
+    tendShop: function tendShop() {var setdata = uni.getStorageSync('usermen');if (!setdata) {uni.showToast({ title: '请先登录', icon: 'none' });log(setdata);this.modaishow = true;} else {// this.modaishow = false
+        uni.navigateTo({ url: '../../pagesII/tendShop/tendShop' });
 
       }
 
@@ -863,7 +856,6 @@ var _console = console,log = _console.log;var logins = __webpack_require__(/*! .
     } },
 
   onShow: function onShow() {
-    log('每次都执行');
     this.getMerchants();
     this.getOrderData();
     this.ifUser();

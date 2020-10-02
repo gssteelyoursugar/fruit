@@ -22,7 +22,7 @@
 			</view>
 		</view>
 		<!--header-->
-		
+
 		<!-- 搜索框 -->
 		<view class="search-bar">
 			<image src="../../static/images/search-icon.png" mode=""></image>
@@ -49,7 +49,6 @@
 						<view class="tui-bottom-text" >{{item.name}}</view>
 						<text class="iconfont icon-xiajiantou" :color="index == dropNum ? '#00BC45' : '#444' "  v-if="index == 0 || index == 1 || index == 2"></text>
 					</view>
-					
 				</block> -->
 				<view class="tui-bottom-item tui-icon-ml" @tap="btnDropChange(slMangguo)" :class="{ activeNull: isActives1 }">
 					<view class="tui-bottom-text">{{slMangguo}}</view>
@@ -63,9 +62,10 @@
 					<view class="tui-bottom-text">{{slGuobiao}}</view>
 					<text class="iconfont icon-xiajiantou"></text>
 				</view>
-				<view class="tui-bottom-item tui-icon-ml" @tap="btnDropChange(slYanzheng)">
+				<view class="tui-bottom-item tui-icon-ml">
+					<!-- @tap="btnDropChange(slYanzheng)" -->
 					<view class="tui-bottom-text">{{slYanzheng}}</view>
-					<text class="iconfont icon-xiajiantou"></text>
+					<!-- <text class="iconfont icon-xiajiantou"></text> -->
 				</view>
 
 			</view>
@@ -118,7 +118,7 @@
 				<block v-for="(item, index) in goods" :key="index" v-if="(index + 1) % 2 == 0">
 					<!-- <template is="productItem" data="{{item,index:index}}" /> -->
 					<!--商品列表2-->
-					<view class="tui-pro-item"  @tap="gotoList(item.id)">
+					<view class="tui-pro-item" @tap="gotoList(item.id)">
 						<image :src="item.url" class="tui-pro-img" mode="widthFix" />
 						<view class="tui-pro-content">
 							<view class="tui-pro-tit">
@@ -164,15 +164,16 @@
 				<view class="tui-hot-title" style="color: #000000;">
 					热门水果
 				</view>
-				<view class="hot-wrap"  style="display: flex; flex-wrap: wrap;">
-					<view class="tui-drop-item" :class="{'tui-drop-active':index == numNull}" v-for="(item, index) in species" :key="index" :style="">
+				<view class="hot-wrap" style="display: flex; flex-wrap: wrap;">
+					<view class="tui-drop-item" :class="{'tui-drop-active':index == numNull}" v-for="(item, index) in species" :key="index"
+					 :style="">
 						<text class="" :class="{activetext:index == numNull}" @click="checkDing(index,item.id,item.title)">{{ item.title }}</text>
 					</view>
 					<view class="tui-drop-item ">
 						<text class="" @click="checkgeng()">更多></text>
 					</view>
 				</view>
-				
+
 				<!-- <view class="tui-drop-item "v-for="(item, index) in variety":key="index" >
 					<text class="tui-ml tui-middle " :class="{checked: item.isActives}" @click="checkDing2(index,item.title,item.isActives)">{{ item.title }}</text>
 				</view> -->
@@ -188,8 +189,8 @@
 		 @close="btnCloseDrop">
 			<scroll-view class="tui-scroll-box" scroll-y :scroll-top="scrollTop">
 				<view class="hot-wrap"></view>
-				<view class="tui-drop-item" v-for="(item,index) of variety" :key="index">
-					<text class="tui-ml tui-middle ">{{item.title}}</text>
+				<view class="tui-drop-item" :class="{'tui-drop-active':index == numNull2}" v-for="(item,index) of variety" :key="index">
+					<text class="tui-ml tui-middle" :class="{activetext:index == numNull2 }" @click="checkVariety(index,item.id,item.title)">{{item.title}}</text>
 				</view>
 			</scroll-view>
 			<view class="tui-drop-btnbox">
@@ -207,89 +208,98 @@
 						<text class="tui-title-bold">果品等级</text>
 					</view>
 					<view class="tui-drawer-content tui-flex-attr">
-
 						<block v-for="(item,index) in fruit_level" :key="index">
-							<view class="tui-attr-item" :class="{activeItem:index == num}" @click="activeGo(index)">
+							<view class="tui-attr-item" :class="{activeItem:index == num}" @click="activeGo('level',item.id)">
 								<view class="tui-attr-ellipsis">{{item.title}}</view>
 							</view>
 						</block>
 					</view>
-
 					<view class="tui-drawer-title">
 						<text class="tui-title-bold">单果重量</text>
 					</view>
 					<view class="tui-drawer-content">
-						<input placeholder-class="tui-phcolor" class="tui-input" placeholder="不限" maxlength="11" type="number" />
+						<input placeholder-class="tui-phcolor" v-model="optionList.ltWeight" class="tui-input" placeholder="不限" maxlength="11"
+						 type="number" />
 						<tui-icon name="reduce" color="#333" :size="14"></tui-icon>
-						<input placeholder-class="tui-phcolor" class="tui-input" placeholder="不限" maxlength="11" type="number" /><text>克</text>
+						<input placeholder-class="tui-phcolor" v-model="optionList.rtWeight" class="tui-input" placeholder="不限" maxlength="11"
+						 type="number" /><text>克</text>
 					</view>
 					<view class="tui-drawer-title">
 						<text class="tui-title-bold">果径大小</text>
 					</view>
 					<view class="tui-drawer-content">
-						<input placeholder-class="tui-phcolor" class="tui-input" placeholder="不限" maxlength="11" type="number" />
+						<input placeholder-class="tui-phcolor" v-model="optionList.ltWidth" class="tui-input" placeholder="不限" maxlength="11"
+						 type="number" />
 						<tui-icon name="reduce" color="#333" :size="14"></tui-icon>
-						<input placeholder-class="tui-phcolor" class="tui-input" placeholder="不限" maxlength="11" type="number" /><text>毫米</text>
+						<input placeholder-class="tui-phcolor" v-model="optionList.rtWidth" class="tui-input" placeholder="不限" maxlength="11"
+						 type="number" /><text>毫米</text>
 					</view>
 					<view class="tui-drawer-title">
 						<text class="tui-title-bold">口感等级</text>
 					</view>
 					<view class="tui-drawer-content">
 						<view class="content" @click="useOutClickSide">
-							<easy-select :options="taste_level" :colorLevelList="taste_level" ref="easySelect" size="mini" :value="selecValue" @selectOne="selectOne"></easy-select>
+							<easy-select :options="tasteBox" ref="easySelect" size="mini" :selectName="'ltTaste'" :value="optionList.ltTaste"
+							 @selectOne="selectItem"></easy-select>
 						</view>
 						<tui-icon name="reduce" color="#333" :size="14"></tui-icon>
 						<view class="content" @click="useOutClickSide">
-							<easy-select :options="taste_level" ref="easySelect" size="mini" :value="selecTwoValue" :valueNum="kouGanPicker.selectOne" @selectOne="selectTwo"></easy-select>
+							<easy-select :options="tasteBox" ref="easySelect" size="mini" :selectName="'rtTaste'" :value="optionList.rtTaste"
+							 :valueNum="optionList.ltTaste" @selectOne="selectItem"></easy-select>
 						</view>
-						<text>星</text>
+						<!-- <text>星</text> -->
 					</view>
 					<view class="tui-drawer-title">
 						<text class="tui-title-bold">颜色等级</text>
 					</view>
 					<view class="tui-drawer-content">
 						<view class="content" @click="useOutClickSide">
-							<easy-select ref="easySelect" size="mini" :value="selecValue" @selectOne="selectOne"></easy-select>
+							<easy-select :options="colorBox" ref="easySelect" :selectName="'ltColor'" size="mini" :value="optionList.ltColor" @selectOne="selectItem"></easy-select>
 						</view>
 						<tui-icon name="reduce" color="#333" :size="14"></tui-icon>
 						<view class="content" @click="useOutClickSide">
-							<easy-select ref="easySelect" size="mini" :value="selecValue" @selectOne="selectOne"></easy-select>
-						</view><text>星</text>
+							<easy-select :options="colorBox" ref="easySelect" :selectName="'rtColor'" size="mini" :value="optionList.rtColor" @selectOne="selectItem"></easy-select>
+						</view><!-- <text>星</text> -->
 					</view>
 					<view class="tui-drawer-title">
 						<text class="tui-title-bold">果形等级</text>
 					</view>
 					<view class="tui-drawer-content">
 						<view class="content" @click="useOutClickSide">
-							<easy-select ref="easySelect" size="mini" :value="selecValue" @selectOne="selectOne"></easy-select>
+							<easy-select :options="facadeBox" ref="easySelect" :selectName="'ltShape'" size="mini" :value="optionList.ltShape" @selectOne="selectItem"></easy-select>
 						</view>
 						<tui-icon name="reduce" color="#333" :size="14"></tui-icon>
 						<view class="content" @click="useOutClickSide">
-							<easy-select ref="easySelect" size="mini" :value="selecValue" @selectOne="selectOne"></easy-select>
-						</view><text>星</text>
+							<easy-select :options="facadeBox" ref="easySelect" :selectName="'rtShape'" size="mini" :value="optionList.rtShape" @selectOne="selectItem"></easy-select>
+						</view>
+						<!-- <text>星</text> -->
 					</view>
 					<view class="tui-drawer-title">
 						<text class="tui-title-bold">不良率</text>
 					</view>
 					<view class="tui-drawer-content">
-						<input placeholder-class="tui-phcolor" class="tui-input" placeholder="不限" maxlength="11" type="number" />
+						<input placeholder-class="tui-phcolor" v-model="optionList.ltRight" class="tui-input" placeholder="不限" maxlength="11"
+						 type="number" />
 						<tui-icon name="reduce" color="#333" :size="14"></tui-icon>
-						<input placeholder-class="tui-phcolor" class="tui-input" placeholder="不限" maxlength="11" type="number" /><text>%</text>
+						<input placeholder-class="tui-phcolor" v-model="optionList.rtRight" class="tui-input" placeholder="不限" maxlength="11"
+						 type="number" /><text>%</text>
 					</view>
 					<view class="tui-drawer-title">
 						<text class="tui-title-bold">价格区间</text>
 					</view>
 					<view class="tui-drawer-content">
-						<input placeholder-class="tui-phcolor" class="tui-input" placeholder="不限" maxlength="11" type="number" />
+						<input placeholder-class="tui-phcolor" v-model="optionList.ltPrice" class="tui-input" placeholder="不限" maxlength="11"
+						 type="number" />
 						<tui-icon name="reduce" color="#333" :size="14"></tui-icon>
-						<input placeholder-class="tui-phcolor" class="tui-input" placeholder="不限" maxlength="11" type="number" /><text>元</text>
+						<input placeholder-class="tui-phcolor" v-model="optionList.rtPrice" class="tui-input" placeholder="不限" maxlength="11"
+						 type="number" /><text>元</text>
 					</view>
 					<view class="tui-safearea-bottom"></view>
 				</scroll-view>
 				<view class="tui-attr-btnbox">
 					<view class="tui-attr-safearea">
-						<view class="tui-drawer-btn tui-drawerbtn-black" hover-class="tui-white-hover" :hover-stay-time="150">重置</view>
-						<view class="tui-drawer-btn tui-drawerbtn-primary" hover-class="tui-red-hover" :hover-stay-time="150" @tap="closeDrawer">确定</view>
+						<view class="tui-drawer-btn tui-drawerbtn-black" hover-class="tui-white-hover" :hover-stay-time="150" @tap="clickToReset">重置</view>
+						<view class="tui-drawer-btn tui-drawerbtn-primary" hover-class="tui-red-hover" :hover-stay-time="150" @tap="clickToConfirm">确定</view>
 					</view>
 				</view>
 			</view>
@@ -320,8 +330,8 @@
 		data() {
 			return {
 				title: '选中',
-				sleter:false,
-				sleter2:false,
+				sleter: false,
+				sleter2: false,
 				dropdownlistData: [{
 					name: "微信支付",
 				}, {
@@ -364,7 +374,7 @@
 				fileUploadList: '',
 				mouthfeelLevelList: [],
 				slMangguo: '芒果',
-				serrchGoods:'',
+				serrchGoods: '',
 				slPinzhong: '品种',
 				slGuobiao: '水果标准',
 				slYanzheng: '验证保障',
@@ -418,10 +428,10 @@
 					}
 				],
 				kouGanPicker: {
-					selectOne:0,
-					selectTwo:0,
-					selectOneData:{},
-					selectTwoData:{}
+					selectOne: 0,
+					selectTwo: 0,
+					selectOneData: {},
+					selectTwoData: {}
 				},
 				activeA: false,
 				selecValue: '不限',
@@ -495,20 +505,36 @@
 						selected: false
 					}
 				],
-				
 				pageIndex: 1,
 				loadding: false,
-				pullUpOn: true
+				pullUpOn: true,
+				optionList: {
+					level: '', //等级
+					ltWeight: '', //单果左
+					rtWeight: '', //单果左
+					ltWidth: '', //果径左
+					rtWidth: '', //果径右
+					ltTaste: '', //口感左
+					rtTaste: '', //口感右
+					ltColor: '', //颜色左
+					rtColor: '', //颜色右
+					ltShape: '', //形状左
+					rtShape: '', //形状右
+					ltRight: '', //不良左
+					rtRight: '', //不良右
+					ltPrice: '', //价格左
+					rtPrice: '', //价格右边
+				}
 			};
 		},
 		onLoad(options) {
 			var pages = getCurrentPages();
-			
+
 			var curPage = pages[pages.length - 1]; // 当前页面路径
-			
+
 			var beforePage = pages[pages.length - 2]; // 前一个页面路径
 			log(beforePage.$page.fullPath)
-			if(beforePage.$page.fullPath === '/pagesII/searchGoods/searchGoods'){
+			if (beforePage.$page.fullPath === '/pagesII/searchGoods/searchGoods') {
 				log('我执行了搜索')
 				//搜索	
 			}
@@ -543,12 +569,56 @@
 				}
 			});
 		},
+		computed: {
+			tasteBox () {
+				let arr = []
+				let data = this.taste_level
+				data.forEach((item,index)=>{
+					let tmp = {
+						num: index,
+						star: index + 1, 
+						label: item.title,
+						value: item.title
+					}
+					arr.push(tmp)
+				})
+				return arr
+			},
+			colorBox() {
+				let arr = []
+				let data = this.color_level
+				data.forEach((item,index)=>{
+					let tmp = {
+						num: index,
+						star: index + 1,
+						label: item.title,
+						value: item.title
+					}
+					arr.push(tmp)
+				})
+				return arr
+			},
+			facadeBox () {
+				let arr = []
+				let data = this.facade_level
+				data.forEach((item,index)=>{
+					let tmp = {
+						num: index,
+						star: index + 1,
+						label: item.title,
+						value: item.title
+					}
+					arr.push(tmp)
+				})
+				return arr
+			}
+		},
 		methods: {
 			//商品详情页
-			gotoList(id){
+			gotoList(id) {
 				log(id)
 				uni.navigateTo({
-					url:'../../pagesIII/productDetail/productDetail?id=' + id
+					url: '../../pagesIII/productDetail/productDetail?id=' + id
 				})
 			},
 			//下拉选
@@ -566,26 +636,24 @@
 				this.title = name
 				this.dropdownShow2 = !this.dropdownShow2
 			},
-			getSearch(serrchName){
-				
+			getSearch(serrchName) {
+
 				let data = {
 					pageNo: 1,
 					pageSize: 10,
-					name:serrchName
+					name: serrchName
 				}
-				listing(getGoodsall,data)
-				.then((res)=>{
-					log(res)
-					this.goods = res.data.data[0].goods
-					log(this.goods)
-				})
-				.catch((err)=>{
-					log(err)
-				})
-				
+				listing(getGoodsall, data)
+					.then((res) => {
+						log(res)
+						this.goods = res.data.data[0].goods
+						log(this.goods)
+					})
+					.catch((err) => {
+						log(err)
+					})
+
 			},
-
-
 
 			/* 第一个筛选 */
 			Total(index) {
@@ -595,24 +663,24 @@
 					this.ShopIng()
 					log('综合')
 				} else if (this.num == 1) {
-					if(this.sleter ){
+					if (this.sleter) {
 						log('销量升序')
 						this.getshopDESC()
-					}else{
+					} else {
 						this.getshopASC()
 						log('销量降序')
 					}
 					this.sleter = !this.sleter
 				} else if (this.num == 2) {
-						if(this.sleter2 ){
-							log('价格升序')
-							this.getpriceDESC()
-						}else{
-							log('价格降序')
-							this.getpriceASC()
-						}
-						this.sleter2 = !this.sleter2
-						
+					if (this.sleter2) {
+						log('价格升序')
+						this.getpriceDESC()
+					} else {
+						log('价格降序')
+						this.getpriceASC()
+					}
+					this.sleter2 = !this.sleter2
+
 				} else if (this.num == 3) {
 					uni.navigateTo({
 						url: '../../pagesIII/videos/videos'
@@ -626,9 +694,9 @@
 					})
 				}
 			},
-			
-			
-			
+
+
+
 			/* 筛选果 */
 			btnDropChange(name) {
 				this.isActives1 = !this.isActives1
@@ -686,18 +754,19 @@
 				this.slMangguo = title
 				this.mangguoID = id
 				this.ShopIng()
-				log(index, id, title)
-
-				console.log(this.dropScreenShow)
-
-
-
+				this.dropScreenShow = !this.dropScreenShow
+			},
+			checkVariety(index, id, title) {
+				this.numNull2 = index
+				this.slPinzhong = title
+				this.mangguoID = id
+				this.dropScreenShow2 = !this.dropScreenShow2
+				this.ShopIng()
 			},
 			checkDing2(index, title, id) {
 				this.numNull2 = index
 				this.slPinzhong = title
 				log(index, title, id)
-
 			},
 			checkgeng() {
 				uni.switchTab({
@@ -714,10 +783,21 @@
 			Videosl(id) {
 				log(id)
 			},
-			activeGo(index) {
-				this.num = index
-				console.log(index)
 
+			activeGo(name, id) {
+				this.optionList[name] = id
+				console.log(this.optionList)
+			},
+			selectItem(e) {
+				console.log(e)
+				let {
+					s_name,
+					id,
+					label
+				} = e
+				this.optionList[s_name]=label
+				console.log("optionList:",this.optionList)
+				
 			},
 			//关闭
 			isFalse() {
@@ -739,94 +819,93 @@
 				this.kouGanPicker.selectOne = options.num
 				this.kouGanPicker.selectOneData = options
 				this.selecTwoValue = '不限'
-				
-				console.log("范围1：",this.kouGanPicker.selectOneData);
-				console.log("范围2：",this.kouGanPicker.selectOneData);
+				console.log("范围1：", this.kouGanPicker.selectOneData);
+				console.log("范围2：", this.kouGanPicker.selectOneData);
 			},
 			selectTwo(options) {
 				//这个options返回的就是整个数据
 				this.selecTwoValue = options.label
 				this.kouGanPicker.selectTwo = options.num
 				this.kouGanPicker.selectTwoData = options
-				
-				console.log("范围1：",this.kouGanPicker.selectOneData);
-				console.log("范围2：",this.kouGanPicker.selectOneData);
+
+				console.log("范围1：", this.kouGanPicker.selectOneData);
+				console.log("范围2：", this.kouGanPicker.selectOneData);
 			},
 			useOutClickSide() {
 				this.$refs.easySelect.hideOptions && this.$refs.easySelect.hideOptions()
 			},
-			
+
 			//销量升序
-			getshopDESC(){
-				
+			getshopDESC() {
+
 				let data = {
 					pageNo: 1,
 					pageSize: 10,
-					order:'A.shop_number DESC'
+					order: 'A.shop_number DESC'
 				}
-				listing(getGoodsall,data)
-				.then((res)=>{
-					log(res)
-					this.goods = res.data.data[0].goods
-				})
-				.catch((err)=>{
-					log(err)
-				})
-				
+				listing(getGoodsall, data)
+					.then((res) => {
+						log(res)
+						this.goods = res.data.data[0].goods
+					})
+					.catch((err) => {
+						log(err)
+					})
+
 			},
 			//销量降序
-			getshopASC(){
-				
+			getshopASC() {
+
 				let data = {
 					pageNo: 1,
 					pageSize: 10,
-					order:'A.shop_number ASC'
+					order: 'A.shop_number ASC'
 				}
-				listing(getGoodsall,data)
-				.then((res)=>{
-					log(res)
-					this.goods = res.data.data[0].goods
-				})
-				.catch((err)=>{
-					log(err)
-				})
-				
+				listing(getGoodsall, data)
+					.then((res) => {
+						log(res)
+						this.goods = res.data.data[0].goods
+					})
+					.catch((err) => {
+						log(err)
+					})
+
 			},
 			//价格升序
-			getpriceDESC(){
-				
+			getpriceDESC() {
+
 				let data = {
 					pageNo: 1,
 					pageSize: 10,
-					order:'A.platform_price DESC'
+					order: 'A.platform_price DESC'
 				}
-				listing(getGoodsall,data)
-				.then((res)=>{
-					log(res)
-					this.goods = res.data.data[0].goods
-				})
-				.catch((err)=>{
-					log(err)
-				})
+				listing(getGoodsall, data)
+					.then((res) => {
+						log(res)
+						this.goods = res.data.data[0].goods
+					})
+					.catch((err) => {
+						log(err)
+					})
 			},
 			//价格降序
-			getpriceASC(){
-				
+			getpriceASC() {
+
 				let data = {
 					pageNo: 1,
 					pageSize: 10,
-					order:'A.platform_price ASC'
+					order: 'A.platform_price ASC'
 				}
-				listing(getGoodsall,data)
-				.then((res)=>{
-					log(res)
-					this.goods = res.data.data[0].goods
-				})
-				.catch((err)=>{
-					log(err)
-				})
+				listing(getGoodsall, data)
+					.then((res) => {
+						log(res)
+						this.goods = res.data.data[0].goods
+					})
+					.catch((err) => {
+						log(err)
+					})
 			},
-			
+
 			//请求数据
 			ShopIng() {
 				let data = {
@@ -836,7 +915,6 @@
 				let data2 = {
 					id: this.mangguoID
 				}
-
 				Promise.all([listing(getGoodsall, data), listing(getAttribute, data2)])
 					// listing(getGoodsall,data)
 					.then((res) => {
@@ -859,21 +937,12 @@
 						this.species = res[0].data.data[0].species
 						for (var i = 0; i < this.species.length; i++) {
 							this.species[i].isActives = this.activeA
-
 						}
 						log(this.species)
 						this.storage_mode = res[0].data.data[0].storage_mode
 						this.taste_level = res[0].data.data[0].taste_level
 						this.variety = res[0].data.data[0].variety
-						//编译格式
-						for(let i =0;i<this.taste_level.length;i++){
-							this.taste_level[i].num = i
-							this.taste_level[i].label = this.taste_level[i].title
-							this.taste_level[i].value = this.taste_level[i].title
-						}
-
-
-
+						
 					})
 					.catch((err) => {
 						log(err)
@@ -943,6 +1012,29 @@
 					})
 				}
 			},
+			clickToConfirm() {
+				console.log(this.optionList)
+				// this.closeDrawer()
+			},
+			clickToReset() {
+				this.optionList = {
+					level: '', //等级
+					ltWeight: '', //单果左
+					rtWeight: '', //单果左
+					ltWidth: '', //果径左
+					rtWidth: '', //果径右
+					ltTaste: '', //口感左
+					rtTaste: '', //口感右
+					ltColor: '', //颜色左
+					rtColor: '', //颜色右
+					ltShape: '', //形状左
+					rtShape: '', //形状右
+					ltRight: '', //不良左
+					rtRight: '', //不良右
+					ltPrice: '', //价格左
+					rtPrice: '', //价格右边
+				}
+			},
 			closeDrawer: function() {
 				this.drawer = false;
 			},
@@ -993,7 +1085,7 @@
 	.activetext {
 		color: #fff;
 		border: 1rpx solid rgba(0, 0, 0, 0);
-		
+
 	}
 
 	.tui-drop-input-box {
@@ -1022,17 +1114,19 @@
 	.container {
 		padding-bottom: env(safe-area-inset-bottom);
 	}
-	.container-img{
+
+	.container-img {
 		margin-top: 350rpx;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
 	}
-	.color-text{
+
+	.color-text {
 		color: rgba(112, 112, 112, 1);
 	}
-	
+
 
 	/* .tui-ml {
 		border: 1rpx solid #ccc;
@@ -1060,7 +1154,7 @@
 	.tui-header {
 		display: flex;
 		align-items: center;
-		
+
 	}
 
 	.tui-back {
@@ -1068,7 +1162,7 @@
 		height: 32px !important;
 		width: 32px !important;
 	}
-	
+
 	.tui--top-title {
 		margin-top: 52rpx;
 		height: 66rpx;
@@ -1077,8 +1171,8 @@
 		font-size: 32rpx;
 
 	}
-	
-	
+
+
 	.tui-searchbox {
 		width: 100%;
 		height: 30px;
@@ -1126,7 +1220,7 @@
 		overflow: hidden;
 		text-overflow: ellipsis;
 	}
-	
+
 	.search-bar {
 		width: 590rpx;
 		margin: 0 50rpx;
@@ -1144,17 +1238,18 @@
 		align-items: center;
 		padding: 0 40rpx;
 	}
-	
+
 	.search-bar image {
 		width: 36rpx;
 		height: 36rpx;
-		margin-right:20rpx;
+		margin-right: 20rpx;
 	}
+
 	.search-text {
 		color: #666666;
 		font-size: 28rpx;
 	}
-	
+
 	/*screen*/
 
 	.tui-header-screen {
@@ -1312,15 +1407,17 @@
 		word-break: break-all;
 		margin-top: 100rpx;
 	}
-	.tui-hot-title{
+
+	.tui-hot-title {
 		margin: 24rpx 40rpx;
 		color: #333;
 	}
-	
+
 	.hot-wrap {
 		display: flex;
 		flex-wrap: wrap;
 	}
+
 	.tui-drop-item {
 		padding: 10rpx 0;
 		width: 19%;
@@ -1331,10 +1428,12 @@
 		font-size: 24rpx;
 		color: #333;
 	}
+
 	.tui-drop-active {
 		background: linear-gradient(to left, rgba(0, 188, 69, 1), rgba(0, 197, 42, 1));
-		
+
 	}
+
 	/* .tui-drop-item {
 		color: #333;
 		font-size: 28rpx;
@@ -1547,14 +1646,14 @@
 		left: 0;
 		bottom: 0;
 		box-sizing: border-box;
-		padding: 0 30rpx;
+		/* padding: 0 30rpx; */
 		background: #fff;
 	}
 
 	.tui-attr-safearea {
 		height: 100rpx;
 		display: flex;
-		align-items: center;
+		/* align-items: center; */
 		justify-content: space-between;
 		padding-bottom: env(safe-area-inset-bottom);
 	}
@@ -1576,19 +1675,15 @@
 	}
 
 	.tui-drawer-btn {
-		width: 47%;
+		width: 50%;
 		text-align: center;
-		height: 60rpx;
-		border-radius: 30rpx;
-		flex-shrink: 0;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		box-sizing: border-box;
+		line-height: 100rpx;
+		font-size: 28rpx;
 	}
 
 	.tui-drawerbtn-black {
-		border: 1rpx solid #555;
+		background: #DCDCDC;
+		color: #555555;
 	}
 
 	.tui-drawerbtn-primary {

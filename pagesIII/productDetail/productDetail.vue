@@ -29,6 +29,7 @@
 						</swiper-item> -->
 					<block v-for="(item, index) in urlList" :key="index">
 						<swiper-item :data-index="index">
+							
 							<image :src="item" class="tui-slide-image" :style="{ height: scrollH + 'px' }" />
 						</swiper-item>
 					</block>

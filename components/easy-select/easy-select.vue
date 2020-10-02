@@ -10,7 +10,7 @@
 		 我只添加了这个，用作控制显示0-5星的范围而已，假如valueNum设置的是3，那就只显示3-5星，1、2星就不显示，这个地方就是这个作用
 		  -->
 		<view class="easy-select-options" v-if="showOptions" style="min-height: 180px;" :style="{'min-width': boundingClientRect.width + 'px', top: optionsGroupTop, margin: optionsGroupMargin}">
-			<view class="easy-select-options-item" v-for="item in options" :key="item.value" v-if="item.num >= valueNum" @click.stop="select(item)" :class="{active: currentSelect.label === item.label}">
+			<view class="easy-select-options-item" v-for="item in options" :key="item.value" v-if="item.num >= valueNum" @click.stop="select(item,selectName)" :class="{active: currentSelect.label === item.label}">
 				<text>{{item.label}}</text>
 			</view>
 		</view>
@@ -48,7 +48,6 @@
 	export default {
 		name: COMPONENT_NAME,
 		props: {
-			
 			windowHeight: {
 				type: [Number, String],
 				default: 0
@@ -56,6 +55,11 @@
 			placeholder: {
 				type: String,
 				default: '请选择'
+			},
+				
+			selectName: {
+				type: String,
+				default: ''
 			},
 			valueNum:{
 				type: Number,
@@ -99,7 +103,6 @@
 		},
 		data() {
 			return {
-				
 				showOptions: false,
 				boundingClientRect: {},
 				currentSelect: {},
@@ -167,9 +170,11 @@
 					this.showOptions = !this.showOptions
 				}).exec();
 			},
-			select(options) {
+			select(options,name) {
 				this.showOptions = false
 				this.currentSelect = options
+				options.s_name = name
+				console.log(options)
 				this.$emit('selectOne', options)
 			},
 			hideOptions() {

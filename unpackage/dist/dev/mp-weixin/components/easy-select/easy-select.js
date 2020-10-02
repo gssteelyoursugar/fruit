@@ -174,7 +174,6 @@ var SIZE = {
 {
   name: COMPONENT_NAME,
   props: {
-
     windowHeight: {
       type: [Number, String],
       default: 0 },
@@ -182,6 +181,11 @@ var SIZE = {
     placeholder: {
       type: String,
       default: '请选择' },
+
+
+    selectName: {
+      type: String,
+      default: '' },
 
     valueNum: {
       type: Number,
@@ -225,7 +229,6 @@ var SIZE = {
 
   data: function data() {
     return {
-
       showOptions: false,
       boundingClientRect: {},
       currentSelect: {},
@@ -293,9 +296,11 @@ var SIZE = {
         _this2.showOptions = !_this2.showOptions;
       }).exec();
     },
-    select: function select(options) {
+    select: function select(options, name) {
       this.showOptions = false;
       this.currentSelect = options;
+      options.s_name = name;
+      console.log(options);
       this.$emit('selectOne', options);
     },
     hideOptions: function hideOptions() {

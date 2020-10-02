@@ -7,6 +7,6 @@
     "tui-list-cell": "/components/tui-list-cell/tui-list-cell",
     "tui-button": "/components/tui-button/tui-button",
     "tui-countdown": "/components/tui-countdown/tui-countdown",
-    "tui-nomore": "/components/tui-nomore/tui-nomore"
+    "uni-load-more": "/components/uni-load-more/uni-load-more"
   }
 }

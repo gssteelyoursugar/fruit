@@ -261,11 +261,8 @@
 	export default {
 		onLoad: function(options) {
 			this.$forceUpdate()
-			log('执行了=====')
 			this.getMerchants()
-			log(this.ApproveStatus)
 			this.ifLogin()
-			log(setdata)
 			// this.getMerchants()
 			// this.getWxdata()
 			let obj = {};
@@ -281,7 +278,6 @@
 
 			uni.getSystemInfo({
 				success: (res) => {
-					log(res)
 					this.width = obj.left || res.windowWidth;
 					this.height = obj.top ? (obj.top + obj.height + 8) : (res.statusBarHeight + 44);
 					this.top = obj.top ? (obj.top + (obj.height - 32) / 2) : (res.statusBarHeight + 6);
@@ -459,17 +455,13 @@
 				let data = {
 					token: setdata
 				}
-				log(data)
 				listing(getClient, data)
 					.then((res) => {
-						log(res)
 						///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
 						this.ApproveStatus = res.data.data.approveStatus //获取状态码，0未认证，1已认证，2拒绝
 						uni.setStorageSync('StoreStatus', res.data.data.approveStatus)
 						let setStore = uni.getStorageSync('StoreStatus') //状态码
 						this.user_phone = res.data.data.phone
-						log(setStore)
-						//log(this.ApproveStatus)
 						var valu2 = this.ApproveStatus
 						if (valu2 == undefined) { //判断如果请求返回为空说明未申请过店铺认证
 							//显示去认证店铺的按钮
@@ -511,12 +503,13 @@
 			// 	})
 
 			// },
+			// 获取订单
 			getOrderData() {
 				let setdata = uni.getStorageSync('usermen')
 				let data = {
 					token: setdata,
 					pageNo: 1,
-					pageSize: 100000,
+					pageSize: 100,
 				}
 				listing(getMyOrder, data)
 					.then((res) => {
@@ -526,7 +519,6 @@
 						let shouhuoList = []
 						let tuikuanList = []
 						list.forEach(item => {
-							console.log(item)
 							if (item.payStatus == 0) {
 								fukuanList.push(item)
 							}
@@ -544,6 +536,7 @@
 						this.fahuoList = fahuoList.length
 						this.shouhuoList = shouhuoList.length
 						this.tuikuanList = tuikuanList.length
+						this.$forceUpdate()
 					})
 					.catch((err) => {
 						log(err)
@@ -727,7 +720,6 @@
 			}
 		},
 		onShow() {
-			log('每次都执行')
 			this.getMerchants()
 			this.getOrderData()
 			this.ifUser()
