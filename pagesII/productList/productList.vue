@@ -24,7 +24,7 @@
 		<!--header-->
 
 		<!-- 搜索框 -->
-		<view class="search-bar">
+		<view class="search-bar" >
 			<image src="../../static/images/search-icon.png" mode=""></image>
 			<view class="search-text">芒果</view>
 		</view>
@@ -173,11 +173,9 @@
 						<text class="" @click="checkgeng()">更多></text>
 					</view>
 				</view>
-
 				<!-- <view class="tui-drop-item "v-for="(item, index) in variety":key="index" >
 					<text class="tui-ml tui-middle " :class="{checked: item.isActives}" @click="checkDing2(index,item.title,item.isActives)">{{ item.title }}</text>
 				</view> -->
-
 			</scroll-view>
 			<!-- <view class="tui-drop-btnbox">
 				<view class="tui-drop-btn tui-btn-white" hover-class="tui-white-hover" :hover-stay-time="150" @tap="reset">重置</view>

@@ -459,7 +459,7 @@
 	position: relative;
 	z-index: 2;
 }
-.tui-order-text text{
+.tui-order-text text {
 	display: block;
 	position: absolute;
 	top: -72rpx;

@@ -348,7 +348,13 @@
 						"navigationBarTitleText": "售后详情"
 					}
 				}
-			]
+			    ,{
+                    "path" : "orderDetail/orderDetail",
+                    "style": {
+                    	"navigationBarTitleText": "订单详情"
+                    }
+                }
+            ]
 		}
 	],
 	"condition": { //模式配置，仅开发期间生效

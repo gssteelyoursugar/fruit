@@ -518,6 +518,7 @@
 						let fahuoList = []
 						let shouhuoList = []
 						let tuikuanList = []
+						if (list.length === 0) return
 						list.forEach(item => {
 							if (item.payStatus == 0) {
 								fukuanList.push(item)
@@ -1149,11 +1150,13 @@
 		color: #555;
 		padding-top: 12rpx;
 	}
+
 	.tui-order-text {
 		position: relative;
 		z-index: 2;
 	}
-	.tui-order-text text{
+
+	.tui-order-text text {
 		display: block;
 		position: absolute;
 		top: -72rpx;

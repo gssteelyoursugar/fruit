@@ -470,14 +470,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
 var _api = __webpack_require__(/*! ../../api/api.js */ 19);
 
 
 var _request = __webpack_require__(/*! ../../api/request.js */ 21); //
-//
-//
 //
 //
 //
@@ -841,7 +837,9 @@ var _console = console,log = _console.log;var _default = { data: function data()
         //略小，避免误差带来的影响
         _this.dropScreenH = _this.height * 750 / res.windowWidth + 186;_this.drawerH = res.windowHeight - uni.upx2px(100) - _this.height;} });}, computed: { tasteBox: function tasteBox() {var arr = [];var data = this.taste_level;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title };arr.push(tmp);});return arr;}, colorBox: function colorBox() {var arr = [];var data = this.color_level;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title };arr.push(tmp);});return arr;}, facadeBox: function facadeBox() {var arr = [];var data = this.facade_level;data.forEach(function (item, index) {var tmp = { num: index, star: index + 1, label: item.title, value: item.title };arr.push(tmp);});return arr;} }, methods: { //商品详情页
     gotoList: function gotoList(id) {log(id);uni.navigateTo({ url: '../../pagesIII/productDetail/productDetail?id=' + id });}, //下拉选
-    dropDownList: function dropDownList(index, name) {if (index !== -1) {console.log("index：" + index, name);}this.title = name;this.dropdownShow = !this.dropdownShow;}, dropDownList2: function dropDownList2(index, name) {if (index !== -1) {console.log("index：" + index, name);}this.title = name;this.dropdownShow2 = !this.dropdownShow2;}, getSearch: function getSearch(serrchName) {var _this2 = this;var data = { pageNo: 1, pageSize: 10, name: serrchName };(0, _api.listing)(_request.getGoodsall, data).then(function (res) {log(res);_this2.goods = res.data.data[0].goods;log(_this2.goods);}).catch(function (err) {log(err);});}, /* 第一个筛选 */Total: function Total(index) {this.num = index;log(this.num);if (this.num == 0) {this.ShopIng();log('综合');} else if (this.num == 1) {if (this.sleter) {log('销量升序');this.getshopDESC();} else {this.getshopASC();log('销量降序');}this.sleter = !this.sleter;} else if (this.num == 2) {if (this.sleter2) {log('价格升序');this.getpriceDESC();} else {log('价格降序');this.getpriceASC();}this.sleter2 = !this.sleter2;} else if (this.num == 3) {uni.navigateTo({ url: '../../pagesIII/videos/videos' });log('视频选果');} else if (this.num == 4) {uni.navigateTo({ url: '../../pagesII/rankingList/rankingList' });
+    dropDownList: function dropDownList(index, name) {if (index !== -1) {console.log("index：" + index, name);}this.title = name;this.dropdownShow = !this.dropdownShow;}, dropDownList2: function dropDownList2(index, name) {if (index !== -1) {console.log("index：" + index, name);}this.title = name;this.dropdownShow2 = !this.dropdownShow2;}, getSearch: function getSearch(serrchName) {var _this2 = this;var data = { pageNo: 1, pageSize: 10, name: serrchName };(0, _api.listing)(_request.getGoodsall, data).then(function (res) {log(res);_this2.goods = res.data.data[0].goods;log(_this2.goods);}).catch(function (err) {log(err);});}, /* 第一个筛选 */Total: function Total(index) {this.num = index;log(this.num);if (this.num == 0) {this.ShopIng();log('综合');} else if (this.num == 1) {if (this.sleter) {log('销量升序');this.getshopDESC();} else {this.getshopASC();log('销量降序');}this.sleter = !this.sleter;} else if (this.num == 2) {if (this.sleter2) {log('价格升序');this.getpriceDESC();} else {log('价格降序');this.getpriceASC();}this.sleter2 = !this.sleter2;} else if (this.num == 3) {uni.navigateTo({ url: '../../pagesIII/videos/videos' });log('视频选果');} else if (this.num == 4) {uni.navigateTo({
+          url: '../../pagesII/rankingList/rankingList' });
+
       }
     },
 

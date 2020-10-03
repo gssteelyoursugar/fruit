@@ -50,7 +50,8 @@
         "afterDetails/afterDetails",
         "PayOK/PayOK",
         "confirmAfter/confirmAfter",
-        "AfterSaleDetails/AfterSaleDetails"
+        "AfterSaleDetails/AfterSaleDetails",
+        "orderDetail/orderDetail"
       ]
     }
   ],

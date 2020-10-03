@@ -292,11 +292,8 @@ var util = __webpack_require__(/*! @/utils/util.js */ 99);var _default =
       uni.navigateTo({
         url: '../../pagesII/productList/productList?name=' + name });
 
-
-
       this.key = util.trim(e.detail.value);
       console.log(this.key);
-
       if (!this.key) {
         this.searchList = [];
         console.log(this.searchList);
