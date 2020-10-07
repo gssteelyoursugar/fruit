@@ -24,7 +24,7 @@
 		<!--header-->
 
 		<!-- 搜索框 -->
-		<view class="search-bar" >
+		<view class="search-bar" @click="goToSearchGoods">
 			<image src="../../static/images/search-icon.png" mode=""></image>
 			<view class="search-text">芒果</view>
 		</view>
@@ -193,11 +193,10 @@
 			</scroll-view>
 			<view class="tui-drop-btnbox">
 				<view class="tui-drop-btn tui-btn-white" hover-class="tui-white-hover" :hover-stay-time="150" @tap="reset">重置</view>
-				<view class="tui-drop-btn tui-btn-red" hover-class="tui-red-hover" :hover-stay-time="150" @tap="btnSure">确定</view>
+				<view class="tui-drop-btn tui-btn-red" hover-class="tui-red-hover" :hover-stay-time="150" @click="clickToSure(1)">确定</view>
 			</view>
 		</tui-top-dropdown>
 		<!---顶部下拉筛选弹层 属性-->
-
 		<!--左抽屉弹层 筛选 -->
 		<tui-drawer mode="right" :visible="drawer" @close="closeDrawer">
 			<view class="tui-drawer-box" :style="{ paddingTop: height + 'px' }">
@@ -207,7 +206,7 @@
 					</view>
 					<view class="tui-drawer-content tui-flex-attr">
 						<block v-for="(item,index) in fruit_level" :key="index">
-							<view class="tui-attr-item" :class="{activeItem:index == num}" @click="activeGo('level',item.id)">
+							<view class="tui-attr-item" :class="{activeItem:index == num}" @click="activeGo('level',item.id,index)">
 								<view class="tui-attr-ellipsis">{{item.title}}</view>
 							</view>
 						</block>
@@ -237,7 +236,7 @@
 					</view>
 					<view class="tui-drawer-content">
 						<view class="content" @click="useOutClickSide">
-							<easy-select :options="tasteBox" ref="easySelect" size="mini" :selectName="'ltTaste'" :value="optionList.ltTaste"
+							<easy-select :options="tasteBox" ref="easySelect"  size="mini" :selectName="'ltTaste'" :value="optionList.ltTaste"
 							 @selectOne="selectItem"></easy-select>
 						</view>
 						<tui-icon name="reduce" color="#333" :size="14"></tui-icon>
@@ -605,6 +604,12 @@
 			}
 		},
 		methods: {
+			//点击搜索
+			goToSearchGoods() {
+				uni.navigateTo({
+					url: '../../pagesII/searchGoods/searchGoods'
+				})
+			},
 			//商品详情页
 			gotoList(id) {
 				log(id)
@@ -775,8 +780,9 @@
 				log(id)
 			},
 
-			activeGo(name, id) {
+			activeGo(name, id,idx) {
 				this.optionList[name] = id
+				this.num = idx
 				console.log(this.optionList)
 			},
 			selectItem(e) {
@@ -919,6 +925,7 @@
 			reset() {
 				this.isActives2 = false
 				this.isActives = false
+				this.slPinzhong = "品种"
 				// let arr = this.attrData;
 				// for (let item of arr) {
 				// 	item.selected = false;
@@ -930,26 +937,30 @@
 				this.$nextTick(() => {
 					this.scrollTop = 0;
 				});
+				
 				this.dropScreenShow = false;
 				this.attrIndex = -1;
 			},
-			btnSure: function() {
-				log('确定')
-				this.btnCloseDrop();
-				this.dropScreenShow = false
+			clickToSure(dd) {
+				this.isActives2 = false
+				this.isActives = false
+				// this.btnCloseDrop();
+				this.dropScreenShow2 = false
+				console.log('我真的点击了',dd)
+				// this.dropScreenShow = false
 			},
-			showDropdownList: function() {
+			showDropdownList(){
 				this.selectH = 246;
 				this.tabIndex = 0;
 			},
-			hideDropdownList: function() {
+			hideDropdownList () {
 				this.selectH = 0;
 			},
-			dropdownItem: function() {
+			dropdownItem () {
 				log('2')
 			},
 			//筛选事件汇总
-			screen: function(e) {
+			screen (e) {
 
 				let index = e.currentTarget.dataset.index ? e.currentTarget.dataset.index : e;
 				console.log(index)
@@ -976,6 +987,7 @@
 				this.closeDrawer()
 			},
 			clickToReset() {
+				this.num = 0
 				this.optionList = {
 					level: '', //等级
 					ltWeight: '', //单果左
@@ -1410,6 +1422,7 @@
 		bottom: 0;
 		box-sizing: border-box;
 		display: flex;
+		z-index: 999;
 	}
 
 	.tui-drop-btn {

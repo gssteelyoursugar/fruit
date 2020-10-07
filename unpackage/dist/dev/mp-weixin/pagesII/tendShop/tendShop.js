@@ -94,7 +94,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   tuiListCell: function() {
-    return __webpack_require__.e(/*! import() | components/tui-list-cell/tui-list-cell */ "components/tui-list-cell/tui-list-cell").then(__webpack_require__.bind(null, /*! @/components/tui-list-cell/tui-list-cell.vue */ 420))
+    return __webpack_require__.e(/*! import() | components/tui-list-cell/tui-list-cell */ "components/tui-list-cell/tui-list-cell").then(__webpack_require__.bind(null, /*! @/components/tui-list-cell/tui-list-cell.vue */ 428))
   }
 }
 var render = function() {
@@ -876,6 +876,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var _api = __webpack_require__(/*! ../api/api.js */ 19);
 
+
+
 var _request = __webpack_require__(/*! ../api/request.js */ 21); //
 //
 //
@@ -889,11 +891,15 @@ var _request = __webpack_require__(/*! ../api/request.js */ 21); //
 //
 //请求
 //请求地址
-var _console = console,log = _console.log;var _default = { data: function data() {return { tips: '', modaishow: false };}, methods: { init: function init(bull, tips) {this.modaishow = bull;this.tips = tips;},
+var _console = console,log = _console.log;var _default = { data: function data() {return { tips: '', modaishow: false };}, methods: {
+    init: function init(bull, tips) {
+      this.modaishow = bull;
+      this.tips = tips;
+    },
 
     //获取头像昵称
     getUserInfo: function getUserInfo(event) {
-      log(event);
+      // log(event)
       this.usering = event.detail.userInfo;
       uni.setStorageSync('userIN', event.detail.userInfo); //把头像存在本地，小程序提供如同浏览器cookie
       var userING = uni.setStorageSync('userIN', event.detail.userInfo);
@@ -903,7 +909,6 @@ var _console = console,log = _console.log;var _default = { data: function data()
       }
       // wx.startPullDownRefresh()
 
-      log('dddddddddd');
 
 
     },
@@ -911,7 +916,7 @@ var _console = console,log = _console.log;var _default = { data: function data()
     wxCode: function wxCode(avatarUrl, nickName) {var _this = this;
       wx.login({
         success: function success(res) {
-          log(res);
+          // log(res)
           var code = res.code;
           _this.wxLoging(code);
         },
@@ -923,7 +928,7 @@ var _console = console,log = _console.log;var _default = { data: function data()
     },
     //发code给后台换取token
     wxLoging: function wxLoging(code) {
-      log(code);
+      // log(code)
 
       // let appid = wx.getAccountInfoSync().miniProgram.appId
       // let secret = "956f8c9345cbe06a42c6494f7bb53f7f"
@@ -943,10 +948,10 @@ var _console = console,log = _console.log;var _default = { data: function data()
             content: '服务器错误，请重新登录获取信息',
             success: function success(res) {
               if (res.confirm) {
-                console.log('用户点击确定');
+                // console.log('用户点击确定');
                 uni.hideLoading();
               } else if (res.cancel) {
-                console.log('用户点击取消');
+                // console.log('用户点击取消');
                 uni.hideLoading();
               }
             } });

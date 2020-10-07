@@ -476,7 +476,6 @@
 					.then((res) => {
 						///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
 						this.ApproveStatus = res.data.data.approveStatus //获取电偶状态码，0未认证，1已认证，2拒绝
-						log("认证状态:" + this.ApproveStatus,)
 					})
 					.catch((err) => {
 						log(err)
@@ -591,7 +590,6 @@
 			//获取头像昵称
 			getUserInfo(event) {
 				this.userInfo = event.detail.userInfo
-				log(this.userInfo)
 				if (event.detail.userInfo) {
 					let wxing = event.detail.userInfo
 					this.wxCode(wxing.avatarUrl, wxing.nickName)
@@ -635,7 +633,6 @@
 			},
 			ifUser() {
 				let setdata = uni.getStorageSync('usermen')
-				log(setdata)
 				if (!setdata) {
 					uni.showToast({
 						title: '请登陆',
@@ -927,7 +924,6 @@
 					success: (res) => {
 						this.temperature = res.data.lives[0].temperature //气温
 						this.citys = res.data.lives[0].city //获取区域
-						console.log("天气：" + this.temperature)
 					}
 				});
 			}

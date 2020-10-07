@@ -307,13 +307,13 @@
 				let data = {
 					token: setdata
 				}
-				log(data)
+				// log(data)
 				listing(getClient, data)
 					.then((res) => {
 						// log(res)
 						///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
 						this.ApproveStatus = res.data.data.approveStatus //获取状态码，0未认证，1已认证，2拒绝
-						log(this.ApproveStatus)
+						// log(this.ApproveStatus)
 
 					})
 					.catch((err) => {
@@ -323,7 +323,6 @@
 			},
 			//计算总价
 			jieSuanPrice() {
-				console.log("====ji")
 				let allPrice = 0; //总价
 				for (let index in this.orderObj) {
 					let oneData = this.orderObj[index].list;
@@ -347,10 +346,10 @@
 				let data = {
 					token: setdata
 				}
-				log(setdata)
+				// log(setdata)
 				listing(getCart, data)
 					.then((res) => {
-						log(res.data.data)
+						// log(res.data.data)
 						this.orderObj = res.data.data
 						// for(var i=0;i<this.orderObj.length;i++){
 						// 	for( var j=0; j<this.orderObj[i].list.length;j++){
@@ -358,7 +357,7 @@
 						// 	}
 						// }
 						
-						log(this.orderObj)
+						// log(this.orderObj)
 
 
 					})
@@ -405,7 +404,7 @@
 				uni.showLoading({
 
 				})
-				console.log(e)
+				// console.log(e)
 				this.orderObj[e.custom].list[e.index].number = e.value
 
 				//计算价格
@@ -422,12 +421,12 @@
 					token: setdata
 
 				}
-				log(data)
+				// log(data)
 				//更新我的加购单
 				publicing(postUpOrder, data)
 					.then((res) => {
-						log(res)
-						log(res.data.msg)
+						// log(res)
+						// log(res.data.msg)
 						// uni.showToast({
 						// 	title:`${}`
 						// })
@@ -455,10 +454,10 @@
 					goodsId: goodsId,
 					token: setdata
 				}
-				log(data)
+				// log(data)
 				publicing(postDelOrder, data)
 					.then((res) => {
-						log(res)
+						// log(res)
 
 						uni.showToast({
 							title: `${res.data.msg}`
@@ -498,7 +497,6 @@
 					})
 					return
 				}
-				log('结算=============')
 				if (this.cartIds.length <= 0) {
 					this.isAll = false
 					this.checkFlag = false
@@ -508,7 +506,7 @@
 						title: '先勾选要结算商品呀！',
 						icon: 'none'
 					})
-					console.log("提示没有选择任何商品，不可结算")
+					// console.log("提示没有选择任何商品，不可结算")
 					return;
 				}
 				//结算,获取到选中的商品id数组
@@ -519,10 +517,8 @@
 				for (let index in this.cartIds) {
 					ids = ids + this.cartIds[index] + ",";
 				}
-				console.log("ids====", ids)
 				//去除ids最后一个逗号
 				ids = ids.substring(0, ids.length - 1);
-				console.log("ids去除逗号后====", ids)
 				return
 				let data = {
 					id: ids,
@@ -530,7 +526,7 @@
 				}
 				publicing(postSubmitOrder, data)
 					.then((res) => {
-						log(res)
+						// log(res)
 						uni.navigateTo({
 							url: '../../pagesIII/submitOrder/submitOrder?ids=' + ids
 						})
@@ -553,27 +549,23 @@
 					})
 					return
 				}
-				log('结算=============')
 				if (this.cartIds.length <= 0) {
 					//提示没有选择任何商品，不可结算
 					uni.showToast({
 						title: '先勾选要结算商品呀！',
 						icon: 'none'
 					})
-					console.log("提示没有选择任何商品，不可结算")
 					return;
 				}
 				//结算,获取到选中的商品id数组
-				console.log(this.cartIds);
+				// console.log(this.cartIds);
 				//拼接字符串id
 				let ids = "";
 				for (let index in this.cartIds) {
 					ids = ids + this.cartIds[index] + ",";
 				}
-				console.log("ids====", ids)
 				//去除ids最后一个逗号
 				ids = ids.substring(0, ids.length - 1);
-				console.log("ids去除逗号后====", ids)
 				this.orderID = ids
 
 				//去结算页面
@@ -586,7 +578,7 @@
 				//获取选中的数组id
 				let oLength = this.orderObj.length
 				this.cartIds = e.detail.value;
-				console.log(this.cartIds)
+				// console.log(this.cartIds)
 				if(oLength === e.detail.value.length){
 					this.isAll = true
 				}

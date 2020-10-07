@@ -76,12 +76,12 @@
 	background-image: -webkit-gradient(linear, left top, right top, from(#FF943D), to(#FF5600));
 	background-image: -webkit-linear-gradient(left, #FF943D, #FF5600);
 	background-image: linear-gradient(to right, #FF943D, #FF5600);
-	width: 230rpx;
+	width: 250rpx;
 	height: 70rpx;
 	position: absolute;
 	line-height: 70rpx;
 	right: 0;
-	top: 52rpx;
+	bottom: -12rpx;
 	text-align: center;
 	-webkit-box-pack: center;
 	-webkit-justify-content: center;

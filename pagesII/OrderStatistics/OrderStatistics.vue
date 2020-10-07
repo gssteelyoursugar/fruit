@@ -10,7 +10,8 @@
 		<view class="tui-tab-rank" v-for="(item,index) in 10 " :key="index">
 			<view class="tui-time-title"><text class="title-time-left">2020-09-02 15:06:00</text> </view>
 			<view class="tui-tab-rank-cent">
-				<image src="../../static/images/ranking.png" mode="aspectFill" class="img-rink"></image>
+				<!-- ../../static/images/ranking.png -->
+				<image src="" mode="aspectFill" class="img-rink"></image>
 				<view class="tui-pro-tit">
 					<text class="tag-tit">采手精选</text> <text class="tag-tit-text">葡萄回复的伤口缝合公司的讲课风格</text>
 					<view class="tag-tit2">

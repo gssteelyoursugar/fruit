@@ -394,6 +394,7 @@ page {
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;
+	z-index: 999;
 }
 .tui-drop-btn {
 	width: 50%;

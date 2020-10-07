@@ -94,13 +94,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   tuiSwipeAction: function() {
-    return __webpack_require__.e(/*! import() | components/tui-swipe-action/tui-swipe-action */ "components/tui-swipe-action/tui-swipe-action").then(__webpack_require__.bind(null, /*! @/components/tui-swipe-action/tui-swipe-action.vue */ 399))
+    return __webpack_require__.e(/*! import() | components/tui-swipe-action/tui-swipe-action */ "components/tui-swipe-action/tui-swipe-action").then(__webpack_require__.bind(null, /*! @/components/tui-swipe-action/tui-swipe-action.vue */ 407))
   },
   tuiNumberbox: function() {
-    return __webpack_require__.e(/*! import() | components/tui-numberbox/tui-numberbox */ "components/tui-numberbox/tui-numberbox").then(__webpack_require__.bind(null, /*! @/components/tui-numberbox/tui-numberbox.vue */ 406))
+    return __webpack_require__.e(/*! import() | components/tui-numberbox/tui-numberbox */ "components/tui-numberbox/tui-numberbox").then(__webpack_require__.bind(null, /*! @/components/tui-numberbox/tui-numberbox.vue */ 414))
   },
   tuiButton: function() {
-    return __webpack_require__.e(/*! import() | components/tui-button/tui-button */ "components/tui-button/tui-button").then(__webpack_require__.bind(null, /*! @/components/tui-button/tui-button.vue */ 413))
+    return __webpack_require__.e(/*! import() | components/tui-button/tui-button */ "components/tui-button/tui-button").then(__webpack_require__.bind(null, /*! @/components/tui-button/tui-button.vue */ 421))
   }
 }
 var render = function() {
@@ -477,13 +477,13 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       var data = {
         token: setdata };
 
-      log(data);
+      // log(data)
       (0, _api.listing)(_request.getClient, data).
       then(function (res) {
         // log(res)
         ///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
         _this3.ApproveStatus = res.data.data.approveStatus; //获取状态码，0未认证，1已认证，2拒绝
-        log(_this3.ApproveStatus);
+        // log(this.ApproveStatus)
 
       }).
       catch(function (err) {
@@ -493,7 +493,6 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
     },
     //计算总价
     jieSuanPrice: function jieSuanPrice() {
-      console.log("====ji");
       var allPrice = 0; //总价
       for (var index in this.orderObj) {
         var oneData = this.orderObj[index].list;
@@ -517,10 +516,10 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       var data = {
         token: setdata };
 
-      log(setdata);
+      // log(setdata)
       (0, _api.listing)(_request.getCart, data).
       then(function (res) {
-        log(res.data.data);
+        // log(res.data.data)
         _this4.orderObj = res.data.data;
         // for(var i=0;i<this.orderObj.length;i++){
         // 	for( var j=0; j<this.orderObj[i].list.length;j++){
@@ -528,7 +527,7 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
         // 	}
         // }
 
-        log(_this4.orderObj);
+        // log(this.orderObj)
 
 
       }).
@@ -575,7 +574,7 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       uni.showLoading({});
 
 
-      console.log(e);
+      // console.log(e)
       this.orderObj[e.custom].list[e.index].number = e.value;
 
       //计算价格
@@ -592,12 +591,12 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
         token: setdata };
 
 
-      log(data);
+      // log(data)
       //更新我的加购单
       (0, _api.publicing)(_request.postUpOrder, data).
       then(function (res) {
-        log(res);
-        log(res.data.msg);
+        // log(res)
+        // log(res.data.msg)
         // uni.showToast({
         // 	title:`${}`
         // })
@@ -625,10 +624,10 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
         goodsId: goodsId,
         token: setdata };
 
-      log(data);
+      // log(data)
       (0, _api.publicing)(_request.postDelOrder, data).
       then(function (res) {
-        log(res);
+        // log(res)
 
         uni.showToast({
           title: "".concat(res.data.msg) });
@@ -668,7 +667,6 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
 
         return;
       }
-      log('结算=============');
       if (this.cartIds.length <= 0) {
         this.isAll = false;
         this.checkFlag = false;
@@ -678,7 +676,7 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
           title: '先勾选要结算商品呀！',
           icon: 'none' });
 
-        console.log("提示没有选择任何商品，不可结算");
+        // console.log("提示没有选择任何商品，不可结算")
         return;
       }
       //结算,获取到选中的商品id数组
@@ -689,10 +687,8 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       for (var index in this.cartIds) {
         ids = ids + this.cartIds[index] + ",";
       }
-      console.log("ids====", ids);
       //去除ids最后一个逗号
       ids = ids.substring(0, ids.length - 1);
-      console.log("ids去除逗号后====", ids);
       return;
       var data = {
         id: ids,
@@ -700,7 +696,7 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
 
       (0, _api.publicing)(_request.postSubmitOrder, data).
       then(function (res) {
-        log(res);
+        // log(res)
         uni.navigateTo({
           url: '../../pagesIII/submitOrder/submitOrder?ids=' + ids });
 
@@ -723,27 +719,23 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
 
         return;
       }
-      log('结算=============');
       if (this.cartIds.length <= 0) {
         //提示没有选择任何商品，不可结算
         uni.showToast({
           title: '先勾选要结算商品呀！',
           icon: 'none' });
 
-        console.log("提示没有选择任何商品，不可结算");
         return;
       }
       //结算,获取到选中的商品id数组
-      console.log(this.cartIds);
+      // console.log(this.cartIds);
       //拼接字符串id
       var ids = "";
       for (var index in this.cartIds) {
         ids = ids + this.cartIds[index] + ",";
       }
-      console.log("ids====", ids);
       //去除ids最后一个逗号
       ids = ids.substring(0, ids.length - 1);
-      console.log("ids去除逗号后====", ids);
       this.orderID = ids;
 
       //去结算页面
@@ -756,7 +748,7 @@ var _console = console,log = _console.log;var setdata = uni.getStorageSync('user
       //获取选中的数组id
       var oLength = this.orderObj.length;
       this.cartIds = e.detail.value;
-      console.log(this.cartIds);
+      // console.log(this.cartIds)
       if (oLength === e.detail.value.length) {
         this.isAll = true;
       }

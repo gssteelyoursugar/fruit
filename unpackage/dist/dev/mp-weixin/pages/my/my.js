@@ -94,7 +94,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   tuiListCell: function() {
-    return __webpack_require__.e(/*! import() | components/tui-list-cell/tui-list-cell */ "components/tui-list-cell/tui-list-cell").then(__webpack_require__.bind(null, /*! @/components/tui-list-cell/tui-list-cell.vue */ 420))
+    return __webpack_require__.e(/*! import() | components/tui-list-cell/tui-list-cell */ "components/tui-list-cell/tui-list-cell").then(__webpack_require__.bind(null, /*! @/components/tui-list-cell/tui-list-cell.vue */ 428))
   }
 }
 var render = function() {
@@ -656,16 +656,18 @@ var _console = console,log = _console.log;var logins = __webpack_require__(/*! .
       Goauth2: false, //以申请待审核
       Goauth3: false, //通过认证
       Goauth4: false, //被拒绝,
-      user_phone: "", fukuanList: '', fahuoList: '', shouhuoList: "", tuikuanList: '' };}, methods: { onPullDownRefresh: function onPullDownRefresh() {this.getMerchants();console.log('refresh');setTimeout(function () {uni.stopPullDownRefresh();}, 1000);}, //获取头像昵称
+      user_phone: "", fukuanList: '', fahuoList: '', shouhuoList: "", tuikuanList: '' };}, methods: { onPullDownRefresh: function onPullDownRefresh() {this.getMerchants(); // console.log('refresh');
+      setTimeout(function () {uni.stopPullDownRefresh();}, 1000);}, //获取头像昵称
     getUserInfo: function getUserInfo(event) {log(event);this.usering = event.detail.userInfo;uni.setStorageSync('userIN', event.detail.userInfo); //把头像存在本地，小程序提供如同浏览器cookie
       var userING = uni.setStorageSync('userIN', event.detail.userInfo);if (event.detail.userInfo) {var wxing = event.detail.userInfo;this.wxCode(wxing.avatarUrl, wxing.nickName);} // wx.startPullDownRefresh()
-      this.ifUser();log('dddddddddd');}, //获取code
-    wxCode: function wxCode(avatarUrl, nickName) {var _this2 = this;wx.login({ success: function success(res) {log(res);var code = res.code;_this2.wxLoging(code);}, fail: function fail(err) {log(err);} });}, //发code给后台换取token
+      this.ifUser();}, //获取code
+    wxCode: function wxCode(avatarUrl, nickName) {var _this2 = this;wx.login({ success: function success(res) {// log(res)
+          var code = res.code;_this2.wxLoging(code);}, fail: function fail(err) {log(err);} });}, //发code给后台换取token
     wxLoging: function wxLoging(code) {var _this3 = this;log(code); // let appid = wx.getAccountInfoSync().miniProgram.appId
       // let secret = "956f8c9345cbe06a42c6494f7bb53f7f"
       var data = { code: code };uni.showLoading({ title: '加载中', icon: 'none' // mask:true
       });(0, _api.publicing2)(_request.loginis, data) //发送请求携带参数
-      .then(function (res) {if (res.statusCode == 500) {uni.showModal({ title: '提示', content: '服务器错误，请重新登录获取信息', success: function success(res) {if (res.confirm) {console.log('用户点击确定');uni.hideLoading();} else if (res.cancel) {console.log('用户点击取消');uni.hideLoading();}} });return;} else if (res.statusCode == 200) {log(res);}log(res); //获得token
+      .then(function (res) {if (res.statusCode == 500) {uni.showModal({ title: '提示', content: '服务器错误，请重新登录获取信息', success: function success(res) {if (res.confirm) {console.log('用户点击确定');uni.hideLoading();} else if (res.cancel) {console.log('用户点击取消');uni.hideLoading();}} });return;} else if (res.statusCode == 200) {log(res);} // log(res) //获得token
         uni.setStorageSync('usermen', res.data.token); //把token存在本地，小程序提供如同浏览器cookie
         uni.hideLoading();_this3.getMerchants(); // this.ifUser()
         // if(res.data.msg == 'success'){
@@ -674,7 +676,8 @@ var _console = console,log = _console.log;var logins = __webpack_require__(/*! .
         // }
       }).catch(function (err) {uni.showToast({ title: "".concat(err) });log(err);});}, //一、认证店铺首先判断是否登录
     ifLogin: function ifLogin() {var value = this.ApproveStatus;if (!setdata) {//判断有无token，没有就显示去认证店铺
-        log('没有token信息请点击登录');log(this.logMsg);} else if (value == 0) {this.Goauth2 = true; //状态为0时证明已经认证
+        log('没有token信息请点击登录'); // log(this.logMsg)
+      } else if (value == 0) {this.Goauth2 = true; //状态为0时证明已经认证
         this.logMsg = '审核中待通过';} else if (value == 1) {this.logMsg = '我的店铺已认证';this.Goauth3 = true;} else if (value == 2) {this.logMsg = '未通过';this.Goauth4 = true;} else if (value == undefined) {this.Goauth = true;this.Goauth2 = false;this.logMsg = '去认证我的店铺';}}, //获取申请店铺状态信息
     getMerchants: function getMerchants() {var _this4 = this;var setdata = uni.getStorageSync('usermen'); //Token
       var data = { token: setdata };(0, _api.listing)(_request.getClient, data).then(function (res) {///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
@@ -701,14 +704,9 @@ var _console = console,log = _console.log;var logins = __webpack_require__(/*! .
     // },
     // 获取订单
     getOrderData: function getOrderData() {var _this5 = this;var setdata = uni.getStorageSync('usermen');var data = { token: setdata, pageNo: 1, pageSize: 100 };(0, _api.listing)(_request.getMyOrder, data).then(function (res) {var list = res.data.data;var fukuanList = [];var fahuoList = [];var shouhuoList = [];var tuikuanList = [];if (list.length === 0) return;list.forEach(function (item) {if (item.payStatus == 0) {fukuanList.push(item);}if (item.tradeStatus == 1 || item.tradeStatus == 3) {fahuoList.push(item);}if (item.tradeStatus == 4) {shouhuoList.push(item);}if (item.tradeStatus == 7) {tuikuanList.push(item);}});_this5.fukuanList = fukuanList.length;_this5.fahuoList = fahuoList.length;_this5.shouhuoList = shouhuoList.length;_this5.tuikuanList = tuikuanList.length;_this5.$forceUpdate();}).catch(function (err) {log(err);});}, ifUser: function ifUser() {var setuserdata = uni.getStorageSync('userIN');if (!setuserdata) {this.wxlogin = false;} else {this.wxlogin = true;this.usering = setuserdata;}}, //认证店铺
-    tendShop: function tendShop() {var setdata = uni.getStorageSync('usermen');if (!setdata) {uni.showToast({ title: '请先登录', icon: 'none' });log(setdata);this.modaishow = true;} else {// this.modaishow = false
-        uni.navigateTo({
-          url: '../../pagesII/tendShop/tendShop' });
-
-      }
-
-    },
-    tendShop2: function tendShop2() {
+    tendShop: function tendShop() {var setdata = uni.getStorageSync('usermen');if (!setdata) {uni.showToast({ title: '请先登录', icon: 'none' }); // log(setdata)
+        this.modaishow = true;} else {// this.modaishow = false
+        uni.navigateTo({ url: '../../pagesII/tendShop/tendShop' });}}, tendShop2: function tendShop2() {
       uni.navigateTo({
         url: '../../pagesII/StoreInformation/StoreInformation' });
 
@@ -738,14 +736,14 @@ var _console = console,log = _console.log;var logins = __webpack_require__(/*! .
     ifUser2: function ifUser2() {
 
 
-      log(setdata);
+      // log(setdata)
       if (!setdata) {
         uni.showToast({
           title: '登录失败',
           duration: 2000,
           icon: 'none' });
 
-        log('用户没有登陆');
+        // log('用户没有登陆')
         this.wxlogin = false;
       } else {
         uni.showToast({

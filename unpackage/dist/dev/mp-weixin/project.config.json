@@ -13,8 +13,6 @@
 	"libVersion": "",
 	"appid": "wxb820c791e554616c",
 	"projectname": "圈果项目",
-	"simulatorType": "wechat",
-	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,
@@ -77,16 +75,23 @@
 				},
 				{
 					"id": -1,
-					"name": "搜索商品",
-					"pathName": "pagesII/searchGoods/searchGoods",
-					"query": "__id__=1",
+					"name": "视频",
+					"pathName": "pagesIII/videos/videos",
+					"query": "__id__=14",
 					"scene": null
 				},
 				{
 					"id": -1,
-					"name": "订单详情",
-					"pathName": "pagesIII/orderDetail/orderDetail",
-					"query": "__id__=1",
+					"name": "找水果",
+					"pathName": "pages/search/search",
+					"query": "__id__=14",
+					"scene": null
+				},
+				{
+					"id": 8,
+					"name": "搜水果",
+					"pathName": "pagesII/searchGoods/searchGoods",
+					"query": "__id__=2",
 					"scene": null
 				}
 			]

@@ -163,7 +163,7 @@
 					sizeType: _this.sizeType,
 					sourceType: _this.sourceType,
 					success: function(e) {
-						console.log(e)
+						// console.log(e)
 						let imageArr = [];
 						for (let i = 0; i < e.tempFiles.length; i++) {
 							let len = _this.imageList.length;
@@ -235,7 +235,7 @@
 						formData: this.formData,
 						filePath: url,
 						success: function(res) {
-							console.log(res)
+							// console.log(res)
 							if (res.statusCode == 200) {
 								//返回结果 此处需要按接口实际返回进行修改
 								let d = JSON.parse(res.data.replace(/\ufeff/g, "") || "{}")

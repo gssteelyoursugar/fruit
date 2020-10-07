@@ -52,7 +52,6 @@
 	.imgWidth {
 		margin: 30rpx 20rpx;
 		width: 710rpx;
-
 	}
 
 	.imgWidth image {

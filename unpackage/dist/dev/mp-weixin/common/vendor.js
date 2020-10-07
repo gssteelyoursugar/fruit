@@ -1943,12 +1943,9 @@ function normalizeComponent (
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
 var _vuex = _interopRequireDefault(__webpack_require__(/*! vuex */ 12));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 _vue.default.use(_vuex.default);
-
-
-
 
 var screendata = {
   // 存储筛选出来的数据
@@ -1957,7 +1954,8 @@ var screendata = {
 
 // 数据仓库
 var state = {
-  screendata: screendata };var _default =
+  screendata: screendata,
+  history: uni.getStorageSync('history') ? uni.getStorageSync('history') : [] };var _default =
 
 
 new _vuex.default.Store({
@@ -1970,7 +1968,24 @@ new _vuex.default.Store({
       state.screendata = {
         screenarr: listdata };
 
+    },
+    saveSearch: function saveSearch(state, data) {
+      var arr = state.history;
+      arr.unshift(data.data);
+      state.history = arr;
+      uni.setStorageSync('history', arr);
+    },
+    clearSearch: function clearSearch(state, data) {
+      console.log(data);
+      var list = state.history;
+      list = [];
+      state.history = list;
+      uni.removeStorageSync('history');
+      uni.showToast({
+        title: '已清除' });
+
     } } });exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 
@@ -10041,7 +10056,7 @@ exports.getActivity = getActivity;var postActivity = "".concat(url, "api/wx/acti
 
 
 //登录
-exports.postActivity = postActivity;var loginis = "".concat(url2, "api/wx/user/login");
+exports.postActivity = postActivity;var loginis = "".concat(url, "api/wx/user/login");
 
 //找水果
 exports.loginis = loginis;var getsearch = "".concat(url, "api/wx/menu/select");
@@ -10258,7 +10273,7 @@ module.exports = g;
 
 /***/ }),
 
-/***/ 500:
+/***/ 508:
 /*!******************************************************************************!*\
   !*** /Users/gsheng/Desktop/fruit/components/jyf-parser/libs/MpHtmlParser.js ***!
   \******************************************************************************/
@@ -10272,9 +10287,9 @@ module.exports = g;
  * @author JinYufeng
  * @listens MIT
  */
-var cfg = __webpack_require__(/*! ./config.js */ 501),
+var cfg = __webpack_require__(/*! ./config.js */ 509),
 blankChar = cfg.blankChar,
-CssHandler = __webpack_require__(/*! ./CssHandler.js */ 502),
+CssHandler = __webpack_require__(/*! ./CssHandler.js */ 510),
 windowWidth = uni.getSystemInfoSync().windowWidth;
 var emoji;
 
@@ -10804,7 +10819,7 @@ module.exports = MpHtmlParser;
 
 /***/ }),
 
-/***/ 501:
+/***/ 509:
 /*!************************************************************************!*\
   !*** /Users/gsheng/Desktop/fruit/components/jyf-parser/libs/config.js ***!
   \************************************************************************/
@@ -10894,14 +10909,14 @@ module.exports = cfg;
 
 /***/ }),
 
-/***/ 502:
+/***/ 510:
 /*!****************************************************************************!*\
   !*** /Users/gsheng/Desktop/fruit/components/jyf-parser/libs/CssHandler.js ***!
   \****************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var cfg = __webpack_require__(/*! ./config.js */ 501),
+var cfg = __webpack_require__(/*! ./config.js */ 509),
 isLetter = function isLetter(c) {return c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z';};
 
 function CssHandler(tagStyle) {

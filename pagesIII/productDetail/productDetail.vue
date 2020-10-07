@@ -74,7 +74,7 @@
 							<view class="tui-magin"> <text class="tui-code">￥</text> <text class="tui-price-one">{{shopListdata.data.platformPrice}}</text>
 								<text style="font-size:28rpx;color: #FF6500;">元</text> /件</view>
 							<view class="tui-huaxian" >￥{{shopListdata.data.marketPrice}}/件</view>
-							<view>{{shopListdata.data.specification}}, 水果净重约{{shopListdata.data.kg2}}斤</view>
+							<view class="tui-text-overflow">{{shopListdata.data.specification}}, 水果净重约{{shopListdata.data.kg2}}斤</view>
 						</view>
 					</view>
 				</view>
@@ -1425,12 +1425,21 @@
 
 	.tui-huaxian {
 		text-decoration: line-through;
-		margin: 0 10rpx;
 		font-size: 24rpx;
+		min-width: 65px;
 	}
 
 	.tui-magin {
-		margin: 10rpx;
+		margin: 10rpx 0;
+		max-width: 120rpx;
+		min-width: 22%;
+	}
+	.tui-text-overflow {
+		width: 460rpx;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+
 	}
 
 	.tui-code {

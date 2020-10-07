@@ -5,78 +5,61 @@
 				<view class="page-section-spacing">
 					<swiper class="swiper" @change="changefun" @animationfinish="animationfinishfun" :current="1" :circular="true"
 					 :vertical="true">
+						<!-- v-for item of PayVideo -->
 						<swiper-item v-for="(item,index) in PayVideo" :key="index">
 							<view class="swiper-item uni-bg-red">
-
+								<!-- video_path -->
 								<video :custom-cache="false" loop="true" class="video" :id="'id'+index" :enable-play-gesture="true"
-								 :enable-progress-gesture="true" :controls="false" :src="item.video_path" :show-center-play-btn="false">
-
+								 :enable-progress-gesture="true" :controls="true" :src="video_path" :show-center-play-btn="true">
 								</video>
-
 							</view>
 						</swiper-item>
-
 					</swiper>
 				</view>
+				<!-- 此处的is_more应该是循环体里面的字段，暂时为模拟 -->
+				<view class="collect-btn" @click="clickToCollect(PayVideo[index_].id)" :class="{'is-collect':is_show}">
+					<image src="../../static/images/like.png"></image>
+					<text>收藏</text>
+				</view>
 			</view>
-
 		</view>
-		<view v-if="is_active">
-			
-			
-			<!-- 左侧文案 -->
-			<view class="left">
-				<cover-view class="left_box">
-					
-					<cover-view class="ren" @click="shopPing">百色田东芒果(标题可链接到商品)</cover-view>
-					<cover-view class="ke_context">桂七芒果，来自中国芒果之乡百色田东(该功能待完善) </cover-view>
-					
-				</cover-view>
+		<view class="left_box" v-if="is_active">
+			<view class="tui-tab-rank">
+				<!-- <view class="tui-time-title"><text class="title-time-left">2020年9月6日</text> </view> -->
+				<view class="tui-tab-rank-cent">
+					<view class="show-more" @click="toggleShow">
+						<text>{{is_more?'收起':'展开'}}</text>
+						<tui-icon :name="is_more?'arrowdown':'arrowup'" :color="iconColor" :size="iconSize" :unit="iconUnit"></tui-icon>
+					</view>
+					<view class="detail-btn" v-if="!is_more" @click="clickToDetail(PayVideo[index_].id)">查看详情</view>
+					<image src="../../static/images/pingguo1.png" mode="aspectFill" class="img-rink"></image>
+					<view class="tui-pro-tit">
+						<view><text class="tag-tit">采手精选</text> <text class="tag-tit-text">{{PayVideo[index_].title}}</text></view>
+						<view class="tag-tit2">
+							<view class="">
+								<view class="tag-tit2-price">
+									5斤装 × 1
+								</view>
+								<view class="tag-tit2-text">
+									<view class="price1">
+										<text style="font-size: 20rpx;margin-right:4rpx;">¥</text>108<text style="font-size: 20rpx;margin-left:4rpx;">元</text>
+										<text class="price2">/件</text>
+									</view>
+								</view>
+							</view>
+							<!-- <view>购物车</view> -->
+						</view>
+
+					</view>
+				</view>
+				<view class="show-detail" v-if="is_more">
+					<view class="detail-btn-item">货源地:陕西西安</view>
+					<view class="detail-btn-item">成交:0.9万元</view>
+					<view class="detail-btn-item">1万多人看过</view>
+					<view class="click-detail-btn" @click="clickToDetail(PayVideo[index_].id)">查看详情</view>
+				</view>
 			</view>
-			
-			<!-- <view class="left">
-				<cover-view class="left_box">
-					<cover-view class="ke">
-						<cover-image :src="imgUrl"></cover-image>
-						<cover-view> 我讲的Ps零基础教程</cover-view>
-					</cover-view>
-					<cover-view class="ren">@PS之光</cover-view>
-					<cover-view class="ke_context">PS水印去除技巧合集来了。技能我都给 出来了，下面就看你们自己发挥了。去 水印不求人啦~ </cover-view>
-					<cover-view class="auto">
-						<cover-image :src="hamiguaPNG"></cover-image>
-						<cover-view> 光良 童话</cover-view>
-					</cover-view>
-				</cover-view>
-			</view> -->
-			
-			<!-- 右侧列表 -->
-			<!-- <view class="right">
-				<cover-view class="right_box  ">
-					<cover-view class="top1">
-						<cover-image class="avatar_img" :src="PayVideo[index].avatar_url" mode=""></cover-image>
-						<cover-image class="add_img" :src="hamiguaPNG" mode=""></cover-image>
-					</cover-view>
-					<cover-view class="top2">
-						<cover-image class="t_img" :src="mangguoPNG" mode=""></cover-image>
-						<cover-view class="font_t">397</cover-view>
-					</cover-view>
-					<cover-view class="top2">
-						<cover-image class="t_img" :src="hamiguaPNG" mode=""></cover-image>
-						<cover-view class="font_t">397</cover-view>
-					</cover-view>
-					<cover-view class="top2">
-						<cover-image class="t_img" :src="mangguoPNG" mode=""></cover-image>
-						<cover-view class="font_t">397</cover-view>
-					</cover-view>
-					<cover-view class="top2">
-						<cover-image class="t_img" :src="hamiguaPNG" mode=""></cover-image>
-						<cover-view class="font_t">397</cover-view>
-					</cover-view>
-				</cover-view>
-			</view> -->
-			
 		</view>
-
 	</view>
 </template>
 
@@ -85,9 +68,9 @@
 
 		data() {
 			return {
-				hamiguaPNG:'http://192.168.1.10:8980/js/userfiles/fileupload/202008/1299161489108729858.png',
-				mangguoPNG:'http://192.168.1.10:8980/js/userfiles/fileupload/202008/1298932901905809410.png',
-				imgUrl:'http://192.168.1.10:8980/js/userfiles/fileupload/202008/1295611300690604034.png',
+				hamiguaPNG: 'http://192.168.1.10:8980/js/userfiles/fileupload/202008/1299161489108729858.png',
+				mangguoPNG: 'http://192.168.1.10:8980/js/userfiles/fileupload/202008/1298932901905809410.png',
+				imgUrl: 'http://192.168.1.10:8980/js/userfiles/fileupload/202008/1295611300690604034.png',
 				data: [{
 					"id": 16,
 					"title": "哈哈哈PS",
@@ -163,7 +146,7 @@
 					"img_path": "https://pic.rmb.bdstatic.com/7b836f461a0e7b69ed0e91941fa2133a.jpeg@s_2,w_272,h_272,q_80",
 					"video_path": "https://vd4.bdstatic.com/mda-kgwsw7bsybhikxzv/v1-cae/sc/mda-kgwsw7bsybhikxzv.mp4?auth_key=1598866881-0-0-b986bf7f3bb0ab0bb80b5c8872749429&bcevod_channel=searchbox_feed&pd=1&pt=3",
 					"distance": "1.8km"
-				}],
+				}, ],
 				index_: 1,
 				index: '1',
 				is_active: true,
@@ -172,7 +155,10 @@
 				current_i: 2,
 				_arr: [],
 				len: 0,
-
+				iconSize: 32,
+				iconUnit: 'rpx',
+				is_more: false, //true展开，false收起
+				is_show: false, //模拟用户点击收藏按钮
 			}
 		},
 		computed: {
@@ -185,9 +171,34 @@
 			},
 		},
 		methods: {
-			shopPing(){
+			// 视频页点击商品详情按钮
+			clickToDetail(id) {
+				// console.log(id)
+				// let id = 1311280367173636096
 				uni.navigateTo({
-					url:'../productDetail/productDetail'
+					url: '../productDetail/productDetail?id=' + id
+				})
+			},
+			// 视频页点击收藏商品
+			clickToCollect(id){
+				console.log(id)
+				this.is_show = !this.is_show
+				this.is_show && uni.showToast({
+					title: '收藏成功',
+					icon: 'none'
+				})
+				!this.is_show && uni.showToast({
+					title: '取消收藏',
+					icon: 'none'
+				})
+			},
+			// 切换显示
+			toggleShow() {
+				this.is_more = !this.is_more
+			},
+			shopPing() {
+				uni.navigateTo({
+					url: '../productDetail/productDetail'
 				})
 			},
 			changefun(e) {
@@ -204,7 +215,6 @@
 				console.log(PayVideo, index_)
 				let videoContext = uni.createVideoContext('id' + index_)
 				videoContext.pause()
-
 				this.PayVideo = PayVideo
 			},
 			animationfinishfun(e) {
@@ -217,13 +227,11 @@
 					t
 				} = this
 				let current = e.detail.current
-
 				this.is_active = true
-
 				PayVideo[current]['istrue'] = true
 				this.PayVideo = PayVideo
 				let videoContext = uni.createVideoContext('id' + index_)
-				console.log(index_,  '正在播放第' + index_ +'个视频')
+				console.log(current, index_, '正在播放第' + current + '个视频')
 				videoContext.pause()
 				videoContext = uni.createVideoContext('id' + current)
 				videoContext.play()
@@ -339,19 +347,43 @@
 
 	}
 
+	.collect-btn {
+		position: fixed;
+		top: 60rpx;
+		right: 60rpx;
+		color: #fff;
+		display: flex;
+		align-items: center;
+		background: rgba(255,255,255,.3);
+		justify-content: space-evenly;
+		border-radius: 40rpx;
+		font-size: 28rpx;
+		width: 160rpx;
+		height: 60rpx;
+
+	}
+
+	.collect-btn image {
+		width: 36rpx;
+		height: 30rpx;
+	}
+
+	.is-collect {
+		background: #FF7709;
+	}
+
 	.left_box {
 		/* 2020/8/31改 */
 		position: fixed;
 		width: 100%;
-		height: 200rpx;
-		border-radius: 20rpx 20rpx 0 0;
+		// height: 200rpx;
+		border-radius: 40rpx 40rpx 0 0;
 		bottom: 0;
-		left: 20;
+		left: 0;
 		background-color: #fff;
 		color: #000;
 
 		.ke_context {
-
 			width: 516rpx;
 			font-size: 30rpx;
 			font-family: PingFang SC;
@@ -450,8 +482,6 @@
 
 	.right_box {
 		width: 100rpx;
-
-
 		position: absolute;
 		z-index: 2;
 		bottom: 60rpx;
@@ -504,5 +534,157 @@
 			}
 		}
 
+	}
+
+	.price1 {
+		color: #FF5600;
+		font-size: 36rpx;
+		font-weight: 600;
+	}
+
+	.price2 {
+		color: #B6B6B6;
+		font-size: 20rpx;
+	}
+
+	.tui-tab-rank {
+		// background-color: #fff;
+		// margin: 20rpx 0;
+
+	}
+
+	.tui-time-title {
+		height: 60rpx;
+		line-height: 60rpx;
+		border-bottom: 1rpx solid #F5F5F5;
+
+	}
+
+	.title-time-left {
+		margin-left: 30rpx;
+		color: #707070;
+		padding: 14rpx 0;
+		font-size: 28rpx;
+		font-weight: 500;
+
+	}
+
+	.tui-tab-rank-cent {
+		display: flex;
+		padding: 32rpx 20rpx 20rpx;
+		position: relative;
+	}
+
+	.show-detail {
+		display: flex;
+		border-top: 1px solid #e5e5e5;
+		padding: 30rpx 0;
+		position: relative;
+
+	}
+
+	.detail-btn-item {
+		padding: 10rpx 8rpx;
+		text-align: center;
+		font-size: 20rpx;
+		color: #555555;
+		background: #E5E5E5;
+		border-radius: 10rpx;
+		margin: 0 20rpx;
+	}
+
+	.click-detail-btn {
+		position: absolute;
+		right: 0;
+		background: linear-gradient(to right, #FF7709, #FF6500);
+		width: 180rpx;
+		height: 70rpx;
+		text-align: center;
+		line-height: 70rpx;
+		border-radius: 40rpx 0 0 40rpx;
+		top: 16rpx;
+		color: #fff;
+
+	}
+
+	.show-more {
+		position: absolute;
+		right: 20rpx;
+		top: 20rpx;
+		font-size: 24rpx;
+		display: flex;
+		align-items: center;
+		color: #B6B6B6;
+
+	}
+
+	.detail-btn {
+		position: absolute;
+		right: 0;
+		bottom: 40rpx;
+		background: linear-gradient(to right, #FF7709, #FF6500);
+		width: 180rpx;
+		height: 70rpx;
+		text-align: center;
+		color: #fff;
+		font-size: 28rpx;
+		font-weight: 400;
+		line-height: 70rpx;
+		border-radius: 40rpx 0 0 40rpx;
+
+	}
+
+	.img-rink {
+		width: 140rpx;
+		height: 140rpx;
+		display: block;
+		margin-right: 10rpx;
+		background: #eee;
+		border-radius: 6rpx;
+
+	}
+
+	.tui-pro-tit {
+		flex: 5;
+	}
+
+	.tag-tit {
+		/* 渐变色 */
+		background-image: linear-gradient(to right, #00C94A, #00AC3F);
+		margin-right: 10rpx;
+		padding: 0 10rpx;
+		border-radius: 15rpx 0 15rpx 0;
+		color: #fff;
+		font-size: 24rpx;
+	}
+
+	.tag-tit2 {
+		display: flex;
+		justify-content: space-between;
+		margin: 8rpx 0;
+		align-items: center;
+
+
+	}
+
+	.tag-tit2-price {
+		color: #555555;
+		font-size: 24rpx;
+	}
+
+	.tag-tit2-text {
+		color: #FF5600;
+		font-size: 24rpx;
+	}
+
+	.tui-shop-car {
+		width: 44rpx;
+		height: 46rpx;
+		display: block;
+	}
+
+	.tag-tit-text {
+		font-size: 28rpx;
+		color: #333;
 	}
 </style>

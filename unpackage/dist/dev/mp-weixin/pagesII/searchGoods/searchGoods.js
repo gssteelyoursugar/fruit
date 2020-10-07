@@ -122,14 +122,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
-  tuiIcon: function() {
-    return __webpack_require__.e(/*! import() | components/tui-icon/tui-icon */ "components/tui-icon/tui-icon").then(__webpack_require__.bind(null, /*! @/components/tui-icon/tui-icon.vue */ 357))
-  },
   tuiTag: function() {
-    return __webpack_require__.e(/*! import() | components/tui-tag/tui-tag */ "components/tui-tag/tui-tag").then(__webpack_require__.bind(null, /*! @/components/tui-tag/tui-tag.vue */ 467))
+    return __webpack_require__.e(/*! import() | components/tui-tag/tui-tag */ "components/tui-tag/tui-tag").then(__webpack_require__.bind(null, /*! @/components/tui-tag/tui-tag.vue */ 475))
   },
   tuiActionsheet: function() {
-    return __webpack_require__.e(/*! import() | components/tui-actionsheet/tui-actionsheet */ "components/tui-actionsheet/tui-actionsheet").then(__webpack_require__.bind(null, /*! @/components/tui-actionsheet/tui-actionsheet.vue */ 474))
+    return __webpack_require__.e(/*! import() | components/tui-actionsheet/tui-actionsheet */ "components/tui-actionsheet/tui-actionsheet").then(__webpack_require__.bind(null, /*! @/components/tui-actionsheet/tui-actionsheet.vue */ 482))
   }
 }
 var render = function() {
@@ -169,166 +166,159 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
-var util = __webpack_require__(/*! @/utils/util.js */ 99);var _default =
-{
-  data: function data() {
-    return {
-      //搜索历史
-      history: [
-        // "美洲杯",
-        // "D站观点",
-        // "C罗",
-        // "早安D站",
-        // "2019退役球星",
-        // "女神大会",
-        // "德利赫特",
-        // "托雷斯",
-        // "自热火锅",
-        // "华为手机",
-        // "有机酸奶"
-      ],
 
-      hot: [
-        // "德利赫特",
-        // "托雷斯",
-        // "早安D站",
-        // "D站观点",
-        // "德利赫特",
-        // "美洲杯",
-        // "华为手机",
-        // "C罗",
-        // "自热火锅",
-        // "2019退役球星",
-        // "女神大会"
-      ],
-      key: "",
-      showActionSheet: false,
-      tips: "确认清空搜索历史吗？",
-      //搜索历史列表
-      searchResult: [
-        // "按照展示的列表输入关键词看效果","thorui","2019退役球星","搜索关键词高亮显示","模拟搜索结果集","开源不易，需要鼓励","人人为我，我为人人",
-      ],
-      searchList: [] };
 
-  },
-  methods: {
-    back: function back() {
-      uni.navigateBack();
-    },
-    cleanKey: function cleanKey() {
-      this.key = '';
-    },
-    closeActionSheet: function closeActionSheet() {
-      this.showActionSheet = false;
-    },
-    openActionSheet: function openActionSheet() {
-      this.showActionSheet = true;
-    },
-    itemClick: function itemClick(e) {
-      var index = e.index;
-      if (index == 0) {
-        this.showActionSheet = false;
-        this.history = [];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _vuex = __webpack_require__(/*! vuex */ 12);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;} //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var util = __webpack_require__(/*! @/utils/util.js */ 99);var _default = { data: function data() {return { //搜索历史
+      // history: [
+      // 	"美洲杯",
+      // 	"D站观点",
+      // 	"C罗",
+      // 	"早安D站",
+      // 	"2019退役球星",
+      // 	"女神大会",
+      // 	"德利赫特",
+      // 	"托雷斯",
+      // 	"自热火锅",
+      // 	"华为手机",
+      // 	"有机酸奶"
+      // ],
+      hot: ["德利赫特", "托雷斯", "早安D站", "D站观点", "德利赫特", "美洲杯", "华为手机", "C罗", "自热火锅", "2019退役球星", "女神大会"], key: "", showActionSheet: false, tips: "确认清空搜索历史吗？", //搜索历史列表
+      searchResult: [// "按照展示的列表输入关键词看效果","thorui","2019退役球星","搜索关键词高亮显示","模拟搜索结果集","开源不易，需要鼓励","人人为我，我为人人",
+      ], searchList: [] };}, computed: _objectSpread({}, (0, _vuex.mapState)(['history'])), methods: _objectSpread(_objectSpread({}, (0, _vuex.mapMutations)(['saveSearch', 'clearSearch'])), {}, { clickItem: function clickItem(val) {console.log(val);uni.navigateTo({ url: '../../pagesII/productList/productList?name=' + val });}, back: function back() {uni.navigateBack();}, cleanKey: function cleanKey() {this.key = '';}, closeActionSheet: function closeActionSheet() {this.showActionSheet = false;}, openActionSheet: function openActionSheet() {this.showActionSheet = true;}, itemClick: function itemClick(e) {var index = e.index;if (index == 0) {this.showActionSheet = false;this.clearSearch();}}, inputKey: function inputKey(e) {var name = e.detail.value;if (name === '') {uni.showToast({
+          title: "请输入关键词",
+          icon: "none" });
+
       }
-    },
-    inputKey: function inputKey(e) {var _this = this;
-      // uni.showToast({
-      // 	title:`${e.detail.value}`
-      // })
-
-      var name = e.detail.value;
-      uni.navigateTo({
-        url: '../../pagesII/productList/productList?name=' + name });
-
       this.key = util.trim(e.detail.value);
+      // uni.navigateTo({
+      // 	url:'../../pagesII/productList/productList?name=' + name
+      // })
       console.log(this.key);
-      if (!this.key) {
-        this.searchList = [];
-        console.log(this.searchList);
-        return;
-      }
-      //根据关键词查找
-      var arr = [];
-      //实际开发中，根据搜索返回结果集，此处只是做展示提示搜索哪些文字
-      this.searchResult.forEach(function (item) {
-        arr.push({
-          key: item,
-          showKey: util.replaceAll(item, _this.key, "<label style=\"color:#E41F19\">".concat(_this.key, "</label>")) });
-
-      });
-      this.searchList = arr;
-    } },
+      this.saveSearch({ data: this.key });
+    } }),
 
   onLoad: function onLoad(options) {
-
-    wx.getStorage({
-      key: 'searchlist',
-      success: function success(res) {
-        console.log(res);
-        // this.setData({
-        //   searchhistory:res.data
-        // })
-      },
-      fail: function fail(e) {
-        var searcharry = [];
-        wx.setStorage({
-          key: 'searchlist',
-          data: searcharry });
-
-      } });
-
+    console.log();
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

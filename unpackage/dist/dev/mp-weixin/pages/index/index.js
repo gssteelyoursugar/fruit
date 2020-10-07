@@ -103,16 +103,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   tuiIcon: function() {
-    return __webpack_require__.e(/*! import() | components/tui-icon/tui-icon */ "components/tui-icon/tui-icon").then(__webpack_require__.bind(null, /*! @/components/tui-icon/tui-icon.vue */ 357))
+    return __webpack_require__.e(/*! import() | components/tui-icon/tui-icon */ "components/tui-icon/tui-icon").then(__webpack_require__.bind(null, /*! @/components/tui-icon/tui-icon.vue */ 365))
   },
   tuiCountdown: function() {
-    return __webpack_require__.e(/*! import() | components/tui-countdown/tui-countdown */ "components/tui-countdown/tui-countdown").then(__webpack_require__.bind(null, /*! @/components/tui-countdown/tui-countdown.vue */ 364))
+    return __webpack_require__.e(/*! import() | components/tui-countdown/tui-countdown */ "components/tui-countdown/tui-countdown").then(__webpack_require__.bind(null, /*! @/components/tui-countdown/tui-countdown.vue */ 372))
   },
   tuiNomore: function() {
-    return __webpack_require__.e(/*! import() | components/tui-nomore/tui-nomore */ "components/tui-nomore/tui-nomore").then(__webpack_require__.bind(null, /*! @/components/tui-nomore/tui-nomore.vue */ 371))
+    return __webpack_require__.e(/*! import() | components/tui-nomore/tui-nomore */ "components/tui-nomore/tui-nomore").then(__webpack_require__.bind(null, /*! @/components/tui-nomore/tui-nomore.vue */ 379))
   },
   lygPopup: function() {
-    return __webpack_require__.e(/*! import() | components/lyg-popup/lyg-popup */ "components/lyg-popup/lyg-popup").then(__webpack_require__.bind(null, /*! @/components/lyg-popup/lyg-popup.vue */ 378))
+    return __webpack_require__.e(/*! import() | components/lyg-popup/lyg-popup */ "components/lyg-popup/lyg-popup").then(__webpack_require__.bind(null, /*! @/components/lyg-popup/lyg-popup.vue */ 386))
   }
 }
 var render = function() {
@@ -464,7 +464,7 @@ var _api = __webpack_require__(/*! ../../api/api.js */ 19);
 
 
 
-var _request = __webpack_require__(/*! ../../api/request.js */ 21);var _methods;function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var Weather = function Weather() {__webpack_require__.e(/*! require.ensure | pages/index/components/weather */ "pages/index/components/weather").then((function () {return resolve(__webpack_require__(/*! ./components/weather.vue */ 385));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var Banner = function Banner() {__webpack_require__.e(/*! require.ensure | pages/index/components/banner */ "pages/index/components/banner").then((function () {return resolve(__webpack_require__(/*! ./components/banner.vue */ 392));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _console =
+var _request = __webpack_require__(/*! ../../api/request.js */ 21);var _methods;function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var Weather = function Weather() {__webpack_require__.e(/*! require.ensure | pages/index/components/weather */ "pages/index/components/weather").then((function () {return resolve(__webpack_require__(/*! ./components/weather.vue */ 393));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var Banner = function Banner() {__webpack_require__.e(/*! require.ensure | pages/index/components/banner */ "pages/index/components/banner").then((function () {return resolve(__webpack_require__(/*! ./components/banner.vue */ 400));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _console =
 
 
 
@@ -628,7 +628,6 @@ var isFirst1 = true;var _default =
       then(function (res) {
         ///登录成功后显示去认证店铺，如果已认证，显示已认证店铺
         _this.ApproveStatus = res.data.data.approveStatus; //获取电偶状态码，0未认证，1已认证，2拒绝
-        log("认证状态:" + _this.ApproveStatus);
       }).
       catch(function (err) {
         log(err);
@@ -743,7 +742,6 @@ var isFirst1 = true;var _default =
     //获取头像昵称
     getUserInfo: function getUserInfo(event) {
       this.userInfo = event.detail.userInfo;
-      log(this.userInfo);
       if (event.detail.userInfo) {
         var wxing = event.detail.userInfo;
         this.wxCode(wxing.avatarUrl, wxing.nickName);
@@ -787,7 +785,6 @@ var isFirst1 = true;var _default =
     },
     ifUser: function ifUser() {
       var setdata = uni.getStorageSync('usermen');
-      log(setdata);
       if (!setdata) {
         uni.showToast({
           title: '请登陆',
@@ -1079,7 +1076,6 @@ var isFirst1 = true;var _default =
       success: function success(res) {
         _this6.temperature = res.data.lives[0].temperature; //气温
         _this6.citys = res.data.lives[0].city; //获取区域
-        console.log("天气：" + _this6.temperature);
       } });
 
   }), _methods),

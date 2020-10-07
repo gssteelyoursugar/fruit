@@ -92,7 +92,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
-var components
+var components = {
+  tuiIcon: function() {
+    return __webpack_require__.e(/*! import() | components/tui-icon/tui-icon */ "components/tui-icon/tui-icon").then(__webpack_require__.bind(null, /*! @/components/tui-icon/tui-icon.vue */ 365))
+  }
+}
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -131,23 +135,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -303,9 +290,12 @@ var _default =
       PayVideo: [],
       current_i: 2,
       _arr: [],
-      len: 0 };
-
-
+      len: 0,
+      iconSize: 32,
+      iconUnit: 'rpx',
+      is_more: false, //true展开，false收起
+      is_show: false //模拟用户点击收藏按钮
+    };
   },
   computed: {},
 
@@ -317,6 +307,31 @@ var _default =
 
 
   methods: {
+    // 视频页点击商品详情按钮
+    clickToDetail: function clickToDetail(id) {
+      // console.log(id)
+      // let id = 1311280367173636096
+      uni.navigateTo({
+        url: '../productDetail/productDetail?id=' + id });
+
+    },
+    // 视频页点击收藏商品
+    clickToCollect: function clickToCollect(id) {
+      console.log(id);
+      this.is_show = !this.is_show;
+      this.is_show && uni.showToast({
+        title: '收藏成功',
+        icon: 'none' });
+
+      !this.is_show && uni.showToast({
+        title: '取消收藏',
+        icon: 'none' });
+
+    },
+    // 切换显示
+    toggleShow: function toggleShow() {
+      this.is_more = !this.is_more;
+    },
     shopPing: function shopPing() {
       uni.navigateTo({
         url: '../productDetail/productDetail' });
@@ -336,7 +351,6 @@ var _default =
       console.log(PayVideo, index_);
       var videoContext = uni.createVideoContext('id' + index_);
       videoContext.pause();
-
       this.PayVideo = PayVideo;
     },
     animationfinishfun: function animationfinishfun(e) {var
@@ -349,13 +363,11 @@ var _default =
 
       this.index_,len = this.len,PayVideo = this.PayVideo,active = this.active,_arr = this._arr,t = this.t;
       var current = e.detail.current;
-
       this.is_active = true;
-
       PayVideo[current]['istrue'] = true;
       this.PayVideo = PayVideo;
       var videoContext = uni.createVideoContext('id' + index_);
-      console.log(index_, '正在播放第' + index_ + '个视频');
+      console.log(current, index_, '正在播放第' + current + '个视频');
       videoContext.pause();
       videoContext = uni.createVideoContext('id' + current);
       videoContext.play();

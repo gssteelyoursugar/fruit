@@ -58,7 +58,6 @@
 		},
 		created: function() {
 			var that = this;
-			console.log("lyg-popup created");
 			uni.getStorage({
 				key: this.policyStorageKey,
 				success: (res) => {
@@ -70,7 +69,7 @@
 				fail: function(e) {
 					that.showPopup = true;
 					uni.hideTabBar({});
-					console.log(e)
+					// console.log(e)
 				}
 			});
 		},

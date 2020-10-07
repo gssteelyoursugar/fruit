@@ -39,13 +39,6 @@
 			}
 
 		},
-		created() {
-			setTimeout(()=>{
-				console.log("我好了",this.address,this.ApproveStatus)
-			},1000)
-			
-		},
-		
 	}
 </script>
 

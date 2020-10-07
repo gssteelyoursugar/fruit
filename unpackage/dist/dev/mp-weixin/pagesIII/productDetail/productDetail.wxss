@@ -398,11 +398,19 @@ page {
 }
 .tui-huaxian {
 	text-decoration: line-through;
-	margin: 0 10rpx;
 	font-size: 24rpx;
+	min-width: 65px;
 }
 .tui-magin {
-	margin: 10rpx;
+	margin: 10rpx 0;
+	max-width: 120rpx;
+	min-width: 22%;
+}
+.tui-text-overflow {
+	width: 460rpx;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 .tui-code {
 	color: rgba(255, 101, 0, 1);

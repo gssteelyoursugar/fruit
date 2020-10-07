@@ -73,7 +73,7 @@ let postActivity = `${url}api/wx/activity/select`
 
 
 //登录
-let loginis = `${url2}api/wx/user/login`
+let loginis = `${url}api/wx/user/login`
 
 //找水果
 let getsearch = `${url}api/wx/menu/select`

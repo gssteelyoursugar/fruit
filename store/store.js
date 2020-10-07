@@ -2,9 +2,6 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 Vue.use(Vuex)
 
-
-
-
 const screendata = {
 	// 存储筛选出来的数据
 	screenarr:[]
@@ -12,7 +9,8 @@ const screendata = {
 
 // 数据仓库
 const state = {
-	screendata
+	screendata,
+	history: uni.getStorageSync('history') ? uni.getStorageSync('history') : []
 }
 
 export default new Vuex.Store({
@@ -25,6 +23,23 @@ export default new Vuex.Store({
 			state.screendata = {
 				screenarr:listdata
 			}
-		}
+		},
+		saveSearch (state,data) {
+			let arr = state.history
+			arr.unshift(data.data)
+			state.history = arr
+			uni.setStorageSync('history',arr)
+		},
+		clearSearch (state,data) {
+			console.log(data)
+			let list = state.history
+			list = []
+			state.history = list
+			uni.removeStorageSync('history')
+			uni.showToast({
+				title: '已清除'
+			})
+		},
+		
 	}
 })

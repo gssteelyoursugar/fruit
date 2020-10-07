@@ -40,8 +40,8 @@
 			height: '30px'
 		},
 		'mini': {
-			width: '80px',
-			height: '30px'
+			width: '200rpx',
+			height: '60rpx'
 		}
 	}
 	
@@ -179,7 +179,7 @@
 				this.showOptions = false
 				this.currentSelect = options
 				options.s_name = name
-				console.log(options)
+				// console.log(options)
 				this.$emit('selectOne', options)
 			},
 			hideOptions() {

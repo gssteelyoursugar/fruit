@@ -289,9 +289,9 @@
 		name: "orderDetail",
 		data() {
 			return {
-
+				
 			};
-		}
+		},
 	}
 </script>
 

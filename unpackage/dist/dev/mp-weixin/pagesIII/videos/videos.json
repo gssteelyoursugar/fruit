@@ -1,4 +1,6 @@
 {
   "navigationBarTitleText": "视频选果",
-  "usingComponents": {}
+  "usingComponents": {
+    "tui-icon": "/components/tui-icon/tui-icon"
+  }
 }

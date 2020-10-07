@@ -51,7 +51,7 @@
 						</view>
 					</view>
 				</view>
-				<view class="tui-set-box3" v-if="wxlogin && Goauth2 && ApproveStatus === 0">
+				<view class="tui-set-box3" v-if="wxlogin && Goauth2 && ApproveStatus === 1">
 					<view class="tui-icon-box">
 						<view class="tui-icon-box " @tap="tendShop2">
 							<text class="tui-icon-text3">{{logMsg}} <text style="margin-left: 6rpx;"> ></text></text>
@@ -331,7 +331,7 @@
 		methods: {
 			onPullDownRefresh() {
 				this.getMerchants()
-				console.log('refresh');
+				// console.log('refresh');
 				setTimeout(function() {
 					uni.stopPullDownRefresh();
 
@@ -351,13 +351,12 @@
 				}
 				// wx.startPullDownRefresh()
 				this.ifUser()
-				log('dddddddddd')
 			},
 			//获取code
 			wxCode(avatarUrl, nickName) {
 				wx.login({
 					success: (res) => {
-						log(res)
+						// log(res)
 						let code = res.code
 						this.wxLoging(code)
 					},
@@ -370,7 +369,6 @@
 			//发code给后台换取token
 			wxLoging(code) {
 				log(code)
-
 				// let appid = wx.getAccountInfoSync().miniProgram.appId
 				// let secret = "956f8c9345cbe06a42c6494f7bb53f7f"
 				let data = {
@@ -404,7 +402,7 @@
 							log(res)
 						}
 
-						log(res) //获得token
+						// log(res) //获得token
 						uni.setStorageSync('usermen', res.data.token) //把token存在本地，小程序提供如同浏览器cookie
 						uni.hideLoading();
 						this.getMerchants()
@@ -432,7 +430,7 @@
 				var value = this.ApproveStatus
 				if (!setdata) { //判断有无token，没有就显示去认证店铺
 					log('没有token信息请点击登录')
-					log(this.logMsg)
+					// log(this.logMsg)
 				} else if (value == 0) {
 					this.Goauth2 = true
 					//状态为0时证明已经认证
@@ -561,7 +559,7 @@
 						title: '请先登录',
 						icon: 'none'
 					})
-					log(setdata)
+					// log(setdata)
 					this.modaishow = true
 				} else {
 					// this.modaishow = false
@@ -602,14 +600,14 @@
 			ifUser2() {
 
 
-				log(setdata)
+				// log(setdata)
 				if (!setdata) {
 					uni.showToast({
 						title: '登录失败',
 						duration: 2000,
 						icon: 'none'
 					});
-					log('用户没有登陆')
+					// log('用户没有登陆')
 					this.wxlogin = false
 				} else {
 					uni.showToast({
@@ -810,12 +808,12 @@
 		align-items: center;
 		justify-content: space-between;
 		background-image: linear-gradient(to right, #FF943D, #FF5600);
-		width: 230rpx;
+		width: 250rpx;
 		height: 70rpx;
 		position: absolute;
 		line-height: 70rpx;
 		right: 0;
-		top: 52rpx;
+		bottom: -12rpx;
 		text-align: center;
 		justify-content: center;
 		border-radius: 60rpx 0 0 60rpx;
